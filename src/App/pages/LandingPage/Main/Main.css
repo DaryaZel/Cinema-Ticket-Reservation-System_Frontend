@@ -1,5 +1,5 @@
 .main__container{
-    margin: 0 100px;
+    margin: 0 15vw;
 }
 .main__filters{
     display: flex;
@@ -9,26 +9,27 @@
 .main__carousel{
     margin-top: 50px;
 }
+.main__filters{
+    border-top: 1px solid rgba(168, 168, 196, 0.356);
+    border-bottom: 1px solid rgba(168, 168, 196, 0.356);
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    padding: 10px 0;
+}
 .filter-form{
-    width: 20%;
-    margin-right: 20px;
+    width: 10%;
+    margin-right: 50px;
 }
 .filter-form__selector{
     width: 100%;
-    height: 30px;
+    height: 40px;
     padding: 0 10px;
+    border: none;
     border-radius: 40px;
-    background-color: #fff;
-    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 5%), 0 3px 10px 0 rgb(0 0 0 / 10%);
+    background-color: rgba(168, 168, 196, 0.356);
 }
 .filter-form__selector:hover{
-    background-color: rgb(244, 251, 255);
+    background-color: rgba(168, 168, 196, 0.562);
     cursor: pointer;
-}
-.carousel__ticket{
-    position: absolute;
-    width: 60%;
-    left: 15%;
-    bottom: 15%;
-    border-radius: 5px;
 }

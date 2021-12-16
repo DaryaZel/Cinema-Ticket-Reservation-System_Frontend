@@ -37,67 +37,85 @@ export function Carousel() {
                     }}
                 >
                     <div className='carousel__item'>
-                        <img src={poster_1} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_1} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_2} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_2} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_3} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_3} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_1} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_1} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_2} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_2} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_3} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_3} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_1} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_1} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_2} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_2} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                     <div className='carousel__item'>
-                        <img src={poster_3} />
-                        <div className='carousel__ticket'>
-                            <a href="#"><Ticket /></a>
+                        <div className='carousel__img-container'>
+                            <img src={poster_3} />
+                            <div className='carousel__ticket'>
+                                <a href="#"><Ticket /></a>
+                            </div>
+                            <h3>Movie name</h3>
                         </div>
-                        <h3>Movie name</h3>
                     </div>
                 </div>
 

@@ -1,18 +1,13 @@
 
 .ticket{
     display: flex;
-    padding: 5px;
-    background-color: rgb(159, 212, 236);
-}
-.ticket__icon{
-    width: 20%;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: rgba(159, 212, 236, 0.753);
 }
-.ticket__icon img{
-    max-width: 100%;
+.ticket:hover{
+    background-color: rgb(159, 212, 236);
 }
 .ticket__text{
     text-transform: uppercase;

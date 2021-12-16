@@ -15,6 +15,9 @@
     display: flex;
     align-items: center;
 }
+.logo__text{
+    text-transform: uppercase;
+}
 .logo__icon img{
     margin-left: 40%;
     height: 50px;

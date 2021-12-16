@@ -8,7 +8,7 @@ export function Header() {
             <div className="header__container">
                 <div className="header__logo logo">
                     <div className="logo__text">
-                        <h3>Spool</h3>
+                        <h2>Spool</h2>
                     </div>
                     <div className="logo__icon">
                         <img src={film} alt="film_logo" />

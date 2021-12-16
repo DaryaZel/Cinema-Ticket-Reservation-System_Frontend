@@ -19,26 +19,39 @@
     transition-timing-function: ease-in-out;
 }
 .carousel__item{
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    height: 40vh;
+    height: 45vh;
     min-width: 25%;
     max-width: 25%;
 }
+.carousel__img-container{
+    position: relative;
+}
 .carousel__item img{
-    width: 15vw;
+    max-width: 80%;
+    max-height: 80%;
 }
 .carousel__item h3{
     position: absolute;
-    bottom:-5%
+    bottom: -6%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    white-space:nowrap
 }
 .carousel__item a{
     text-decoration: none;
 }
-
+.carousel__ticket{
+    position: absolute;
+    width: 55%;
+    height: 25%;
+    left: 10%;
+    bottom: 4%;
+    border-radius: 5px;
+}
 .carousel__arrow img{
     cursor: pointer;
     width: 50px;
