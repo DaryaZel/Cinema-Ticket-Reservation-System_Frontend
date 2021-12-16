@@ -1,0 +1,54 @@
+.schedule__date-container{
+    margin-top: 50px;
+    height: 5vh;
+    background-color: rgba(36, 36, 37, 0.11);
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.cinema-schedule{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.cinema-schedule h3{
+    margin: 0;
+}
+.cinema-schedule__cinema-name-container{
+    width: 40%;
+    padding-top: 20px;
+}
+.cinema-schedule__movie-schedule-container{
+    width: 60%;
+    padding-top: 20px;
+}
+.movie-schedule{
+     display: flex;
+     margin-bottom: 20px;
+}
+.movie-schedule__movie-container{
+    width: 40%;
+}
+.movie-schedule__movie-container h3{
+    margin: 0;
+}
+.movie-schedule__time-container{
+    width: 60%;
+    display: flex;
+}
+.movie-schedule__time-item{
+    margin-right: 20px;
+    width: 15%;
+    background-color: rgb(159, 212, 236);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.movie-schedule__time-item a{
+    text-decoration: none;
+}
+.movie-schedule__time-item span{
+    color: black;
+}
