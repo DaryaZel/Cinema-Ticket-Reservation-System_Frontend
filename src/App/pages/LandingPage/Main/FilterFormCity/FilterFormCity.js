@@ -21,8 +21,7 @@ export function FilterFormCity() {
         }
         return 0;
     });
-    cityArray.unshift('City');
-
+    cityArray.unshift('New York');
     return (
         <div className='filter-form'>
             <select className='filter-form__selector' name="select" >
