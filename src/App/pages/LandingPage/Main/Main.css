@@ -1,15 +1,18 @@
-.main__container{
+.main__container {
     margin: 0 15vw;
 }
-.main__filters{
+
+.main__filters {
     display: flex;
     width: 50%;
     justify-content: space-between;
 }
-.main__carousel{
+
+.main__carousel {
     margin-top: 50px;
 }
-.main__filters{
+
+.main__filters {
     border-top: 1px solid rgba(168, 168, 196, 0.356);
     border-bottom: 1px solid rgba(168, 168, 196, 0.356);
     width: 100%;
@@ -17,11 +20,13 @@
     justify-content: left;
     padding: 10px 0;
 }
-.filter-form{
+
+.filter-form {
     width: 10%;
     margin-right: 50px;
 }
-.filter-form__selector{
+
+.filter-form__selector {
     width: 100%;
     height: 40px;
     padding: 0 10px;
@@ -29,7 +34,8 @@
     border-radius: 40px;
     background-color: rgba(168, 168, 196, 0.356);
 }
-.filter-form__selector:hover{
+
+.filter-form__selector:hover {
     background-color: rgba(168, 168, 196, 0.562);
     cursor: pointer;
 }

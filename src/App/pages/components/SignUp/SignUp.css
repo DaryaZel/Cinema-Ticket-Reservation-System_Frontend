@@ -1,7 +1,8 @@
-.sign{
+.sign {
     display: flex;
 }
-.sign__logIn{
+
+.sign__logIn {
     border-right: 2px solid black;
     padding-right: 10px;
     margin-right: 10px;

@@ -1,5 +1,6 @@
-import './Ticket.css'
-import ticket from './ticket.png'
+import './Ticket.css';
+import ticket from './ticket.png';
+
 export function Ticket() {
     return (
         <div className='carousel__ticket ticket'>

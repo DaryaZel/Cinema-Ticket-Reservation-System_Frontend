@@ -1,7 +1,8 @@
 import film from './film.png';
-import './Header.css'
-import { SearchForm } from './SearchForm/SearchForm'
-import { SignUp } from '../SignUp/SignUp'
+import './Header.css';
+import { SearchForm } from './SearchForm/SearchForm';
+import { SignUp } from '../SignUp/SignUp';
+
 export function Header() {
     return (
         <header className="header">
@@ -11,11 +12,11 @@ export function Header() {
                         <h2>Spool</h2>
                     </div>
                     <div className="logo__icon">
-                        <img src={film} alt="film_logo" />
+                        <img src={film} alt="film_logo"/>
                     </div>
                 </div>
-                <SearchForm/>
-                <SignUp/>
+                <SearchForm />
+                <SignUp />
             </div>
         </header>
     )

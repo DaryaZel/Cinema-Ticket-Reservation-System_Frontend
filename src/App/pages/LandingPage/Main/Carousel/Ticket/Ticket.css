@@ -1,15 +1,16 @@
-
-.ticket{
+.ticket {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px;
     background-color: rgba(159, 212, 236, 0.753);
 }
-.ticket:hover{
+
+.ticket:hover {
     background-color: rgb(159, 212, 236);
 }
-.ticket__text{
+
+.ticket__text {
     text-transform: uppercase;
     color: black;
 }

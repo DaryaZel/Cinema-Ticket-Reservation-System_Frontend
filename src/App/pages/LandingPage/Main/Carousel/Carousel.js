@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Ticket } from './Ticket/Ticket';
-import './Carousel.css'
-import leftArrow from './left_arrow.png'
-import rightArrow from './right_arrow.png'
-import poster_1 from './poster_1.jpeg'
-import poster_2 from './poster_2.png'
-import poster_3 from './poster_3.jpeg'
+import './Carousel.css';
+import leftArrow from './left_arrow.png';
+import rightArrow from './right_arrow.png';
+import poster_1 from './poster_1.jpeg';
+import poster_2 from './poster_2.png';
+import poster_3 from './poster_3.jpeg';
 
 export function Carousel() {
     const windowWidth = 25
@@ -15,7 +15,6 @@ export function Carousel() {
             const newOffset = currentOffset + windowWidth
             return Math.min(newOffset, 0)
         })
-        console.log('left')
     }
     const handleRightArrow = () => {
         setOffset((currentOffset) => {
@@ -23,7 +22,6 @@ export function Carousel() {
             const maxOffset = -(windowWidth * (6 - 1))
             return Math.max(newOffset, maxOffset)
         })
-        console.log('right')
     }
     return (
         <div className='carousel'>
@@ -118,7 +116,6 @@ export function Carousel() {
                         </div>
                     </div>
                 </div>
-
             </div>
             <div className='carousel__arrow' onClick={handleRightArrow}>
                 <img src={rightArrow} />

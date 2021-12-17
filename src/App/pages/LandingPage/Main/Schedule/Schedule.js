@@ -1,5 +1,6 @@
-import './Schedule.css'
-import {CinemaSchedule} from './CinemaSchedule'
+import './Schedule.css';
+import {CinemaSchedule} from './CinemaSchedule';
+
 export function Schedule() {
     return (
         <div className='schedule'>
