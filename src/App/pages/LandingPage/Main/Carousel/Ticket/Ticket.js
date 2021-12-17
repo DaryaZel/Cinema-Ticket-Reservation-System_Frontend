@@ -1,5 +1,5 @@
 import './Ticket.css';
-import ticket from './ticket.png';
+import ticket from './images/ticket.png';
 
 export function Ticket() {
     return (

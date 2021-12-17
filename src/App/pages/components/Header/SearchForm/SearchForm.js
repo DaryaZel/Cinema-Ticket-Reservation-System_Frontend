@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import glass from './magnifying_glass.png';
+import glass from './images/magnifying_glass.png';
 import './SearchForm.css';
 
 export function SearchForm() {

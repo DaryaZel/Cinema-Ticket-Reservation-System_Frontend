@@ -1,4 +1,4 @@
-import film from './film.png';
+import film from './images/film.png';
 import './Header.css';
 import { SearchForm } from './SearchForm/SearchForm';
 import { SignUp } from '../SignUp/SignUp';
