@@ -20,18 +20,19 @@ export function Carousel() {
         { id: 41, movieName: "Movie Name", posterImg: poster_3 }
     ];
     const windowWidth = 25;
+    const itemsInCarouselWindow = 4;
     const [offset, setOffset] = useState(0);
     const handleLeftArrow = () => {
         setOffset((currentOffset) => {
-            const newOffset = currentOffset + windowWidth
-            return Math.min(newOffset, 0)
+            const newOffset = currentOffset + windowWidth;
+            return Math.min(newOffset, 0);
         })
     };
     const handleRightArrow = () => {
         setOffset((currentOffset) => {
-            const newOffset = currentOffset - windowWidth
-            const maxOffset = -(windowWidth * (movieData.length - 4))
-            return Math.max(newOffset, maxOffset)
+            const newOffset = currentOffset - windowWidth;
+            const maxOffset = -(windowWidth * (movieData.length - itemsInCarouselWindow));
+            return Math.max(newOffset, maxOffset);
         })
     };
 
