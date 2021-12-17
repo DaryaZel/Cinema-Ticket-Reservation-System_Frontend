@@ -8,6 +8,17 @@ import poster_2 from './images/poster_2.png';
 import poster_3 from './images/poster_3.jpeg';
 
 export function Carousel() {
+    const movieData = [
+        { id: 65, movieName: "Movie Name", posterImg: poster_1 },
+        { id: 76, movieName: "Movie Name", posterImg: poster_2 },
+        { id: 79, movieName: "Movie Name", posterImg: poster_3 },
+        { id: 46, movieName: "Movie Name", posterImg: poster_1 },
+        { id: 71, movieName: "Movie Name", posterImg: poster_2 },
+        { id: 61, movieName: "Movie Name", posterImg: poster_3 },
+        { id: 70, movieName: "Movie Name", posterImg: poster_1 },
+        { id: 51, movieName: "Movie Name", posterImg: poster_2 },
+        { id: 41, movieName: "Movie Name", posterImg: poster_3 }
+    ];
     const windowWidth = 25;
     const [offset, setOffset] = useState(0);
     const handleLeftArrow = () => {
@@ -19,7 +30,7 @@ export function Carousel() {
     const handleRightArrow = () => {
         setOffset((currentOffset) => {
             const newOffset = currentOffset - windowWidth
-            const maxOffset = -(windowWidth * (6 - 1))
+            const maxOffset = -(windowWidth * (movieData.length - 4))
             return Math.max(newOffset, maxOffset)
         })
     };
@@ -35,87 +46,19 @@ export function Carousel() {
                         transform: `translateX(${offset}%)`
                     }}
                 >
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_1} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
+                    {
+                        movieData.map((movie, index) => (
+                            <div key={movie.id} className='carousel__item'>
+                                <div className='carousel__img-container'>
+                                    <img src={movie.posterImg} />
+                                    <div className='carousel__ticket'>
+                                        <a href="#"><Ticket /></a>
+                                    </div>
+                                    <h3>{movie.movieName}</h3>
+                                </div>
                             </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_2} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_3} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_1} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_2} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_3} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_1} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_2} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
-                    <div className='carousel__item'>
-                        <div className='carousel__img-container'>
-                            <img src={poster_3} />
-                            <div className='carousel__ticket'>
-                                <a href="#"><Ticket /></a>
-                            </div>
-                            <h3>Movie name</h3>
-                        </div>
-                    </div>
+                        ))
+                    }
                 </div>
             </div>
             <div className='carousel__arrow' onClick={handleRightArrow}>
