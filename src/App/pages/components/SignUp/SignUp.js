@@ -10,5 +10,5 @@ export function SignUp() {
                 <span>Sign Up</span>
             </div>
         </div>
-    )
+    );
 }

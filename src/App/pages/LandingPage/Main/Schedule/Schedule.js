@@ -1,5 +1,5 @@
 import './Schedule.css';
-import {CinemaSchedule} from './CinemaSchedule';
+import { CinemaSchedule } from './CinemaSchedule';
 
 export function Schedule() {
     return (
@@ -7,11 +7,11 @@ export function Schedule() {
             <div className='schedule__date-container'>
                 <h2>December 16 , Today, Thursday</h2>
             </div>
-            <CinemaSchedule/>
-            <CinemaSchedule/>
-            <CinemaSchedule/>
-            <CinemaSchedule/>
-            <CinemaSchedule/>
+            <CinemaSchedule />
+            <CinemaSchedule />
+            <CinemaSchedule />
+            <CinemaSchedule />
+            <CinemaSchedule />
         </div>
-    )
+    );
 }

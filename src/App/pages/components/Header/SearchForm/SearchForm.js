@@ -3,10 +3,10 @@ import glass from './magnifying_glass.png';
 import './SearchForm.css';
 
 export function SearchForm() {
-    const [inputText, setInputText] = useState('')
+    const [inputText, setInputText] = useState('');
     const handleChange = (event) => {
         setInputText(event.target.value)
-    }
+    };
 
     return (
         <form className="search-form">
@@ -17,5 +17,5 @@ export function SearchForm() {
                 </button>
             </div>
         </form>
-    )
+    );
 }

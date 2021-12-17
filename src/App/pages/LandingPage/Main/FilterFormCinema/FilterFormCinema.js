@@ -5,13 +5,13 @@ export function FilterFormCinema() {
         { id: 764, cinemaName: "wdwdwdsq", address: { streetAddress: "5435 Sollicitudin Ln", city: "Hudsonville" } },
         { id: 461, cinemaName: "ujujkukik", address: { streetAddress: "9375 Amet Ave", city: "Kenora" } },
         { id: 701, cinemaName: "alalsalsa", address: { streetAddress: "8942 Sit Ct", city: "Washington" } }
-    ]
-    const cinemaArray = []
+    ];
+    const cinemaArray = [];
     for (let i = 0; i < cinemaData.length; i++) {
         if (!cinemaArray.includes(cinemaData[i].cinemaName)) {
             cinemaArray.push(cinemaData[i].cinemaName)
         }
-    }
+    };
     cinemaArray.sort((a, b) => {
         if (a < b) {
             return -1;
@@ -21,7 +21,8 @@ export function FilterFormCinema() {
         }
         return 0;
     });
-    cinemaArray.unshift('Cinema')
+    cinemaArray.unshift('Cinema');
+    
     return (
         <div className='filter-form'>
             <select className='filter-form__selector' name="select" >
@@ -32,5 +33,5 @@ export function FilterFormCinema() {
                 }
             </select>
         </div>
-    )
+    );
 }

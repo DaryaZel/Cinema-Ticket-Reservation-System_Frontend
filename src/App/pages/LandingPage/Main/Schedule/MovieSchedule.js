@@ -13,5 +13,5 @@ export function MovieSchedule() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

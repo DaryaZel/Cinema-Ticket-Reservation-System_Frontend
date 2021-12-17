@@ -11,5 +11,5 @@ export function Ticket() {
                 <span>Ticket</span>
             </div>
         </div>
-    )
+    );
 }

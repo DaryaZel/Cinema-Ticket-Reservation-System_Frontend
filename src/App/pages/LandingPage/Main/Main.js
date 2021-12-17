@@ -6,7 +6,7 @@ import { Carousel } from './Carousel/Carousel';
 import { Schedule } from './Schedule/Schedule';
 import './Main.css';
 
-export function Main({ }) {
+export function Main() {
     return (
         <main className='main'>
             <div className='main__container'>
@@ -23,5 +23,5 @@ export function Main({ }) {
                 </div>
             </div>
         </main>
-    )
+    );
 }

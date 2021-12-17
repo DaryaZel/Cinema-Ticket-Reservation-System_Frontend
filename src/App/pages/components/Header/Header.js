@@ -19,5 +19,5 @@ export function Header() {
                 <SignUp />
             </div>
         </header>
-    )
+    );
 }

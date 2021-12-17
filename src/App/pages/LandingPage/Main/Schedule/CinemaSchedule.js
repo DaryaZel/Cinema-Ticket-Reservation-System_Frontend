@@ -12,5 +12,5 @@ export function CinemaSchedule() {
                 <MovieSchedule />
             </div>
         </div>
-    )
+    );
 }

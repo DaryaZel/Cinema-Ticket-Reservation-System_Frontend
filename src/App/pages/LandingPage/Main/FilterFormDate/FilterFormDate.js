@@ -7,5 +7,5 @@ export function FilterFormDate() {
                 }
             </select>
         </div>
-    )
+    );
 }

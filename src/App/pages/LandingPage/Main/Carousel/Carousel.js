@@ -8,21 +8,22 @@ import poster_2 from './poster_2.png';
 import poster_3 from './poster_3.jpeg';
 
 export function Carousel() {
-    const windowWidth = 25
-    const [offset, setOffset] = useState(0)
+    const windowWidth = 25;
+    const [offset, setOffset] = useState(0);
     const handleLeftArrow = () => {
         setOffset((currentOffset) => {
             const newOffset = currentOffset + windowWidth
             return Math.min(newOffset, 0)
         })
-    }
+    };
     const handleRightArrow = () => {
         setOffset((currentOffset) => {
             const newOffset = currentOffset - windowWidth
             const maxOffset = -(windowWidth * (6 - 1))
             return Math.max(newOffset, maxOffset)
         })
-    }
+    };
+    
     return (
         <div className='carousel'>
             <div className='carousel__arrow' onClick={handleLeftArrow}>
@@ -121,5 +122,5 @@ export function Carousel() {
                 <img src={rightArrow} />
             </div>
         </div>
-    )
+    );
 }

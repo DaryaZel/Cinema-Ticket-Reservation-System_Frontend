@@ -7,5 +7,5 @@ export function LandingPage() {
             <Header />
             <Main />
         </div>
-    )
+    );
 }
