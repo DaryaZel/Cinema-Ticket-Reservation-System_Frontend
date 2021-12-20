@@ -11,8 +11,12 @@ export function SearchForm() {
     return (
         <form className="search-form">
             <div className="search-form__container">
-                <input type='text' name='text' id='text' className="search-form__input" value={inputText} placeholder="Search..." maxLength="20" onChange={handleChange}></input>
-                <button name='enter' id='search' className="search-form__button">
+                <input id='searchText' type='text'
+                    name='searchText' className="search-form__input"
+                    value={inputText} placeholder="Search..."
+                    maxLength="20" onChange={handleChange}>
+                </input>
+                <button id='searchButton' name='searchButton' className="search-form__button">
                     <img src={glass} />
                 </button>
             </div>
