@@ -50,6 +50,10 @@
     border-radius: 10px;
 }
 
+.movie-schedule__time-item:hover {
+    background-color: rgb(125, 205, 241);
+}
+
 .movie-schedule__time-item a {
     text-decoration: none;
 }
