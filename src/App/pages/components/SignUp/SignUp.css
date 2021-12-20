@@ -1,9 +1,16 @@
 .sign {
     display: flex;
 }
+.sign div{
+    width: 5vw;
+}
 
 .sign__logIn {
     border-right: 2px solid black;
     padding-right: 10px;
     margin-right: 10px;
+}
+.sign__signUp:hover, .sign__logIn:hover{
+    cursor: pointer;
+    font-weight: bold;
 }

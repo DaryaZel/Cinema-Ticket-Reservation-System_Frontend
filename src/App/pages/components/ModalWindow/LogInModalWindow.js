@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import './ModalWindow.css';
-import name from './images/user.png';
 import email from './images/arroba.png';
 import password from './images/lock.png';
 
-export function ModalWindow() {
-    const [inputTextName, setInputTextName] = useState('');
+export function LogInModalWindow({ setLogInActiveModal }) {
     const [inputTextEmail, setInputTextEmail] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
-    const signUpData = [
-        { title: 'Name', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
+    const logInData = [
         { title: 'Email', img: email, placeholder: 'type your email', inputText: inputTextEmail, setText: setInputTextEmail },
         { title: 'Password', img: password, placeholder: 'type your password', inputText: inputTextPassword, setText: setInputTextPassword }
     ];
@@ -18,15 +15,15 @@ export function ModalWindow() {
     };
 
     return (
-        <div className='modal'>
-            <div className='modal__content'>
+        <div className='modal' onClick={() => setLogInActiveModal(false)}>
+            <div className='modal__content ' onClick={(e) => e.stopPropagation()}>
                 <div className='modal__title'>
-                    <h2>Sign Up</h2>
+                    <h2>Log In</h2>
                 </div>
                 <form>
                     <div className='modal__container'>
                         {
-                            signUpData.map((item) => (
+                            logInData.map((item) => (
                                 <div className='modal__row'>
                                     <div className='modal__row-title'>
                                         <span>{item.title}</span>
@@ -41,9 +38,13 @@ export function ModalWindow() {
                             ))
                         }
                     </div>
-                    <div >
+                    <div>
+                        <div className='modal__checkbox'>
+                            <input type="checkbox" id="remember" name="remember"></input>
+                            <label for="remember"><span>Remember Me</span></label>
+                        </div>
                         <button className='modal__button'>
-                            <span>Sign Up</span>
+                            <span>Log in</span>
                         </button>
                     </div>
                 </form>
