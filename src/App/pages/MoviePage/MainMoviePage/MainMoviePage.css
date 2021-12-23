@@ -1,0 +1,25 @@
+.main-movie__container {
+    margin: 0 15vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-movie__movie-poster {
+    height: 70vh;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-movie__movie-title {
+    margin-bottom: 30px;
+}
+
+.main-movie__movie-poster img {
+    max-width: 100%;
+}
+
+.main-movie__movie-information {
+    width: 80%;
+}
