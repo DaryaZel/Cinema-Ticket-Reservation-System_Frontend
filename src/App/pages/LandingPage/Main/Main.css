@@ -1,0 +1,39 @@
+.main__container {
+    margin: 0 15vw;
+}
+
+.main__filters {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.main__carousel {
+    margin-top: 50px;
+}
+
+.main__filters {
+    border-top: 1px solid rgba(168, 168, 196, 0.356);
+    border-bottom: 1px solid rgba(168, 168, 196, 0.356);
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    padding: 10px 0;
+}
+
+.filter-form {
+    margin-right: 5vw;
+}
+
+.filter-form__selector {
+    height: 4vh;
+    padding: 0 10px;
+    border: none;
+    border-radius: 40px;
+    background-color: rgba(168, 168, 196, 0.356);
+}
+
+.filter-form__selector:hover {
+    background-color: rgba(168, 168, 196, 0.562);
+    cursor: pointer;
+}

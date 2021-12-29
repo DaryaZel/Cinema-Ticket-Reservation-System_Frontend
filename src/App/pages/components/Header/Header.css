@@ -1,0 +1,29 @@
+.header {
+    width: 100%;
+    height: 8vh;
+    min-height: 40px;
+    margin-bottom: 50px;
+}
+
+.header__container {
+    height: 100%;
+    margin: 40px 73px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo__text {
+    text-transform: uppercase;
+}
+
+.logo__icon img {
+    margin-left: 40%;
+    height: 50px;
+    width: 50px;
+}
