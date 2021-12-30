@@ -21,12 +21,11 @@ export function FilterFormCinema() {
         }
         return 0;
     });
-    cinemaArray.unshift('All');
 
     return (
         <div className='filter-form'>
             <select className='filter-form__selector' name="select" >
-                <option value="" disabled selected hidden>Cinema</option>
+                <option value="" selected>All cinemas</option>
                 {
                     cinemaArray.map((cinema, index) => (
                         <option key={cinema + index} value={cinema}>{cinema}</option>
