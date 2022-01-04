@@ -1,4 +1,8 @@
-export function FilterFormDate() {
+export function FilterFormDate({ changeSelectedDay }) {
+    const daysArray = [0, 1, 2, 3];
+    const today = new Date();
+    const nextDay = new Date();
+
     function formatDate(date) {
 
         let dd = date.getDate();
@@ -12,12 +16,21 @@ export function FilterFormDate() {
 
         return dd + '.' + mm + '.' + yy;
     }
+
     return (
         <div className='filter-form'>
-            <select className='filter-form__selector' name="select" >
-                <option value="" selected>Date</option>
+            <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedDay(e.target.value)}>
+                <option value="Whole calender" selected>Date</option>
                 {
-                    <option value={formatDate(new Date())}>{formatDate(new Date())}</option>
+                    daysArray.map((item) => {
+                        nextDay.setDate(today.getDate() + item);
+
+                        return (
+                            <option value={nextDay.toLocaleDateString()}>{formatDate(nextDay)}</option>
+                        )
+
+                    }
+                    )
                 }
             </select>
         </div>

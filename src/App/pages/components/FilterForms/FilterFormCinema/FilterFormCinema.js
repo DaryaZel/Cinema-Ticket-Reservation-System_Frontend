@@ -1,17 +1,31 @@
-export function FilterFormCinema() {
-    const cinemaData = [
-        { id: 655, cinemaName: "eiufeiufheuf", address: { streetAddress: "6388 Lacus Ct", city: "Kenora" } },
-        { id: 761, cinemaName: "qsqsq", address: { streetAddress: "6057 Vitae Rd", city: "Washington" } },
-        { id: 764, cinemaName: "wdwdwdsq", address: { streetAddress: "5435 Sollicitudin Ln", city: "Hudsonville" } },
-        { id: 461, cinemaName: "ujujkukik", address: { streetAddress: "9375 Amet Ave", city: "Kenora" } },
-        { id: 701, cinemaName: "alalsalsa", address: { streetAddress: "8942 Sit Ct", city: "Washington" } }
-    ];
+import { useState, useEffect } from 'react';
+
+export function FilterFormCinema({ city, changeSelectedCinema }) {
+    const [cinemas, setCinemas] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch('https://cinematicketbooking.herokuapp.com/cinema')
+                if (response.status >= 500 && response.status < 600) {
+                    throw new Error("Bad response from server");
+                }
+                const json = await response.json();
+                setCinemas(json);
+            } catch (error) {
+                alert(error);
+            }
+        }
+        fetchData()
+    }, []);
+
     const cinemaArray = [];
-    for (let i = 0; i < cinemaData.length; i++) {
-        if (!cinemaArray.includes(cinemaData[i].cinemaName)) {
-            cinemaArray.push(cinemaData[i].cinemaName)
+    for (let i = 0; i < cinemas.length; i++) {
+        if (!cinemaArray.includes(cinemas[i].cinemaName) && cinemas[i].cityName === city) {
+            cinemaArray.push(cinemas[i].cinemaName);
         }
     };
+
     cinemaArray.sort((a, b) => {
         if (a < b) {
             return -1;
@@ -24,8 +38,8 @@ export function FilterFormCinema() {
 
     return (
         <div className='filter-form'>
-            <select className='filter-form__selector' name="select" >
-                <option value="" selected>All cinemas</option>
+            <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedCinema(e.target.value)} >
+                <option value="All cinemas" selected>All cinemas</option>
                 {
                     cinemaArray.map((cinema, index) => (
                         <option key={cinema + index} value={cinema}>{cinema}</option>
