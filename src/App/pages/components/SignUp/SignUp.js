@@ -1,7 +1,6 @@
 import './SignUp.css';
 
 export function SignUp({ setSignUpActiveModal, setLogInActiveModal }) {
-
     return (
         <div className="sign">
             <div className="sign__logIn" onClick={() => setLogInActiveModal(true)}>

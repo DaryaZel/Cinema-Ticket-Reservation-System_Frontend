@@ -1,0 +1,28 @@
+.avatar {
+    display: flex;
+    align-items: center;
+}
+
+.avatar div {
+    width: 4.5vw;
+}
+
+.avatar__img {
+    display: flex;
+    align-items: center;
+}
+
+.avatar__img img {
+    width: 40px;
+}
+
+.avatar__title {
+    border-right: 2px solid black;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+.avatar__logOut:hover {
+    cursor: pointer;
+    font-weight: bold;
+}

@@ -46,9 +46,14 @@
 }
 
 .modal__container {
-    padding-top: 4vh;
+    padding-top: 1.5vh;
     width: 80%;
     margin: auto 0;
+}
+
+.modal__greeting h2 {
+    margin-top: 9vh;
+    font-size: 3vw;
 }
 
 .modal__row {
@@ -95,7 +100,7 @@
 }
 
 .modal__button {
-    margin-top: 3vh;
+    margin-top: 1vh;
     outline: none;
     padding: 5px;
     border-radius: 10px;
