@@ -3,6 +3,7 @@ import { LogInUser, SignUpUser } from './User.js';
 import './ModalWindow.css';
 import name from './images/user.png';
 import password from './images/lock.png';
+import { ModalWindow } from './ModalWindow.js';
 
 export function LogInModalWindow({ setLogInActiveModal, logoutUser }) {
     const [inputTextName, setInputTextName] = useState('');
@@ -75,40 +76,35 @@ export function LogInModalWindow({ setLogInActiveModal, logoutUser }) {
 
 
     return (
-        <div className='modal' onClick={() => setLogInActiveModal(false)}>
-            <div className='modal__content ' onClick={(e) => e.stopPropagation()}>
-                <div className='modal__title'>
-                    <h2>Log In</h2>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <div className='modal__container'>
-                        {
-                            logInData.map((item) => (
-                                <div className='modal__row'>
-                                    <label for={item.name} className='modal__row-title'>
-                                        <span>{item.title}</span>
-                                    </label>
-                                    <div className='modal__input-container'>
-                                        <div className='modal__input-icon'>
-                                            <img src={item.img} />
-                                        </div>
-                                        <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
+        <ModalWindow title='Log In' setActiveModal={setLogInActiveModal}>
+            <form onSubmit={handleSubmit}>
+                <div className='modal__container'>
+                    {
+                        logInData.map((item) => (
+                            <div className='modal__row'>
+                                <label for={item.name} className='modal__row-title'>
+                                    <span>{item.title}</span>
+                                </label>
+                                <div className='modal__input-container'>
+                                    <div className='modal__input-icon'>
+                                        <img src={item.img} />
                                     </div>
+                                    <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
                                 </div>
-                            ))
-                        }
+                            </div>
+                        ))
+                    }
+                </div>
+                <div>
+                    <div className='modal__checkbox'>
+                        <input type="checkbox" id="remember" name="remember"></input>
+                        <label for="remember"><span>Remember Me</span></label>
                     </div>
-                    <div>
-                        <div className='modal__checkbox'>
-                            <input type="checkbox" id="remember" name="remember"></input>
-                            <label for="remember"><span>Remember Me</span></label>
-                        </div>
-                        <button type='submit' className='modal__button'>
-                            <span>Log in</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                    <button type='submit' className='modal__button'>
+                        <span>Log in</span>
+                    </button>
+                </div>
+            </form>
+        </ModalWindow>
     )
 }

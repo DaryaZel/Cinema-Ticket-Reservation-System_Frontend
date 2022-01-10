@@ -4,6 +4,7 @@ import './ModalWindow.css';
 import name from './images/user.png';
 import email from './images/arroba.png';
 import password from './images/lock.png';
+import { ModalWindow } from './ModalWindow.js';
 
 export function SignUpModalWindow({ setSignUpActiveModal }) {
     const [showMessage, setShowMessage] = useState(false);
@@ -64,38 +65,33 @@ export function SignUpModalWindow({ setSignUpActiveModal }) {
     }
 
     return (
-        <div className='modal' onClick={() => setSignUpActiveModal(false)}>
-            <div className='modal__content ' onClick={(e) => e.stopPropagation()}>
-                <div className='modal__title'>
-                    <h2>Sign Up</h2>
-                </div>
-                {showMessage ? <div className='modal__greeting'><h2>Welcome!</h2></div> :
-                    <form onSubmit={handleSubmit}>
-                        <div className='modal__container'>
-                            {
-                                signUpData.map((item) => (
-                                    <div className='modal__row'>
-                                        <label for={item.name} className='modal__row-title'>
-                                            <span>{item.title}</span>
-                                        </label>
-                                        <div className='modal__input-container'>
-                                            <div className='modal__input-icon'>
-                                                <img src={item.img} />
-                                            </div>
-                                            <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
+        <ModalWindow title='Sign Up' setActiveModal={setSignUpActiveModal}>
+            {showMessage ? <div className='modal__greeting'><h2>Welcome!</h2></div> :
+                <form onSubmit={handleSubmit}>
+                    <div className='modal__container'>
+                        {
+                            signUpData.map((item) => (
+                                <div className='modal__row'>
+                                    <label for={item.name} className='modal__row-title'>
+                                        <span>{item.title}</span>
+                                    </label>
+                                    <div className='modal__input-container'>
+                                        <div className='modal__input-icon'>
+                                            <img src={item.img} />
                                         </div>
+                                        <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
                                     </div>
-                                ))
-                            }
-                        </div>
-                        <div >
-                            <button type='submit' className='modal__button'>
-                                <span>Sign Up</span>
-                            </button>
-                        </div>
-                    </form>
-                }
-            </div>
-        </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div >
+                        <button type='submit' className='modal__button'>
+                            <span>Sign Up</span>
+                        </button>
+                    </div>
+                </form>
+            }
+        </ModalWindow>
     )
 }
