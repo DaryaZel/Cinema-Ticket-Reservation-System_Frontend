@@ -40,13 +40,13 @@ function App() {
     }
     fetchData()
   }, []);
-  debugger
+ 
   return (
     <UserContext.Provider value={value}>
       <div className="App">
         <Routes>
           <Route path='/' element={<LandingPage />} exact />
-          <Route path='/movie' element={<MoviePage />} />
+          <Route path='/movie/:id' element={<MoviePage />} />
         </Routes>
       </div>
     </UserContext.Provider>
