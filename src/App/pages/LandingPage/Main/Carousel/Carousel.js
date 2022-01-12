@@ -1,25 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Ticket } from './Ticket/Ticket';
 import './Carousel.css';
 import leftArrow from './images/left_arrow.png';
 import rightArrow from './images/right_arrow.png';
-import poster_1 from './images/poster_1.jpeg';
-import poster_2 from './images/poster_2.png';
-import poster_3 from './images/poster_3.jpeg';
 import { Link } from 'react-router-dom';
 
 export function Carousel() {
-    const movieData = [
-        { id: 65, movieName: "Movie Name", posterImg: poster_1 },
-        { id: 76, movieName: "Movie Name", posterImg: poster_2 },
-        { id: 79, movieName: "Movie Name", posterImg: poster_3 },
-        { id: 46, movieName: "Movie Name", posterImg: poster_1 },
-        { id: 71, movieName: "Movie Name", posterImg: poster_2 },
-        { id: 61, movieName: "Movie Name", posterImg: poster_3 },
-        { id: 70, movieName: "Movie Name", posterImg: poster_1 },
-        { id: 51, movieName: "Movie Name", posterImg: poster_2 },
-        { id: 41, movieName: "Movie Name", posterImg: poster_3 }
-    ];
+    const [movieData, setMovieData] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/movie`);
+                const json = await response.json();
+                if (response.status >= 500 && response.status < 600) {
+                    throw new Error("Bad response from server");
+                }
+                else if (response.status >= 400 && response.status < 500) {
+                    alert(json);
+                }
+                else {
+                    setMovieData(json);
+                }
+            } catch (error) {
+                alert(error);
+            }
+        }
+        fetchData()
+    }, []);
+
     const windowWidth = 25;
     const itemsInCarouselWindow = 4;
     const [offset, setOffset] = useState(0);
@@ -49,17 +58,21 @@ export function Carousel() {
                     }}
                 >
                     {
-                        movieData.map((movie, index) => (
-                            <div key={movie.id} className='carousel__item'>
-                                <div className='carousel__img-container'>
-                                    <img src={movie.posterImg} />
-                                    <div className='carousel__ticket'>
-                                        <Link to="/movie"><Ticket /></Link>
+                        movieData.map((movie) => {
+                            const movieLink = '/movie/' + movie._id
+                            debugger
+                            return (
+                                <div key={movie._id} className='carousel__item'>
+                                    <div className='carousel__img-container'>
+                                        <img src={movie.posterImg_link} />
+                                        <div className='carousel__ticket'>
+                                            <Link to={movieLink}><Ticket /></Link>
+                                        </div>
+                                        <h3>{movie.movieName}</h3>
                                     </div>
-                                    <h3>{movie.movieName}</h3>
                                 </div>
-                            </div>
-                        ))
+                            )
+                        })
                     }
                 </div>
             </div>
