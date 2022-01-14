@@ -13,6 +13,7 @@ function App() {
     user: auth,
     logoutUser: setAuth
   }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -40,7 +41,7 @@ function App() {
     }
     fetchData()
   }, []);
- 
+
   return (
     <UserContext.Provider value={value}>
       <div className="App">

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { MainMovieCinemaSchedule } from './MainMovieCinemaSchedule';
 import './MainMovieSchedule.css';
 
-export function MainMovieSchedule({ movieId }) {
+export function MainMovieSchedule({ city, cinema, day, movieId }) {
     const [dateSchedule, setDateSchedule] = useState([]);
 
     function formatDate(date) {
@@ -43,7 +43,7 @@ export function MainMovieSchedule({ movieId }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule/${movieId}`);
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule/${movieId}?city=${city}&cinema=${cinema}&date=${day}`);
                 if (response.status >= 500 && response.status < 600) {
                     throw new Error("Bad response from server");
                 }
@@ -54,7 +54,7 @@ export function MainMovieSchedule({ movieId }) {
             }
         }
         fetchData()
-    }, []);
+    }, [city, cinema, day]);
 
     return (
         <div className='schedule'>

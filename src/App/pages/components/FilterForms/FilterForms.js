@@ -3,12 +3,12 @@ import { FilterFormCity } from './FilterFormCity/FilterFormCity';
 import { FilterFormCinema } from './FilterFormCinema/FilterFormCinema';
 import './FilterForms.css';
 
-export function FilterForms({ city, setCity, setCinema, setDay }) {
+export function FilterForms({city, changeSelectedCity, changeSelectedDay, changeSelectedCinema }) {
     return (
         <div className='filters'>
-            <FilterFormDate changeSelectedDay={setDay} />
-            <FilterFormCity changeSelectedCity={setCity} />
-            <FilterFormCinema city={city} changeSelectedCinema={setCinema} />
+            <FilterFormDate changeSelectedDay={changeSelectedDay} />
+            <FilterFormCity changeSelectedCity={changeSelectedCity} />
+            <FilterFormCinema city={city} changeSelectedCinema={changeSelectedCinema} />
         </div>
     )
 }

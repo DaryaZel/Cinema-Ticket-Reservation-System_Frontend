@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { FilterContext } from '../MoviePage';
 import { FilterForms } from '../../components/FilterForms/FilterForms';
 import './MainMoviePage.css';
 import { MainMovieSchedule } from './MovieSchedule/MainMovieSchedule';
 import { Description } from './Description/Description';
 import { Navigation } from './Navigation/Navigation';
 
-export function MainMoviePage({params}) {
+export function MainMoviePage({ params }) {
     const [movie, setMovie] = useState([]);
     useEffect(() => {
         async function fetchData() {
@@ -33,16 +34,35 @@ export function MainMoviePage({params}) {
                         <h2>{movie.movieName}</h2>
                     </div>
                     <div className='main-movie__filters'>
-                        <FilterForms />
+                        <FilterContext.Consumer>
+                            {({ setDay, city, setCity, setCinema }) => {
+                                return (
+                                    <FilterForms
+                                        city={city}
+                                        changeSelectedCity={setCity}
+                                        changeSelectedCinema={setCinema}
+                                        changeSelectedDay={setDay}
+                                    />
+                                )
+                            }
+                            }
+                        </FilterContext.Consumer>
                     </div>
                     <div>
                         <Navigation />
                     </div>
                     <div className='main-movie__schedule'>
-                        <MainMovieSchedule movieId={params.id} />
+                        <FilterContext.Consumer>
+                            {({ day, city, cinema }) => {
+                                return (
+                                    <MainMovieSchedule city={city} cinema={cinema} day={day} movieId={params.id} />
+                                )
+                            }
+                            }
+                        </FilterContext.Consumer>
                     </div>
                     <div className='main-movie__description'>
-                        <Description storyline={movie.storyline}/>
+                        <Description storyline={movie.storyline} />
                     </div>
                 </div>
             </div>
