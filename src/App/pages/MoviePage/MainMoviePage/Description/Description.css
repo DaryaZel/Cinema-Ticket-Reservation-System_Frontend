@@ -1,0 +1,14 @@
+.description {
+    border-top: 1px solid rgba(168, 168, 196, 0.356);
+}
+
+.description__title {
+    text-align: left;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+
+.description__story-line {
+    text-align: left;
+    line-height: 1.5vw;
+}

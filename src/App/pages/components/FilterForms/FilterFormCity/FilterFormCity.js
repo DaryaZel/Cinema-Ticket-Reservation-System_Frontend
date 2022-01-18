@@ -21,10 +21,10 @@ export function FilterFormCity() {
         }
         return 0;
     });
-    cityArray.unshift('New York');
     return (
         <div className='filter-form'>
             <select className='filter-form__selector' name="select" >
+                <option value="" selected>New York</option>
                 {
                     cityArray.map((city, index) => (
                         <option key={city + index} value={city}>{city}</option>

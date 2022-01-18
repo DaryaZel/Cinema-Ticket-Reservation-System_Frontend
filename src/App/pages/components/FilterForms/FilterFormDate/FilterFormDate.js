@@ -15,7 +15,7 @@ export function FilterFormDate() {
     return (
         <div className='filter-form'>
             <select className='filter-form__selector' name="select" >
-                <option value="" disabled selected hidden>Date</option>
+                <option value="" selected>Date</option>
                 {
                     <option value={formatDate(new Date())}>{formatDate(new Date())}</option>
                 }

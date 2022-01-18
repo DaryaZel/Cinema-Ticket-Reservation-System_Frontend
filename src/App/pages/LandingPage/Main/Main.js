@@ -1,7 +1,4 @@
-
-import { FilterFormCity } from './FilterFormCity/FilterFormCity';
-import { FilterFormDate } from './FilterFormDate/FilterFormDate';
-import { FilterFormCinema } from './FilterFormCinema/FilterFormCinema';
+import { FilterForms } from '../../components/FilterForms/FilterForms';
 import { Carousel } from './Carousel/Carousel';
 import { Schedule } from './Schedule/Schedule';
 import './Main.css';
@@ -11,9 +8,7 @@ export function Main() {
         <main className='main'>
             <div className='main__container'>
                 <div className='main__filters'>
-                    <FilterFormDate />
-                    <FilterFormCity />
-                    <FilterFormCinema />
+                    <FilterForms />
                 </div>
                 <div className='main__carousel'>
                     <Carousel />

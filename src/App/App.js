@@ -1,14 +1,17 @@
+import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './pages/LandingPage/LandingPage';
+import { MoviePage } from './pages/MoviePage/MoviePage';
 import './App.css';
-import { BrowserRouter, Router } from 'react-router-dom';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <LandingPage />
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<LandingPage />} exact />
+        <Route path='/movie' element={<MoviePage />} />
+      </Routes>
+    </div>
+
   );
 }
 

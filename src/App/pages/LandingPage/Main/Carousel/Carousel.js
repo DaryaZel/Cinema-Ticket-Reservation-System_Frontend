@@ -6,6 +6,7 @@ import rightArrow from './images/right_arrow.png';
 import poster_1 from './images/poster_1.jpeg';
 import poster_2 from './images/poster_2.png';
 import poster_3 from './images/poster_3.jpeg';
+import { Link } from 'react-router-dom';
 
 export function Carousel() {
     const movieData = [
@@ -53,7 +54,7 @@ export function Carousel() {
                                 <div className='carousel__img-container'>
                                     <img src={movie.posterImg} />
                                     <div className='carousel__ticket'>
-                                        <a href="#"><Ticket /></a>
+                                        <Link to="/movie"><Ticket /></Link>
                                     </div>
                                     <h3>{movie.movieName}</h3>
                                 </div>
