@@ -1,0 +1,141 @@
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.37);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-duration: 0.1s;
+    animation-name: sloWModal;
+    z-index: 1;
+}
+
+@keyframes sloWModal {
+    from {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    to {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.modal__content {
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
+    height: 20vw;
+    width: 30vw;
+    animation-duration: 0.3s;
+    animation-name: slowModalContent;
+}
+
+@keyframes slowModalContent {
+    from {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.modal__container {
+    padding-top: 4vh;
+    width: 80%;
+    margin: auto 0;
+}
+
+.modal__row {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.modal__title {
+    border-bottom: 2px solid black;
+}
+
+.modal__title h2 {
+    padding-bottom: 20px;
+}
+
+.modal__input-container {
+    margin-left: 2vw;
+    display: flex;
+    justify-content: center;
+}
+
+.modal__input-container input {
+    width: 80%;
+    border: 1px solid black;
+    border-left: none;
+    border-radius: 0px 6px 6px 0px;
+}
+
+.modal__input-icon {
+    padding: 3px;
+    width: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 6px 0px 0px 6px;
+    background: rgba(168, 168, 196, 0.356);
+}
+
+.modal__input-icon img {
+    max-width: 100%;
+}
+
+.modal__button {
+    margin-top: 3vh;
+    outline: none;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+}
+
+.modal__button:hover {
+    box-shadow: inset 0 6px 10px 0 rgba(0, 0, 0, 0.2), inset 0 4px 14px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal__checkbox input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.modal__checkbox input+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.modal__checkbox input+label::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+}
+
+.modal__checkbox input:checked+label::before {
+    border-color: rgba(168, 168, 196, 0.356);
+    background-color: rgba(168, 168, 196, 0.356);
+    background-image: url("./images/check-mark.png");
+}
