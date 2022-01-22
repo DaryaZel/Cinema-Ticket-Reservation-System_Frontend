@@ -5,7 +5,7 @@ import './SearchForm.css';
 export function SearchForm() {
     const [inputText, setInputText] = useState('');
     const handleChange = (event) => {
-        setInputText(event.target.value)
+        setInputText(event.target.value);
     };
 
     return (

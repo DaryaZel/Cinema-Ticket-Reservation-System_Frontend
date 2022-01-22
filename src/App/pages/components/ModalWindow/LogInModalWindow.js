@@ -4,8 +4,9 @@ import './ModalWindow.css';
 import name from './images/user.png';
 import password from './images/lock.png';
 import { ModalWindow } from './ModalWindow.js';
+import { handleResponse } from '../../../utilities/ResponseHandler.js';
 
-export function LogInModalWindow({ setLogInActiveModal, logoutUser }) {
+export function LogInModalWindow({ setLogInActiveModal, setUserState }) {
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
     const logInData = [
@@ -18,30 +19,28 @@ export function LogInModalWindow({ setLogInActiveModal, logoutUser }) {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            })
-            const json = await response.json()
-            if (response.status >= 500 && response.status < 600) {
-                throw new Error("Bad response from server");
-            }
-            else if (response.status >= 400 && response.status < 500) {
-                alert(json)
-            }
-            else {
-                setLogInActiveModal(false)
-                logoutUser(json)
-            }
+            });
+            handleResponse(response,
+                (error) => {
+                    alert(error);
+                },
+                (result) => {
+                    setLogInActiveModal(false);
+                    setUserState(result);
+                }
+            );
         }
         catch (error) {
-            alert(error.message)
+            alert(error);
         }
     }
 
     const handleChange = (text, setInputText) => {
-        setInputText(text)
+        setInputText(text);
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         let name = event.target.name.value;
         let password = event.target.password.value;
         let newUser = new LogInUser(name, password);
@@ -52,28 +51,20 @@ export function LogInModalWindow({ setLogInActiveModal, logoutUser }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(newUser),
-            })
-            const json = await response.json()
-
-            if (response.status >= 500 && response.status < 600) {
-                throw new Error("Bad response from server");
-            }
-            else if (response.status >= 400 && response.status < 500) {
-                alert(json)
-            }
-            else {
-                localStorage.setItem('AUTH_TOKEN', json)
-                getUser(json)
-            }
-
-
+            });
+            handleResponse(response,
+                (error) => {
+                    alert(error);
+                },
+                (result) => {
+                    localStorage.setItem('AUTH_TOKEN', result);
+                    getUser(result);
+                }
+            );
         } catch (error) {
-            alert(error.message)
+            alert(error);
         }
     }
-
-
-
 
     return (
         <ModalWindow title='Log In' setActiveModal={setLogInActiveModal}>

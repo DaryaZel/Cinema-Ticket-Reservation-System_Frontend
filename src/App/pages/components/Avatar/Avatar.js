@@ -1,11 +1,10 @@
 import userAvatar from './image/user.png';
 import './Avatar.css';
 
-export function Avatar({ username, logoutUser }) {
-    debugger
+export function Avatar({ username, setUserState }) {
     const logOut = () => {
         localStorage.clear();
-        logoutUser(null);
+        setUserState(null);
     }
     return (
         <div className="avatar">

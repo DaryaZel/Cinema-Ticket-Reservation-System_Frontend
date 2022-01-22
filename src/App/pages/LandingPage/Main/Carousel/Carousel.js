@@ -4,6 +4,7 @@ import './Carousel.css';
 import leftArrow from './images/left_arrow.png';
 import rightArrow from './images/right_arrow.png';
 import { Link } from 'react-router-dom';
+import { handleResponse } from '../../../../utilities/ResponseHandler';
 
 export function Carousel() {
     const [movieData, setMovieData] = useState([]);
@@ -12,16 +13,14 @@ export function Carousel() {
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/movie`);
-                const json = await response.json();
-                if (response.status >= 500 && response.status < 600) {
-                    throw new Error("Bad response from server");
-                }
-                else if (response.status >= 400 && response.status < 500) {
-                    alert(json);
-                }
-                else {
-                    setMovieData(json);
-                }
+                handleResponse(response,
+                    (error) => {
+                        alert(error);
+                    },
+                    (result) => {
+                        setMovieData(result);
+                    }
+                )
             } catch (error) {
                 alert(error);
             }

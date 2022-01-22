@@ -7,7 +7,7 @@ export const FilterContext = React.createContext();
 
 export function LandingPage() {
     const [city, setCity] = useState('Minsk');
-    const [cinema, setCinema] = useState('All cinemas');
+    const [cinema, setCinema] = useState('All cinemas'); 
     const [day, setDay] = useState('Whole calender');
     const filtersValue = {
         city: city,

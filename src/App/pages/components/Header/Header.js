@@ -1,5 +1,5 @@
 import { UserContext } from '../../../App.js';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import film from './images/film.png';
 import './Header.css';
 import { SearchForm } from './SearchForm/SearchForm';
@@ -11,6 +11,7 @@ import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
 export function Header() {
     const [signUpActiveModal, setSignUpActiveModal] = useState(false);
     const [logInActiveModal, setLogInActiveModal] = useState(false);
+    const { user, setUserState } = useContext(UserContext);
     return (
         <header className="header">
             <div className="header__container">
@@ -23,38 +24,23 @@ export function Header() {
                     </div>
                 </div>
                 <SearchForm />
-                <UserContext.Consumer>
-                    {({ user, logoutUser }) => {
-                        if (user) { return (<Avatar username={user.username} logoutUser={logoutUser} />) }
-                        else {
-                            return (
-                                <SignUp
-                                    setSignUpActiveModal={setSignUpActiveModal}
-                                    setLogInActiveModal={setLogInActiveModal}
-                                />
-                            )
-                        }
-                    }
-                    }
-                </UserContext.Consumer>
-                {signUpActiveModal ? (
-                    <SignUpModalWindow setSignUpActiveModal={setSignUpActiveModal} />
-                ) : (
-                    undefined
-                )}
-                <UserContext.Consumer>
-                    {({ logoutUser }) => {
-                        {
-                            if (logInActiveModal) {
-                                return (
-                                    <LogInModalWindow setLogInActiveModal={setLogInActiveModal} logoutUser={logoutUser} />
-                                )
-                            }
-                            else { return undefined }
-                        }
-                    }
-                    }
-                </UserContext.Consumer>
+                {
+                    user ? (<Avatar username={user.username} setUserState={setUserState} />) :
+                        (<SignUp
+                            setSignUpActiveModal={setSignUpActiveModal}
+                            setLogInActiveModal={setLogInActiveModal}
+                        />)
+                }
+                {
+                    signUpActiveModal ? (
+                        <SignUpModalWindow setSignUpActiveModal={setSignUpActiveModal} />
+                    ) :
+                        null
+                }
+                {
+                    logInActiveModal ? (<LogInModalWindow setLogInActiveModal={setLogInActiveModal} setUserState={setUserState} />)
+                        : null
+                }
             </div>
         </header>
     );

@@ -1,27 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FilterContext } from '../MoviePage';
 import { FilterForms } from '../../components/FilterForms/FilterForms';
-import './MainMoviePage.css';
 import { MainMovieSchedule } from './MovieSchedule/MainMovieSchedule';
 import { Description } from './Description/Description';
 import { Navigation } from './Navigation/Navigation';
+import { handleResponse } from '../../../utilities/ResponseHandler';
+import './MainMoviePage.css';
 
 export function MainMoviePage({ params }) {
     const [movie, setMovie] = useState([]);
+    const { city, setCity, cinema, setCinema, day, setDay } = useContext(FilterContext);
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/movie/${params.id}`);
-                if (response.status >= 500 && response.status < 600) {
-                    throw new Error("Bad response from server");
-                }
-                const json = await response.json();
-                setMovie(json);
+                handleResponse(response,
+                    (error) => {
+                        alert(error);
+                    },
+                    (result) => {
+                        setMovie(result);
+                    }
+                );
             } catch (error) {
                 alert(error);
             }
         }
-        fetchData()
+        fetchData();
     }, []);
     return (
         <main className='main-movie'>
@@ -34,32 +39,23 @@ export function MainMoviePage({ params }) {
                         <h2>{movie.movieName}</h2>
                     </div>
                     <div className='main-movie__filters'>
-                        <FilterContext.Consumer>
-                            {({ setDay, city, setCity, setCinema }) => {
-                                return (
-                                    <FilterForms
-                                        city={city}
-                                        changeSelectedCity={setCity}
-                                        changeSelectedCinema={setCinema}
-                                        changeSelectedDay={setDay}
-                                    />
-                                )
-                            }
-                            }
-                        </FilterContext.Consumer>
+                        <FilterForms
+                            city={city}
+                            changeSelectedCity={setCity}
+                            changeSelectedCinema={setCinema}
+                            changeSelectedDay={setDay}
+                        />
                     </div>
                     <div>
                         <Navigation />
                     </div>
                     <div className='main-movie__schedule'>
-                        <FilterContext.Consumer>
-                            {({ day, city, cinema }) => {
-                                return (
-                                    <MainMovieSchedule city={city} cinema={cinema} day={day} movieId={params.id} />
-                                )
-                            }
-                            }
-                        </FilterContext.Consumer>
+                        <MainMovieSchedule
+                            city={city}
+                            cinema={cinema}
+                            day={day}
+                            movieId={params.id}
+                        />
                     </div>
                     <div className='main-movie__description'>
                         <Description storyline={movie.storyline} />

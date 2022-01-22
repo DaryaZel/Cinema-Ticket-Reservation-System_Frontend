@@ -9,7 +9,7 @@ export function MoviePage() {
     let params = useParams();
     const [city, setCity] = useState('Minsk');
     const [cinema, setCinema] = useState('All cinemas');
-    const [day, setDay] = useState('Whole calender');
+    const [day, setDay] = useState("Whole calender");
     const filtersValue = {
         city: city,
         setCity: setCity,

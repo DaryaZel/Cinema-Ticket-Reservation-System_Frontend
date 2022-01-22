@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { handleResponse } from '../../../../utilities/ResponseHandler';
 
 export function FilterFormCinema({ city, changeSelectedCinema }) {
     const [cinemas, setCinemas] = useState([]);
@@ -8,12 +9,15 @@ export function FilterFormCinema({ city, changeSelectedCinema }) {
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/cinema?city=${city}`)
-                if (response.status >= 500 && response.status < 600) {
-                    throw new Error("Bad response from server");
-                }
-                const json = await response.json();
-                setCinemas(json);
-                changeSelectedCinema(allCinemasOptionValue)
+                handleResponse(response,
+                    (error) => {
+                        alert(error);
+                    },
+                    (result) => {
+                        setCinemas(result);
+                        changeSelectedCinema(allCinemasOptionValue);
+                    }
+                );
             } catch (error) {
                 alert(error);
             }

@@ -11,7 +11,7 @@ function App() {
   const [auth, setAuth] = useState(null);
   const value = {
     user: auth,
-    logoutUser: setAuth
+    setUserState: setAuth
   }
 
   useEffect(() => {
