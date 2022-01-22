@@ -32,7 +32,7 @@ export function ReservedSeatsPage({ reservedSeats, totalPrice, sessionId }) {
         let mth = months[date.getMonth()];
 
         let dw = days[date.getDay()];
-        
+
         let hh = date.getHours();
         if (hh < 10) hh = '0' + hh;
 
@@ -54,7 +54,7 @@ export function ReservedSeatsPage({ reservedSeats, totalPrice, sessionId }) {
                 alert(error);
             }
         }
-        fetchData()
+        fetchData();
     }, []);
     return (<div>
         {movieSession &&

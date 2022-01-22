@@ -4,7 +4,7 @@ import { handleResponse } from './utilities/ResponseHandler';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { MoviePage } from './pages/MoviePage/MoviePage';
-import {CinemaHallPage} from './pages/CinemaHallPage/CinemaHallPage';
+import { ReservationPage } from './pages/ReservationPage/ReservationPage';
 import './App.css';
 
 export const UserContext = React.createContext();
@@ -54,7 +54,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} exact />
           <Route path='/movie/:id' element={<MoviePage />} />
-          <Route path='/reservation/:id' element={<CinemaHallPage />} />
+          <Route path='/reservation/:id' element={<ReservationPage />} />
         </Routes>
       </div>
     </UserContext.Provider>
