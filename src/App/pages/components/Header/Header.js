@@ -25,7 +25,13 @@ export function Header() {
                 </div>
                 <SearchForm />
                 {
-                    user ? (<Avatar username={user.username} setUserState={setUserState} />) :
+                    user ? (<Avatar
+                        username={user.username}
+                        onLogout={() => {
+                            localStorage.clear();
+                            setUserState(null)
+                        }}
+                    />) :
                         (<Authentication
                             openSignUp={() => setSignUpModalVisibility(true)}
                             openLogIn={() => setLogInModalVisibility(true)}
