@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import film from './images/film.png';
 import './Header.css';
 import { SearchForm } from './SearchForm/SearchForm';
-import { SignUp } from '../SignUp/SignUp';
+import { Authentication } from '../Authentication/Authentication';
 import { Avatar } from '../Avatar/Avatar';
 import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
@@ -26,9 +26,9 @@ export function Header() {
                 <SearchForm />
                 {
                     user ? (<Avatar username={user.username} setUserState={setUserState} />) :
-                        (<SignUp
-                            setSignUpActiveModal={setSignUpModalVisibility}
-                            setLogInActiveModal={setLogInModalVisibility}
+                        (<Authentication
+                            openSignUp={() => setSignUpModalVisibility(true)}
+                            openLogIn={() => setLogInModalVisibility(true)}
                         />)
                 }
                 {
