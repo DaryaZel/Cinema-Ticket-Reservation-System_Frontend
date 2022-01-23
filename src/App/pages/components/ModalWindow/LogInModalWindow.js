@@ -6,7 +6,7 @@ import password from './images/lock.png';
 import { ModalWindow } from './ModalWindow.js';
 import { handleResponse } from '../../../utilities/ResponseHandler.js';
 
-export function LogInModalWindow({ setLogInActiveModal, setUserState }) {
+export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
     const logInData = [
@@ -25,7 +25,7 @@ export function LogInModalWindow({ setLogInActiveModal, setUserState }) {
                     alert(error);
                 },
                 (result) => {
-                    setLogInActiveModal(false);
+                    onCloseLogInModal();
                     setUserState(result);
                 }
             );
@@ -67,7 +67,7 @@ export function LogInModalWindow({ setLogInActiveModal, setUserState }) {
     }
 
     return (
-        <ModalWindow title='Log In' setActiveModal={setLogInActiveModal}>
+        <ModalWindow title='Log In' onCloseModalWindow={() => onCloseLogInModal()}>
             <form onSubmit={handleSubmit}>
                 <div className='modal__container'>
                     {

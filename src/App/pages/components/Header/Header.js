@@ -9,8 +9,8 @@ import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
 
 export function Header() {
-    const [signUpActiveModal, setSignUpActiveModal] = useState(false);
-    const [logInActiveModal, setLogInActiveModal] = useState(false);
+    const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
+    const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
     return (
         <header className="header">
@@ -27,18 +27,18 @@ export function Header() {
                 {
                     user ? (<Avatar username={user.username} setUserState={setUserState} />) :
                         (<SignUp
-                            setSignUpActiveModal={setSignUpActiveModal}
-                            setLogInActiveModal={setLogInActiveModal}
+                            setSignUpActiveModal={setSignUpModalVisibility}
+                            setLogInActiveModal={setLogInModalVisibility}
                         />)
                 }
                 {
-                    signUpActiveModal ? (
-                        <SignUpModalWindow setSignUpActiveModal={setSignUpActiveModal} />
+                    signUpModalVisibility ? (
+                        <SignUpModalWindow onCloseSignUpModal={() => setSignUpModalVisibility(false)} />
                     ) :
                         null
                 }
                 {
-                    logInActiveModal ? (<LogInModalWindow setLogInActiveModal={setLogInActiveModal} setUserState={setUserState} />)
+                    logInModalVisibility ? (<LogInModalWindow onCloseLogInModal={() => setLogInModalVisibility(false)} setUserState={setUserState} />)
                         : null
                 }
             </div>

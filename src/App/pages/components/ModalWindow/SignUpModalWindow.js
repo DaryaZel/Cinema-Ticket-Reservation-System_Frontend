@@ -7,7 +7,7 @@ import password from './images/lock.png';
 import { ModalWindow } from './ModalWindow.js';
 import { handleResponse } from '../../../utilities/ResponseHandler.js'
 
-export function SignUpModalWindow({ setSignUpActiveModal }) {
+export function SignUpModalWindow({ onCloseSignUpModal }) {
     const [showMessage, setShowMessage] = useState(false);
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextEmail, setInputTextEmail] = useState('');
@@ -62,7 +62,7 @@ export function SignUpModalWindow({ setSignUpActiveModal }) {
     }
 
     return (
-        <ModalWindow title='Sign Up' setActiveModal={setSignUpActiveModal}>
+        <ModalWindow title='Sign Up' onCloseModalWindow={() => onCloseSignUpModal()}>
             {showMessage ? <div className='modal__greeting'><h2>Welcome! Now you can log in!</h2></div> :
                 <form onSubmit={handleSubmit}>
                     <div className='modal__container'>
