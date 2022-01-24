@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { defaultCityValue, defaultCinemaValue, defaultDayValue } from '../../App';
 import { Header } from "../components/Header/Header";
 import { MainMoviePage } from "./MainMoviePage/MainMoviePage";
 import { useParams } from "react-router-dom";
@@ -7,9 +8,9 @@ import { useParams } from "react-router-dom";
 export const FilterContext = React.createContext();
 export function MoviePage() {
     let params = useParams();
-    const [city, setCity] = useState('Minsk');
-    const [cinema, setCinema] = useState('All cinemas');
-    const [day, setDay] = useState("Whole calender");
+    const [city, setCity] = useState(defaultCityValue);
+    const [cinema, setCinema] = useState(defaultCinemaValue);
+    const [day, setDay] = useState(defaultDayValue);
     const filtersValue = {
         city: city,
         setCity: setCity,

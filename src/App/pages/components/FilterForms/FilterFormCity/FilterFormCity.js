@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { defaultCityValue } from '../../../../App';
 import { handleResponse } from '../../../../utilities/ResponseHandler';
 
 export function FilterFormCity({ changeSelectedCity }) {
@@ -26,24 +27,16 @@ export function FilterFormCity({ changeSelectedCity }) {
     const cityArray = [];
 
     for (let i = 0; i < cities.length; i++) {
-        if (!cityArray.includes(cities[i].cityName) && cities[i].cityName !== 'Minsk') {
+        if (!cityArray.includes(cities[i].cityName) && cities[i].cityName !== defaultCityValue) {
             cityArray.push(cities[i].cityName);
         }
     };
-    cityArray.sort((a, b) => {
-        if (a < b) {
-            return -1;
-        }
-        if (a > b) {
-            return 1;
-        }
-        return 0;
-    });
+    cityArray.sort();
 
     return (
         <div className='filter-form'>
             <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedCity(e.target.value)} >
-                <option value="Minsk" selected>Minsk</option>
+                <option value={defaultCityValue} selected>Minsk</option>
                 {
                     cityArray.map((city, index) => (
                         <option key={city + index} value={city}>{city}</option>

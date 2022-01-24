@@ -6,6 +6,11 @@ import { MoviePage } from './pages/MoviePage/MoviePage';
 import './App.css';
 
 export const UserContext = React.createContext();
+export const defaultCityValue = 'Minsk';
+export const defaultCinemaValue = 'All cinemas';
+export const defaultDayValue = 'Whole calender';
+export const tokenStorageKey = 'AUTH_TOKEN';
+
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -17,7 +22,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = localStorage.getItem('AUTH_TOKEN');
+        const token = localStorage.getItem(tokenStorageKey);
         if (token) {
           const response = await fetch('https://cinematicketbooking.herokuapp.com/auth/user', {
             headers: {

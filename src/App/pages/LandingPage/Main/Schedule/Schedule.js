@@ -5,41 +5,8 @@ import { handleResponse } from '../../../../utilities/ResponseHandler';
 
 export function Schedule({ city, cinema, day }) {
     const [dateSchedule, setDateSchedule] = useState([]);
-
-    function formatDate(date) {
-        const months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ]
-        const days = [
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday'
-        ]
-
-        let dd = date.getDate();
-        if (dd < 10) dd = '0' + dd;
-
-        let mm = months[date.getMonth()];
-
-        let dw = days[date.getDay()];
-
-        return mm + ' ' + dd + ', ' + dw;
-    }
+    const locale = "en-US";
+    const formattingOptions = { month: 'long', day: 'numeric', weekday: 'long' };
 
     useEffect(() => {
         async function fetchData() {
@@ -66,7 +33,7 @@ export function Schedule({ city, cinema, day }) {
                 return (
                     <div>
                         <div className='schedule__date-container'>
-                            <h2>{formatDate(new Date(elem.day))}</h2>
+                            <h2>{new Date(elem.day).toLocaleDateString(locale, formattingOptions)}</h2>
                         </div>
                         {
                             elem.schedules.map((cinema) => (

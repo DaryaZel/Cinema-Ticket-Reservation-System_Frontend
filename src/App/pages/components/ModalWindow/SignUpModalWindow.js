@@ -19,6 +19,7 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
         { title: 'Password', name: 'password', type: 'password', img: password, placeholder: 'type your password', inputText: inputTextPassword, setText: setInputTextPassword },
         { title: 'Repeat Password', name: 'repeatPassword', type: 'password', img: password, placeholder: 'repeat your password', inputText: inputTextRepeatPassword, setText: setInputTextRepeatPassword }
     ];
+    const titleSignUpModalWindow = 'Sign Up';
 
     const handleChange = (text, setInputText) => {
         setInputText(text);
@@ -62,7 +63,7 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
     }
 
     return (
-        <ModalWindow title='Sign Up' onCloseModalWindow={() => onCloseSignUpModal()}>
+        <ModalWindow title={titleSignUpModalWindow} onCloseModalWindow={() => onCloseSignUpModal()}>
             {showMessage ? <div className='modal__greeting'><h2>Welcome! Now you can log in!</h2></div> :
                 <form onSubmit={handleSubmit}>
                     <div className='modal__container'>

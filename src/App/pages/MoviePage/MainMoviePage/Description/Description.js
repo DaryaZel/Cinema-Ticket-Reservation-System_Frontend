@@ -1,6 +1,6 @@
 import './Description.css'
 
-export function Description({storyline}) {
+export function Description({ storyline }) {
     return (
         <div className='description'>
             <h3 className='description__title'>

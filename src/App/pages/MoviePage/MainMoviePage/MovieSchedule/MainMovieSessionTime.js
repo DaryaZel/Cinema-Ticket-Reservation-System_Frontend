@@ -1,20 +1,14 @@
 export function MainMovieSessionTime({ session }) {
-     function formatDate(date) {
-        let dateObject = new Date(date);
-        let hh = dateObject.getHours();
-        if (hh < 10) hh = '0' + hh;
-
-        let mm = dateObject.getMinutes() + 1;
-        if (mm < 10) mm = '0' + mm;
-
-        return hh + ':' + mm;
-    }
+    const locale = "en-US";
+    const formattingOptions = {
+        hour: 'numeric', minute: 'numeric',
+        hour12: false
+    };
 
     return (
         <div className='movie-schedule__time-item'>
-            <a href='#'><span>{formatDate(session.date)}</span></a>
+            <a href='#'><span>{new Intl.DateTimeFormat(locale, formattingOptions).format(new Date(session.date))}</span></a>
         </div>
     )
-
-
 }
+

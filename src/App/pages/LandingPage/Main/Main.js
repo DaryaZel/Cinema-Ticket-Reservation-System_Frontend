@@ -6,8 +6,8 @@ import './Main.css';
 import { useContext } from 'react';
 
 export function Main() {
-    const { city, setCity, cinema, setCinema, day, setDay } = useContext(FilterContext)
-    
+    const { city, setCity, cinema, setCinema, day, setDay } = useContext(FilterContext);
+
     return (
         <main className='main'>
             <div className='main__container'>

@@ -28,6 +28,7 @@ export function MainMoviePage({ params }) {
         }
         fetchData();
     }, []);
+
     return (
         <main className='main-movie'>
             <div className='main-movie__container'>

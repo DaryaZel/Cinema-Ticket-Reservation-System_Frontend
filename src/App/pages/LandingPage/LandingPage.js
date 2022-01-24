@@ -1,14 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
+import { defaultCityValue, defaultCinemaValue, defaultDayValue } from '../../App';
 import { Main } from './Main/Main';
 import { Header } from '../components/Header/Header';
 
 export const FilterContext = React.createContext();
 
 export function LandingPage() {
-    const [city, setCity] = useState('Minsk');
-    const [cinema, setCinema] = useState('All cinemas'); 
-    const [day, setDay] = useState('Whole calender');
+    const [city, setCity] = useState(defaultCityValue);
+    const [cinema, setCinema] = useState(defaultCinemaValue);
+    const [day, setDay] = useState(defaultDayValue);
     const filtersValue = {
         city: city,
         setCity: setCity,
@@ -17,7 +18,7 @@ export function LandingPage() {
         day: day,
         setDay: setDay
     }
-    
+
     return (
         <div>
             <Header />

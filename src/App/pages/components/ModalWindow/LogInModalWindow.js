@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { LogInUser, SignUpUser } from './User.js';
-import './ModalWindow.css';
+import { tokenStorageKey } from '../../../App.js';
+import { LogInUser } from './User.js';
 import name from './images/user.png';
 import password from './images/lock.png';
 import { ModalWindow } from './ModalWindow.js';
 import { handleResponse } from '../../../utilities/ResponseHandler.js';
+import './ModalWindow.css';
 
 export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
     const [inputTextName, setInputTextName] = useState('');
@@ -13,6 +14,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
         { title: 'Name', name: 'name', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
         { title: 'Password', name: 'password', type: 'password', img: password, placeholder: 'type your password', inputText: inputTextPassword, setText: setInputTextPassword }
     ];
+    const titleLoginModalWindow = 'Log In';
     const getUser = async (token) => {
         try {
             const response = await fetch('https://cinematicketbooking.herokuapp.com/auth/user', {
@@ -57,7 +59,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                     alert(error);
                 },
                 (result) => {
-                    localStorage.setItem('AUTH_TOKEN', result);
+                    localStorage.setItem(tokenStorageKey, result);
                     getUser(result);
                 }
             );
@@ -67,7 +69,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
     }
 
     return (
-        <ModalWindow title='Log In' onCloseModalWindow={() => onCloseLogInModal()}>
+        <ModalWindow title={titleLoginModalWindow} onCloseModalWindow={() => onCloseLogInModal()}>
             <form onSubmit={handleSubmit}>
                 <div className='modal__container'>
                     {
