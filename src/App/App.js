@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { handleResponse } from './utilities/ResponseHandler';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { MoviePage } from './pages/MoviePage/MoviePage';
@@ -28,17 +29,15 @@ function App() {
             headers: {
               'Authorization': `Bearer ${token}`
             }
-          })
-          const json = await response.json()
-          if (response.status >= 500 && response.status < 600) {
-            throw new Error("Bad response from server");
-          }
-          else if (response.status >= 400 && response.status < 500) {
-            alert(json)
-          }
-          else {
-            setAuth(json)
-          }
+          });
+          handleResponse(
+            (error) => {
+              alert(error);
+            },
+            (result) => {
+              setAuth(result);
+            }
+          )
         }
       } catch (error) {
         alert(error);
