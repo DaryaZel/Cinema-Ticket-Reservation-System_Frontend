@@ -30,7 +30,7 @@ function App() {
               'Authorization': `Bearer ${token}`
             }
           });
-          handleResponse(
+          handleResponse(response,
             (error) => {
               alert(error);
             },
