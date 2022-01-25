@@ -58,8 +58,7 @@ export function Carousel() {
                 >
                     {
                         movieData.map((movie) => {
-                            const movieLink = '/movie/' + movie._id
-                            debugger
+                            const movieLink = '/movie/' + movie._id;
                             return (
                                 <div key={movie._id} className='carousel__item'>
                                     <div className='carousel__img-container'>

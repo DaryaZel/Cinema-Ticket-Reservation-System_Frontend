@@ -1,27 +1,45 @@
-import { defaultDayValue } from "../../../../App";
+import { useState, useEffect } from 'react';
+import { handleResponse } from '../../../../utilities/ResponseHandler';
+import { defaultDayValue, timezone} from "../../../../App";
 
 export function FilterFormDate({ changeSelectedDay }) {
-    const daysArray = [0, 1, 2, 3];
-    const today = new Date();
-    const nextDay = new Date();
+    const [daysArray, setDaysArrays] = useState([]);
+        useEffect(() => {
+            async function fetchData() {
+                try {
+                    const response = await fetch(`https://cinematicketbooking.herokuapp.com/session?timeZone=${timezone}`);
+                    handleResponse(response,
+                        (error) => {
+                            alert(error);
+                        },
+                        (result) => {
+                            setDaysArrays(result);
+                        }
+                    );
+                } catch (error) {
+                    alert(error);
+                }
+            }
+            fetchData();
+        }, []);
 
     const locale = "en-US";
     const formattingOptions = { month: 'short', day: 'numeric' };
 
     return (
-        <div className='filter-form'>
+        daysArray&&
+        (<div className='filter-form'>
             <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedDay(e.target.value)}>
                 <option value={defaultDayValue} selected>Date</option>
                 {
                     daysArray.map((item) => {
-                        nextDay.setDate(today.getDate() + item);
                         return (
-                            <option value={nextDay.toLocaleDateString()}>{nextDay.toLocaleDateString(locale, formattingOptions)}</option>
+                            <option value={new Date (item)}>{new Date (item).toLocaleDateString(locale, formattingOptions)}</option>
                         )
                     }
                     )
                 }
             </select>
-        </div>
+        </div>)
     );
 }

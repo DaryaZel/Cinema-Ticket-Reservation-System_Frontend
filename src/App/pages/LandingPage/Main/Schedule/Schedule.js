@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './Schedule.css';
 import { CinemaSchedule } from './CinemaSchedule';
 import { handleResponse } from '../../../../utilities/ResponseHandler';
+import { timezone } from '../../../../App';
 
 export function Schedule({ city, cinema, day }) {
     const [dateSchedule, setDateSchedule] = useState([]);
@@ -11,12 +12,13 @@ export function Schedule({ city, cinema, day }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule?city=${city}&cinema=${cinema}&date=${day}`);
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule?city=${city}&cinema=${cinema}&date=${day}&timeZone=${timezone}`);
                 handleResponse(response,
                     (error) => {
                         alert(error);
                     },
                     (result) => {
+                        debugger
                         setDateSchedule(result);
                     }
                 );

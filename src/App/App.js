@@ -7,6 +7,7 @@ import { MoviePage } from './pages/MoviePage/MoviePage';
 import './App.css';
 
 export const UserContext = React.createContext();
+export const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 export const defaultCityValue = 'Minsk';
 export const defaultCinemaValue = 'All cinemas';
 export const defaultDayValue = 'Whole calender';
