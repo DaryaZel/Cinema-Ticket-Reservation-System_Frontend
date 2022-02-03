@@ -12,13 +12,19 @@ export function Schedule({ city, cinema, day }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule?city=${city}&cinema=${cinema}&date=${day}&timeZone=${timezone}`);
+                let queryParams = `city=${city}&timeZone=${timezone}`
+                if (cinema !== "All cinemas") {
+                    queryParams = queryParams + `&cinema=${cinema}`
+                }
+                if (day !== "Whole calendar") {
+                    queryParams = queryParams + `&date=${day}`
+                }
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule?${queryParams}`);
                 handleResponse(response,
                     (error) => {
                         alert(error);
                     },
                     (result) => {
-                        debugger
                         setDateSchedule(result);
                     }
                 );

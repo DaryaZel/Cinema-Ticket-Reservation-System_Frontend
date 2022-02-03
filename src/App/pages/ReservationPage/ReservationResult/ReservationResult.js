@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-export function ReservedSeatsPage({ reservedSeats, totalPrice, sessionId }) {
+export function ReservationResult({ reservedSeats, totalPrice, sessionId }) {
     const [movieSession, setMovieSession] = useState(null);
     function formatDate(date) {
         const months = [
@@ -48,7 +48,6 @@ export function ReservedSeatsPage({ reservedSeats, totalPrice, sessionId }) {
                     throw new Error("Bad response from server");
                 }
                 const json = await response.json();
-                debugger
                 setMovieSession(json);
             } catch (error) {
                 alert(error);

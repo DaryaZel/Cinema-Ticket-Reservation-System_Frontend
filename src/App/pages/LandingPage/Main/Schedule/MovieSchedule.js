@@ -9,7 +9,6 @@ export function MovieSchedule({ movie }) {
             </div>
             <div className='movie-schedule__time-container'>
                 {movie.sessions.map((session) => {
-                    debugger
                     const sessionLink = '/reservation/' + session.id;
                     return (
                         <Link to={sessionLink}><SessionTime session={session} /></Link>

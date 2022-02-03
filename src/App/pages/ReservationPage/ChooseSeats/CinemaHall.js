@@ -1,10 +1,12 @@
-export function CinemaHall({ rows, ticketsPriceSum, seatHandleClick, reservationHandleClick, selectedSeats }) {
+export function CinemaHall({ rows, seatHandleClick, selectedSeats }) {
     const getClassNamesFor = (seat) => {
         let index = selectedSeats.indexOf(seat);
+        let basicClass = 'row__seat seat'
         if (seat.isReserved) {
-            return 'row__seat seat seat_reserved';
+            basicClass = basicClass + ' seat_reserved';
+            return basicClass
         }
-        return index == -1 ? `row__seat seat` : 'row__seat seat seat_selected';
+        return index == -1 ? basicClass : basicClass + ' seat_selected';
     }
     return (
         <div>
@@ -23,8 +25,6 @@ export function CinemaHall({ rows, ticketsPriceSum, seatHandleClick, reservation
                     })
                 }
             </div>
-            <h3>Total price: {ticketsPriceSum}$</h3>
-            <button type='submit' value='Reserve' onClick={reservationHandleClick}>Reserve</button>
         </div>
     )
 }

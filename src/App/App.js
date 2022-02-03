@@ -4,14 +4,14 @@ import { handleResponse } from './utilities/ResponseHandler';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { MoviePage } from './pages/MoviePage/MoviePage';
-import { ReservationPage } from './pages/ReservationPage/ReservationPage';
+import { ReservationPage } from './pages/ReservationPage/ReservationProcessPage';
 import './App.css';
 
 export const UserContext = React.createContext();
 export const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 export const defaultCityValue = 'Minsk';
 export const defaultCinemaValue = 'All cinemas';
-export const defaultDayValue = 'Whole calender';
+export const defaultDayValue = 'Whole calendar';
 export const tokenStorageKey = 'AUTH_TOKEN';
 
 
