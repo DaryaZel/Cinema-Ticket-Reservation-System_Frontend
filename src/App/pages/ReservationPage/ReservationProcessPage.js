@@ -13,6 +13,15 @@ export function ReservationPage() {
     const [ticketsPriceSum, setTicketsPriceSum] = useState(0);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [reserved, setReserved] = useState(false);
+
+    const mapSeats = (seatData) => {
+        let transformedSeat = {
+            seat_details: seatData,
+            chosen: false
+        }
+        return transformedSeat;
+    };
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -23,14 +32,14 @@ export function ReservationPage() {
                     },
                     (result) => {
                         const seats = result;
+                        let transformedSeats = seats.map(mapSeats);
                         let { rowNumber } = seats.reduce((acc, curr) => acc.rowNumber > curr.rowNumber ? acc : curr);
                         let rowsArray = [];
                         for (let i = 0; i < rowNumber; i++) {
                             rowsArray.push(new Array());
                         }
-                        for (let i = 0; i < seats.length; i++) {
-                            seats[i].id = seats[i]._id.toString();
-                            rowsArray[seats[i].rowNumber - 1].push(seats[i]);
+                        for (let i = 0; i < transformedSeats.length; i++) {
+                            rowsArray[transformedSeats[i].seat_details.rowNumber - 1].push(transformedSeats[i]);
                         }
                         setRows(rowsArray);
                     }
@@ -41,27 +50,27 @@ export function ReservationPage() {
         }
         fetchData()
     }, []);
-    const addSeatCallback = (row, number) => {
-        let isSelectedSeat = rows[row - 1][number - 1];
+
+    const addSeatCallback = (seat) => {
         async function fetchData() {
             try {
-                debugger
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/addSelect`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(isSelectedSeat),
+                    body: JSON.stringify(seat.seat_details),
                 });
                 handleResponse(response,
                     (error) => {
                         alert(error);
                     },
                     () => {
-                        setTicketsPriceSum((prevTicketsPriceSum) => prevTicketsPriceSum + rows[row - 1][number - 1].price);
-                        let newSelectedSeats = [...selectedSeats];
-                        newSelectedSeats.push(isSelectedSeat);
-                        setSelectedSeats(newSelectedSeats);
+                        setTicketsPriceSum((prevTicketsPriceSum) => prevTicketsPriceSum + seat.seat_details.price);
+
+                        let newRows = [...rows];
+                        newRows[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
+                        setSelectedSeats(newRows);
                     }
                 );
             }
@@ -70,10 +79,9 @@ export function ReservationPage() {
             }
         }
         fetchData()
-    }
+    };
 
-    const removeSeatCallback = (row, number) => {
-        let isSelectedSeat = rows[row - 1][number - 1];
+    const removeSeatCallback = (seat) => {
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/removeSelect`, {
@@ -81,17 +89,18 @@ export function ReservationPage() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(isSelectedSeat),
+                    body: JSON.stringify(seat.seat_details),
                 });
                 handleResponse(response,
                     (error) => {
                         alert(error);
                     },
                     () => {
-                        setTicketsPriceSum((prevTicketsPriceSum) => prevTicketsPriceSum - rows[row - 1][number - 1].price);
-                        let newSelectedSeats = [...selectedSeats];
-                        newSelectedSeats.splice(newSelectedSeats.indexOf(isSelectedSeat), 1);
-                        setSelectedSeats(newSelectedSeats);
+                        setTicketsPriceSum((prevTicketsPriceSum) => prevTicketsPriceSum - seat.seat_details.price);
+
+                        let newRows = [...rows];
+                        newRows[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
+                        setSelectedSeats(newRows);
                     }
                 );
             }
@@ -100,7 +109,8 @@ export function ReservationPage() {
             }
         }
         fetchData();
-    }
+    };
+
     const reservationHandleClick = () => {
         async function fetchData() {
             try {
@@ -109,7 +119,7 @@ export function ReservationPage() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(selectedSeats),
+                    body: JSON.stringify(rows),
                 });
                 handleResponse(response,
                     (error) => {
@@ -124,20 +134,22 @@ export function ReservationPage() {
             }
         }
         fetchData();
-    }
+    };
+
     const seatHandleClick = (seat) => {
-        let index = selectedSeats.indexOf(seat);
-        index != -1 ? removeSeatCallback(seat.rowNumber, seat.number) : addSeatCallback(seat.rowNumber, seat.number);
-    }
+        seat.chosen === true ? removeSeatCallback(seat) : addSeatCallback(seat);
+    };
+
     return (
         <div className='reservation-page__container'>
             {reserved ?
-                <ReservationResult reservedSeats={selectedSeats} totalPrice={ticketsPriceSum} sessionId={sessionId} /> :
-                <ChooseSeats rows={rows}
+                <ReservationResult rows={rows} totalPrice={ticketsPriceSum} sessionId={sessionId} /> :
+                <ChooseSeats
+                    rows={rows}
                     ticketsPriceSum={ticketsPriceSum}
                     seatHandleClick={seatHandleClick}
                     reservationHandleClick={reservationHandleClick}
-                    selectedSeats={selectedSeats} />
+                />
             }
         </div>
     )

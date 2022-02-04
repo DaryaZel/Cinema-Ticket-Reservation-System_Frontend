@@ -1,12 +1,15 @@
-export function CinemaHall({ rows, seatHandleClick, selectedSeats }) {
+export function CinemaHall({ rows, seatHandleClick }) {
     const getClassNamesFor = (seat) => {
-        let index = selectedSeats.indexOf(seat);
         let basicClass = 'row__seat seat'
-        if (seat.isReserved) {
+        if (seat.seat_details.isReserved) {
             basicClass = basicClass + ' seat_reserved';
             return basicClass
         }
-        return index == -1 ? basicClass : basicClass + ' seat_selected';
+        if (seat.seat_details.isSelected === true && seat.chosen === false) {
+            basicClass = basicClass + ' seat_already-selected';
+            return basicClass
+        }
+        return seat.chosen === false ? basicClass : basicClass + ' seat_selected';
     }
     return (
         <div>
@@ -18,7 +21,7 @@ export function CinemaHall({ rows, seatHandleClick, selectedSeats }) {
                             <div>{index + 1}</div>
                             {row.map((seat) => {
                                 return (<div className={getClassNamesFor(seat)} onClick={() => seatHandleClick(seat)}>
-                                    <h4>{seat.number}</h4>
+                                    <h4>{seat.seat_details.number}</h4>
                                 </div>)
                             })}
                         </div>)

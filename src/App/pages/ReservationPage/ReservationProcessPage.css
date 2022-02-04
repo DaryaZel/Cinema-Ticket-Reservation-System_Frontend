@@ -34,3 +34,9 @@
   pointer-events: none;
   background-color: gray;
 }
+
+.seat_already-selected{
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: rgb(163, 162, 162);
+}
