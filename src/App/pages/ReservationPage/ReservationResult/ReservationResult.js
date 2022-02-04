@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { handleResponse } from '../../../utilities/ResponseHandler';
+import { TotalPrice } from '../TotalPrice';
 
-export function ReservationResult({ rows, totalPrice, sessionId }) {
+export function ReservationResult({ rows, sessionId }) {
     const [movieSession, setMovieSession] = useState(null);
     const locale = "en-US";
     const formattingOptions = {
@@ -47,7 +48,7 @@ export function ReservationResult({ rows, totalPrice, sessionId }) {
                     )
                 })
                 }
-                <h2>Total price: {totalPrice}$</h2>
+                <TotalPrice rows={rows}/>
             </div>
         }
     </div>

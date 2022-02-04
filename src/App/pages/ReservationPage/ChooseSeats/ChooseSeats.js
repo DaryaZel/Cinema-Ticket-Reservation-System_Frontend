@@ -1,13 +1,14 @@
+import { TotalPrice } from "../TotalPrice"
 import { CinemaHall } from "./CinemaHall"
 
-export function ChooseSeats({ rows, ticketsPriceSum, seatHandleClick, reservationHandleClick }) {
+export function ChooseSeats({ rows, seatHandleClick, reservationHandleClick }) {
     return (
         <div>
             <CinemaHall
                 rows={rows}
                 seatHandleClick={seatHandleClick}
             />
-            <h3>Total price: {ticketsPriceSum}$</h3>
+            <TotalPrice rows={rows} />
             <button type='submit' value='Reserve' onClick={reservationHandleClick}>Reserve</button>
         </div>
     )
