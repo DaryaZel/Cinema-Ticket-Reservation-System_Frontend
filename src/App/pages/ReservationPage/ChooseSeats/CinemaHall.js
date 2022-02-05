@@ -1,4 +1,4 @@
-export function CinemaHall({ rows, seatHandleClick }) {
+export function CinemaHall({ rowsOfSeats, seatHandleClick }) {
     const getClassNamesFor = (seat) => {
         let basicClass = 'row__seat seat'
         if (seat.seat_details.isReserved) {
@@ -15,8 +15,8 @@ export function CinemaHall({ rows, seatHandleClick }) {
         <div>
             <div><span>Screen</span></div>
             <div>
-                {rows &&
-                    rows.map((row, index) => {
+                {rowsOfSeats &&
+                    rowsOfSeats.map((row, index) => {
                         return (<div className='row'>
                             <div>{index + 1}</div>
                             {row.map((seat) => {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { handleResponse } from '../../../utilities/ResponseHandler';
 import { TotalPrice } from '../TotalPrice';
 
-export function ReservationResult({ rows, sessionId }) {
+export function ReservationResult({ rowsOfSeats, sessionId }) {
     const [movieSession, setMovieSession] = useState(null);
     const locale = "en-US";
     const formattingOptions = {
@@ -36,7 +36,7 @@ export function ReservationResult({ rows, sessionId }) {
                 <h2>{movieSession[0].movieName}</h2>
                 <h2>{movieSession[0].cinemaName}</h2>
                 <h2>{(new Date(movieSession[0].date)).toLocaleDateString(locale, formattingOptions)}</h2>
-                {rows.map((row) => {
+                {rowsOfSeats.map((row) => {
                     return (
                         row.map((seat) => {
                             if (seat.chosen) {
@@ -48,7 +48,7 @@ export function ReservationResult({ rows, sessionId }) {
                     )
                 })
                 }
-                <TotalPrice rows={rows}/>
+                <TotalPrice seats={rowsOfSeats ? rowsOfSeats.flat().filter((seat) => seat.chosen === true) : null} />
             </div>
         }
     </div>

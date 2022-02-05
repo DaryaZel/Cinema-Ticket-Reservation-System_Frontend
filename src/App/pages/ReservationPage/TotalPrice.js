@@ -1,12 +1,8 @@
-export function TotalPrice({ rows }) {
+export function TotalPrice({ seats }) {
     let ticketsPriceSum = 0;
-    if (rows) {
-        rows.forEach((row) => {
-            row.forEach((seat) => {
-                if (seat.chosen) {
-                    ticketsPriceSum += seat.seat_details.price;
-                }
-            })
+    if (seats) {
+        seats.forEach((seat) => {
+            ticketsPriceSum += seat.seat_details.price;
         })
     }
 

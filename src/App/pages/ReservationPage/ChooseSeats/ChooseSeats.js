@@ -1,14 +1,14 @@
 import { TotalPrice } from "../TotalPrice"
 import { CinemaHall } from "./CinemaHall"
 
-export function ChooseSeats({ rows, seatHandleClick, reservationHandleClick }) {
+export function ChooseSeats({ rowsOfSeats, seatHandleClick, reservationHandleClick }) {
     return (
         <div>
             <CinemaHall
-                rows={rows}
+                rowsOfSeats={rowsOfSeats}
                 seatHandleClick={seatHandleClick}
             />
-            <TotalPrice rows={rows} />
+            <TotalPrice seats={rowsOfSeats ? rowsOfSeats.flat().filter((seat) => seat.chosen === true) : null} />
             <button type='submit' value='Reserve' onClick={reservationHandleClick}>Reserve</button>
         </div>
     )

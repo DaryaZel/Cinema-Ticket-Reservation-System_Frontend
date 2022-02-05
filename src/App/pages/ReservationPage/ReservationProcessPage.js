@@ -9,9 +9,7 @@ import './ReservationProcessPage.css';
 export function ReservationPage() {
     const params = useParams();
     const sessionId = params.id;
-    const [rows, setRows] = useState(null);
-    const [ticketsPriceSum, setTicketsPriceSum] = useState(0);
-    const [selectedSeats, setSelectedSeats] = useState([]);
+    const [rowsOfSeats, setRowsOfSeats] = useState(null);
     const [reserved, setReserved] = useState(false);
 
     const mapSeats = (seatData) => {
@@ -21,6 +19,13 @@ export function ReservationPage() {
         }
         return transformedSeat;
     };
+    const mapReservedSeats = (seat) => {
+        let transformedReservedSeats = {
+            session_id: seat.seat_details.session_id,
+            seat_id: seat.seat_details.seat_id
+        }
+        return transformedReservedSeats;
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -41,7 +46,7 @@ export function ReservationPage() {
                         for (let i = 0; i < transformedSeats.length; i++) {
                             rowsArray[transformedSeats[i].seat_details.rowNumber - 1].push(transformedSeats[i]);
                         }
-                        setRows(rowsArray);
+                        setRowsOfSeats(rowsArray);
                     }
                 );
             } catch (error) {
@@ -66,11 +71,9 @@ export function ReservationPage() {
                         alert(error);
                     },
                     () => {
-                        setTicketsPriceSum((prevTicketsPriceSum) => prevTicketsPriceSum + seat.seat_details.price);
-
-                        let newRows = [...rows];
-                        newRows[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
-                        setSelectedSeats(newRows);
+                        let newRowsOfSeats = [...rowsOfSeats];
+                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
+                        setRowsOfSeats(newRowsOfSeats);
                     }
                 );
             }
@@ -96,11 +99,9 @@ export function ReservationPage() {
                         alert(error);
                     },
                     () => {
-                        setTicketsPriceSum((prevTicketsPriceSum) => prevTicketsPriceSum - seat.seat_details.price);
-
-                        let newRows = [...rows];
-                        newRows[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
-                        setSelectedSeats(newRows);
+                        let newRowsOfSeats = [...rowsOfSeats];
+                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
+                        setRowsOfSeats(newRowsOfSeats);
                     }
                 );
             }
@@ -112,6 +113,8 @@ export function ReservationPage() {
     };
 
     const reservationHandleClick = () => {
+        let reservedSeats = rowsOfSeats.flat().filter((seat) => seat.chosen === true)
+        let transformedReservedSeats = reservedSeats.map(mapReservedSeats)
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/reserve`, {
@@ -119,7 +122,7 @@ export function ReservationPage() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(rows),
+                    body: JSON.stringify(transformedReservedSeats),
                 });
                 handleResponse(response,
                     (error) => {
@@ -143,10 +146,9 @@ export function ReservationPage() {
     return (
         <div className='reservation-page__container'>
             {reserved ?
-                <ReservationResult rows={rows} totalPrice={ticketsPriceSum} sessionId={sessionId} /> :
+                <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
                 <ChooseSeats
-                    rows={rows}
-                    ticketsPriceSum={ticketsPriceSum}
+                    rowsOfSeats={rowsOfSeats}
                     seatHandleClick={seatHandleClick}
                     reservationHandleClick={reservationHandleClick}
                 />
