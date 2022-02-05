@@ -5,10 +5,12 @@ import { handleResponse } from '../../utilities/ResponseHandler';
 import { ReservationResult } from './ReservationResult/ReservationResult';
 import { ChooseSeats } from './ChooseSeats/ChooseSeats';
 import './ReservationProcessPage.css';
+import { Loader } from './Loader/Loader';
 
 export function ReservationPage() {
     const params = useParams();
     const sessionId = params.id;
+    const [loading, setLoading] = useState(true);
     const [rowsOfSeats, setRowsOfSeats] = useState(null);
     const [reserved, setReserved] = useState(false);
 
@@ -31,6 +33,7 @@ export function ReservationPage() {
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/?movieSessionId=${sessionId}`);
+
                 handleResponse(response,
                     (error) => {
                         alert(error);
@@ -46,6 +49,7 @@ export function ReservationPage() {
                         for (let i = 0; i < transformedSeats.length; i++) {
                             rowsArray[transformedSeats[i].seat_details.rowNumber - 1].push(transformedSeats[i]);
                         }
+                        setLoading(false);
                         setRowsOfSeats(rowsArray);
                     }
                 );
@@ -145,13 +149,16 @@ export function ReservationPage() {
 
     return (
         <div className='reservation-page__container'>
-            {reserved ?
-                <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
-                <ChooseSeats
-                    rowsOfSeats={rowsOfSeats}
-                    seatHandleClick={seatHandleClick}
-                    reservationHandleClick={reservationHandleClick}
-                />
+            {loading ? <Loader /> :
+                <div>
+                    {reserved ?
+                        <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
+                        <ChooseSeats
+                            rowsOfSeats={rowsOfSeats}
+                            seatHandleClick={seatHandleClick}
+                            reservationHandleClick={reservationHandleClick}
+                        />}
+                </div>
             }
         </div>
     )
