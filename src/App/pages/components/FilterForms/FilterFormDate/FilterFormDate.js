@@ -1,45 +1,59 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { handleResponse } from '../../../../utilities/ResponseHandler';
-import { defaultDayValue, timezone} from "../../../../App";
+import { defaultDayValue, timezone } from "../../../../App";
+import "flatpickr/dist/themes/airbnb.css";
+import Flatpickr from "react-flatpickr";
+import close from '../images/close.png';
 
 export function FilterFormDate({ changeSelectedDay }) {
     const [daysArray, setDaysArrays] = useState([]);
-        useEffect(() => {
-            async function fetchData() {
-                try {
-                    const response = await fetch(`https://cinematicketbooking.herokuapp.com/session?timeZone=${timezone}`);
-                    handleResponse(response,
-                        (error) => {
-                            alert(error);
-                        },
-                        (result) => {
-                            setDaysArrays(result);
-                        }
-                    );
-                } catch (error) {
-                    alert(error);
-                }
-            }
-            fetchData();
-        }, []);
+    const fp = useRef(null);
 
-    const locale = "en-US";
-    const formattingOptions = { month: 'short', day: 'numeric' };
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/session?timeZone=${timezone}`);
+                handleResponse(response,
+                    (error) => {
+                        alert(error);
+                    },
+                    (result) => {
+                        let formatResult = result.map((date) => new Date(date))
+
+                        setDaysArrays(formatResult);
+                        console.log(formatResult)
+                    }
+                );
+            } catch (error) {
+                alert(error);
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
-        daysArray&&
+        daysArray &&
         (<div className='filter-form'>
-            <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedDay(e.target.value)}>
-                <option value={defaultDayValue} selected>Date</option>
-                {
-                    daysArray.map((item) => {
-                        return (
-                            <option value={new Date (item)}>{new Date (item).toLocaleDateString(locale, formattingOptions)}</option>
-                        )
+            <Flatpickr className='filter-form__selector' ref={fp}
+                placeholder="Select Date.."
+                options={{
+                    enable: daysArray,
+                    dateFormat: "l, F d",
+                    onChange: function (selectedDate) {
+                        changeSelectedDay(selectedDate)
                     }
-                    )
-                }
-            </select>
+                }}
+            />
+            <button
+                type="button"
+                className='filter-form__button'
+                onClick={() => {
+                    if (!fp?.current?.flatpickr) return;
+                    fp.current.flatpickr.clear();
+                }}
+            >
+                 <img src={close} />
+            </button>
         </div>)
     );
 }
