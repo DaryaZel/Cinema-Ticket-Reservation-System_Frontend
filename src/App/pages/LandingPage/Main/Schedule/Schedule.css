@@ -9,6 +9,11 @@
     text-transform: uppercase;
 }
 
+.schedule__no-sessions {
+    margin: 3vw 0;
+    color: rgb(131, 125, 125);
+}
+
 .cinema-schedule {
     display: flex;
     justify-content: space-between;
