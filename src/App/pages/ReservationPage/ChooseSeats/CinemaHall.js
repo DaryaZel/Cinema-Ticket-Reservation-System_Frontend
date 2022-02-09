@@ -1,3 +1,5 @@
+import { SeatLoader } from "../SeatLoader/SeatLoader";
+
 export function CinemaHall({ rowsOfSeats, seatHandleClick }) {
     const getClassNamesFor = (seat) => {
         let basicClass = 'row__seat seat'
@@ -20,9 +22,13 @@ export function CinemaHall({ rowsOfSeats, seatHandleClick }) {
                         return (<div className='row'>
                             <div>{index + 1}</div>
                             {row.map((seat) => {
-                                return (<div className={getClassNamesFor(seat)} onClick={() => seatHandleClick(seat)}>
-                                    <h4>{seat.seat_details.number}</h4>
-                                </div>)
+                                return (
+                                    <div className={getClassNamesFor(seat)} onClick={() => seatHandleClick(seat)}>{
+                                        (seat.loading ?
+                                            <SeatLoader /> :
+                                            <h4>{seat.seat_details.number}</h4>)
+                                    }
+                                    </div>)
                             })}
                         </div>)
                     })

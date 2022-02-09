@@ -5,7 +5,7 @@ import { handleResponse } from '../../utilities/ResponseHandler';
 import { ReservationResult } from './ReservationResult/ReservationResult';
 import { ChooseSeats } from './ChooseSeats/ChooseSeats';
 import './ReservationProcessPage.css';
-import { Loader } from './Loader/Loader';
+import { PageLoader } from './PageLoader/PageLoader';
 
 export function ReservationPage() {
     const params = useParams();
@@ -17,7 +17,8 @@ export function ReservationPage() {
     const mapSeats = (seatData) => {
         let transformedSeat = {
             seat_details: seatData,
-            chosen: false
+            chosen: false,
+            loading: false
         }
         return transformedSeat;
     };
@@ -70,6 +71,9 @@ export function ReservationPage() {
                     },
                     body: JSON.stringify(seat.seat_details),
                 });
+                let newRowsOfSeats = [...rowsOfSeats];
+                newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = true;
+                setRowsOfSeats(newRowsOfSeats);
                 handleResponse(response,
                     (error) => {
                         alert(error);
@@ -77,6 +81,7 @@ export function ReservationPage() {
                     () => {
                         let newRowsOfSeats = [...rowsOfSeats];
                         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
+                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
                         setRowsOfSeats(newRowsOfSeats);
                     }
                 );
@@ -98,6 +103,9 @@ export function ReservationPage() {
                     },
                     body: JSON.stringify(seat.seat_details),
                 });
+                let newRowsOfSeats = [...rowsOfSeats];
+                newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = true;
+                setRowsOfSeats(newRowsOfSeats);
                 handleResponse(response,
                     (error) => {
                         alert(error);
@@ -105,6 +113,7 @@ export function ReservationPage() {
                     () => {
                         let newRowsOfSeats = [...rowsOfSeats];
                         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
+                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
                         setRowsOfSeats(newRowsOfSeats);
                     }
                 );
@@ -149,7 +158,7 @@ export function ReservationPage() {
 
     return (
         <div className='reservation-page__container'>
-            {loading ? <Loader /> :
+            {loading ? <PageLoader /> :
                 <div>
                     {reserved ?
                         <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
