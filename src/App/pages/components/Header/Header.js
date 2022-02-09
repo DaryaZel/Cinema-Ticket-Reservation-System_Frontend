@@ -39,7 +39,7 @@ export function Header() {
                 }
                 {
                     signUpModalVisibility ? (
-                        <SignUpModalWindow onCloseSignUpModal={() => setSignUpModalVisibility(false)} />
+                        <SignUpModalWindow onCloseSignUpModal={() => setSignUpModalVisibility(false)} setUserState={setUserState} />
                     ) :
                         null
                 }

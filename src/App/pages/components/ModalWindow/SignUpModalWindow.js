@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SignUpUser } from './User.js';
+import { tokenStorageKey } from '../../../App.js';
 import './ModalWindow.css';
 import name from './images/user.png';
 import email from './images/arroba.png';
@@ -7,7 +8,7 @@ import password from './images/lock.png';
 import { ModalWindow } from './ModalWindow.js';
 import { handleResponse } from '../../../utilities/ResponseHandler.js'
 
-export function SignUpModalWindow({ onCloseSignUpModal }) {
+export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
     const [showMessage, setShowMessage] = useState(false);
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextEmail, setInputTextEmail] = useState('');
@@ -20,7 +21,26 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
         { title: 'Repeat Password', name: 'repeatPassword', type: 'password', img: password, placeholder: 'repeat your password', inputText: inputTextRepeatPassword, setText: setInputTextRepeatPassword }
     ];
     const titleSignUpModalWindow = 'Sign Up';
-
+    const getUser = async (token) => {
+        try {
+            const response = await fetch('https://cinematicketbooking.herokuapp.com/auth/user', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            handleResponse(response,
+                (error) => {
+                    alert(error);
+                },
+                (result) => {
+                    setUserState(result);
+                }
+            );
+        }
+        catch (error) {
+            alert(error);
+        }
+    }
     const handleChange = (text, setInputText) => {
         setInputText(text);
     };
@@ -38,7 +58,9 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
                 (error) => {
                     alert(error);
                 },
-                () => {
+                (result) => {
+                    localStorage.setItem(tokenStorageKey, result);
+                    getUser(result);
                     setShowMessage(true);
                 }
             )
@@ -64,7 +86,7 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
 
     return (
         <ModalWindow title={titleSignUpModalWindow} onCloseModalWindow={() => onCloseSignUpModal()}>
-            {showMessage ? <div className='auth-modal__greeting'><h2>Welcome! Now you can log in!</h2></div> :
+            {showMessage ? <div className='auth-modal__greeting'><h2>Welcome!</h2></div> :
                 <form onSubmit={handleSubmit}>
                     <div className='auth-modal__container'>
                         {
