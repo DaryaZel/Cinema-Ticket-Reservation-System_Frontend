@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = localStorage.getItem(tokenStorageKey);
+        const token = localStorage.getItem(tokenStorageKey)||sessionStorage.getItem(tokenStorageKey);
         if (token) {
           const response = await fetch('https://cinematicketbooking.herokuapp.com/auth/user', {
             headers: {

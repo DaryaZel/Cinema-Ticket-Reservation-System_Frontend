@@ -29,7 +29,8 @@ export function Header() {
                         username={user.username}
                         onLogout={() => {
                             localStorage.clear();
-                            setUserState(null)
+                            sessionStorage.clear();
+                            setUserState(null);
                         }}
                     />) :
                         (<Authentication

@@ -10,6 +10,8 @@ import './ModalWindow.css';
 export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
+    const [checked, setChecked] = useState(false);
+
     const logInData = [
         { title: 'Name', name: 'name', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
         { title: 'Password', name: 'password', type: 'password', img: password, placeholder: 'type your password', inputText: inputTextPassword, setText: setInputTextPassword }
@@ -59,7 +61,12 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                     alert(error);
                 },
                 (result) => {
-                    localStorage.setItem(tokenStorageKey, result);
+                    if (checked) {
+                        localStorage.setItem(tokenStorageKey, result);
+                    }
+                    else {
+                        sessionStorage.setItem(tokenStorageKey, result);
+                    }
                     getUser(result);
                 }
             );
@@ -90,7 +97,12 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                 </div>
                 <div>
                     <div className='auth-modal__checkbox'>
-                        <input type="checkbox" id="remember" name="remember"></input>
+                        <input type="checkbox"
+                            id="remember"
+                            name="remember"
+                            checked={checked}
+                            onChange={e => setChecked(e.target.checked)}>
+                        </input>
                         <label for="remember"><span>Remember Me</span></label>
                     </div>
                     <button type='submit' className='auth-modal__button'>

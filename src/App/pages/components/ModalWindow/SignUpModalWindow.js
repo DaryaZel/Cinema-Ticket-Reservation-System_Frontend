@@ -59,7 +59,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
                     alert(error);
                 },
                 (result) => {
-                    localStorage.setItem(tokenStorageKey, result);
+                    sessionStorage.setItem(tokenStorageKey, result);
                     getUser(result);
                     setShowMessage(true);
                 }
