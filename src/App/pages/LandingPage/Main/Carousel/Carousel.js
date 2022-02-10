@@ -62,7 +62,9 @@ export function Carousel() {
                             return (
                                 <div key={movie._id} className='carousel__item'>
                                     <div className='carousel__img-container'>
-                                        <img src={movie.posterImg_link} />
+                                        <Link to={movieLink}>
+                                            <img src={movie.posterImg_link} />
+                                        </Link>
                                         <div className='carousel__ticket'>
                                             <Link to={movieLink}>
                                                 <Ticket />

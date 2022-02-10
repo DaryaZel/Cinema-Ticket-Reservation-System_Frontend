@@ -1,4 +1,5 @@
-import { MainMovieSessionTime } from './MainMovieSessionTime'
+import { MainMovieSessionTime } from './MainMovieSessionTime';
+import { Link } from 'react-router-dom';
 
 export function MainMovieCinemaSchedule({ cinema }) {
     return (
@@ -8,9 +9,13 @@ export function MainMovieCinemaSchedule({ cinema }) {
                 <h5>{cinema.cinemaAddress}</h5>
             </div>
             <div className='cinema-schedule__time-container'>
-                {cinema.sessions.map((session) => (
-                    <MainMovieSessionTime session={session} />
-                ))}
+                {cinema.sessions.map((session) => {
+                    const sessionLink = '/reservation/' + session.id;
+                    return (
+                        <Link to={sessionLink} className="link"><MainMovieSessionTime session={session} /></Link>
+                    )
+                }
+                )}
             </div>
         </div>
     );
