@@ -1,6 +1,6 @@
-import { SessionTime } from './SessionTime'
+import { MainMovieSessionTime } from './MainMovieSessionTime'
 
-export function CinemaSchedule({ cinema }) {
+export function MainMovieCinemaSchedule({ cinema }) {
     return (
         <div className='cinema-schedule'>
             <div className='cinema-schedule__cinema-name-container'>
@@ -9,7 +9,7 @@ export function CinemaSchedule({ cinema }) {
             </div>
             <div className='cinema-schedule__time-container'>
                 {cinema.sessions.map((session) => (
-                    <SessionTime session={session} />
+                    <MainMovieSessionTime session={session} />
                 ))}
             </div>
         </div>

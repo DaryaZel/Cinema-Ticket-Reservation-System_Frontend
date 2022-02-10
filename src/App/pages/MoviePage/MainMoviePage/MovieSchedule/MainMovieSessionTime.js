@@ -1,4 +1,4 @@
-export function SessionTime({ session }) {
+export function MainMovieSessionTime({ session }) {
     const locale = "en-US";
     const formattingOptions = {
         hour: 'numeric', minute: 'numeric',
@@ -10,5 +10,5 @@ export function SessionTime({ session }) {
             <a href='#'><span>{new Intl.DateTimeFormat(locale, formattingOptions).format(new Date(session.date))}</span></a>
         </div>
     )
-
 }
+

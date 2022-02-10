@@ -1,25 +1,45 @@
-export function FilterFormDate() {
-    function formatDate(date) {
+import { useState, useEffect } from 'react';
+import { handleResponse } from '../../../../utilities/ResponseHandler';
+import { defaultDayValue, timezone} from "../../../../App";
 
-        var dd = date.getDate();
-        if (dd < 10) dd = '0' + dd;
+export function FilterFormDate({ changeSelectedDay }) {
+    const [daysArray, setDaysArrays] = useState([]);
+        useEffect(() => {
+            async function fetchData() {
+                try {
+                    const response = await fetch(`https://cinematicketbooking.herokuapp.com/session?timeZone=${timezone}`);
+                    handleResponse(response,
+                        (error) => {
+                            alert(error);
+                        },
+                        (result) => {
+                            setDaysArrays(result);
+                        }
+                    );
+                } catch (error) {
+                    alert(error);
+                }
+            }
+            fetchData();
+        }, []);
 
-        var mm = date.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
+    const locale = "en-US";
+    const formattingOptions = { month: 'short', day: 'numeric' };
 
-        var yy = date.getFullYear() % 100;
-        if (yy < 10) yy = '0' + yy;
-
-        return dd + '.' + mm + '.' + yy;
-    }
     return (
-        <div className='filter-form'>
-            <select className='filter-form__selector' name="select" >
-                <option value="" selected>Date</option>
+        daysArray&&
+        (<div className='filter-form'>
+            <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedDay(e.target.value)}>
+                <option value={defaultDayValue} selected>Date</option>
                 {
-                    <option value={formatDate(new Date())}>{formatDate(new Date())}</option>
+                    daysArray.map((item) => {
+                        return (
+                            <option value={new Date (item)}>{new Date (item).toLocaleDateString(locale, formattingOptions)}</option>
+                        )
+                    }
+                    )
                 }
             </select>
-        </div>
+        </div>)
     );
 }

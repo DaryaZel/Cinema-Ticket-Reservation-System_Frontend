@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import './Schedule.css';
-import { CinemaSchedule } from './CinemaSchedule';
 import { handleResponse } from '../../../../utilities/ResponseHandler';
+import { MainMovieCinemaSchedule } from './MainMovieCinemaSchedule';
 import { timezone } from '../../../../App';
+import './MainMovieSchedule.css';
 
-export function Schedule({ city, cinema, day }) {
+export function MainMovieSchedule({ city, cinema, day, movieId }) {
     const [dateSchedule, setDateSchedule] = useState([]);
     const locale = "en-US";
     const formattingOptions = { month: 'long', day: 'numeric', weekday: 'long' };
@@ -12,13 +12,12 @@ export function Schedule({ city, cinema, day }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule?city=${city}&cinema=${cinema}&date=${day}&timeZone=${timezone}`);
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule/${movieId}?city=${city}&cinema=${cinema}&date=${day}&timeZone=${timezone}`);
                 handleResponse(response,
                     (error) => {
                         alert(error);
                     },
                     (result) => {
-                        debugger
                         setDateSchedule(result);
                     }
                 );
@@ -26,7 +25,7 @@ export function Schedule({ city, cinema, day }) {
                 alert(error);
             }
         }
-        fetchData();
+        fetchData()
     }, [city, cinema, day]);
 
     return (
@@ -39,7 +38,7 @@ export function Schedule({ city, cinema, day }) {
                         </div>
                         {
                             elem.schedules.map((cinema) => (
-                                <CinemaSchedule cinema={cinema} />
+                                <MainMovieCinemaSchedule cinema={cinema} />
                             ))
                         }</div>
                 )

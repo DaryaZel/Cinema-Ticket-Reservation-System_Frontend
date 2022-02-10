@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { UserContext } from '../../../App.js';
+import { useContext, useState } from 'react';
 import film from './images/film.png';
 import './Header.css';
 import { SearchForm } from './SearchForm/SearchForm';
-import { SignUp } from '../SignUp/SignUp';
+import { Authentication } from '../Authentication/Authentication';
+import { Avatar } from '../Avatar/Avatar';
 import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
 
 export function Header() {
-    const [signUpActiveModal, setSignUpActiveModal] = useState(false)
-    const [logInActiveModal, setLogInActiveModal] = useState(false)
-
+    const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
+    const [logInModalVisibility, setLogInModalVisibility] = useState(false);
+    const { user, setUserState } = useContext(UserContext);
     return (
         <header className="header">
             <div className="header__container">
@@ -22,20 +24,29 @@ export function Header() {
                     </div>
                 </div>
                 <SearchForm />
-                <SignUp
-                    setSignUpActiveModal={setSignUpActiveModal}
-                    setLogInActiveModal={setLogInActiveModal}
-                />
-                {signUpActiveModal ? (
-                    <SignUpModalWindow setSignUpActiveModal={setSignUpActiveModal} />
-                ) : (
-                    undefined
-                )}
-                {logInActiveModal ? (
-                    <LogInModalWindow setLogInActiveModal={setLogInActiveModal} />
-                ) : (
-                    undefined
-                )}
+                {
+                    user ? (<Avatar
+                        username={user.username}
+                        onLogout={() => {
+                            localStorage.clear();
+                            setUserState(null)
+                        }}
+                    />) :
+                        (<Authentication
+                            openSignUp={() => setSignUpModalVisibility(true)}
+                            openLogIn={() => setLogInModalVisibility(true)}
+                        />)
+                }
+                {
+                    signUpModalVisibility ? (
+                        <SignUpModalWindow onCloseSignUpModal={() => setSignUpModalVisibility(false)} />
+                    ) :
+                        null
+                }
+                {
+                    logInModalVisibility ? (<LogInModalWindow onCloseLogInModal={() => setLogInModalVisibility(false)} setUserState={setUserState} />)
+                        : null
+                }
             </div>
         </header>
     );
