@@ -1,5 +1,16 @@
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .page-loader {
-  margin: 25% auto 0;
   border: 16px solid #f3f3f3;
   border-top: 16px solid rgb(73, 160, 172);
   border-radius: 50%;

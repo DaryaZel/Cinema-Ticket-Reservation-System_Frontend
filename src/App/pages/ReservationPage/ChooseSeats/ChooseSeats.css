@@ -1,0 +1,120 @@
+.choose-seats__header {
+    margin-top: 20px;
+}
+
+.choose-seats__header h2 {
+    margin-bottom: 10px;
+}
+
+.choose-seats__main {
+    margin-top: 20px;
+}
+
+.main {
+    display: flex;
+}
+
+.choose-seats__cinemaHall {
+    width: 60%;
+}
+
+.choose-seats__button {
+    margin-top: 1vh;
+    outline: none;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+}
+
+.choose-seats__legend {
+    width: 40%;
+}
+
+.cinemahall__rows-container {
+    margin-top: 20px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row__seat {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.seat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3vw;
+    height: 3vw;
+    background-color: rgb(73, 160, 172);
+    border-radius: 10px 10px 0 0;
+}
+
+.seat-LoveSeat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4vw;
+    height: 3vw;
+    background-color: rgb(177, 71, 71);
+    border-radius: 10px 10px 0 0;
+}
+
+.seat_selected {
+    background-color: rgba(21, 74, 117, 0.849);
+}
+
+.seat_reserved {
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: gray;
+}
+
+.seat_already-selected {
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: rgb(163, 162, 162);
+}
+
+.legend__seatTypes-container {
+    margin-top: 20px;
+}
+
+.seatType {
+    display: flex;
+    border-top: solid 1px black;
+    padding: 20px 20px 20px 0;
+}
+
+.seatType:last-child {
+    border-bottom: solid 1px black;
+}
+
+.seatType__example {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seatType__information {
+    width: 70%
+}
+
+.seatType__title {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.seatType__description {
+    margin-top: 10px;
+    text-align: left;
+}

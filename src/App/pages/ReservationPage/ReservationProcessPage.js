@@ -10,10 +10,33 @@ import { PageLoader } from './PageLoader/PageLoader';
 export function ReservationPage() {
     const params = useParams();
     const sessionId = params.id;
-    const [loading, setLoading] = useState(true);
+    const [contentReady, setContentReady] = useState(
+        {
+            availableseats: false,
+            session: false,
+            seattypes: false
+        });
     const [rowsOfSeats, setRowsOfSeats] = useState(null);
     const [reserved, setReserved] = useState(false);
-
+    let shouldDisplayContent = contentReady.availableseats && contentReady.seattypes && contentReady.session;
+    const changeAvailableSeatContentReady = (state) => {
+        setContentReady((prevContentReady) => ({
+            ...prevContentReady,
+            availableseats: state
+        }));
+    }
+    const changeSessionContentReady = (state) => {
+        setContentReady((prevContentReady) => ({
+            ...prevContentReady,
+            session: state
+        }));
+    }
+    const changeSeatTypesContentReady = (state) => {
+        setContentReady((prevContentReady) => ({
+            ...prevContentReady,
+            seattypes: state
+        }));
+    }
     const mapSeats = (seatData) => {
         let transformedSeat = {
             seat_details: seatData,
@@ -31,6 +54,7 @@ export function ReservationPage() {
     }
 
     useEffect(() => {
+
         async function fetchData() {
             try {
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/?movieSessionId=${sessionId}`);
@@ -50,7 +74,7 @@ export function ReservationPage() {
                         for (let i = 0; i < transformedSeats.length; i++) {
                             rowsArray[transformedSeats[i].seat_details.rowNumber - 1].push(transformedSeats[i]);
                         }
-                        setLoading(false);
+                        changeAvailableSeatContentReady(true);
                         setRowsOfSeats(rowsArray);
                     }
                 );
@@ -155,20 +179,23 @@ export function ReservationPage() {
     const seatHandleClick = (seat) => {
         seat.chosen === true ? removeSeatCallback(seat) : addSeatCallback(seat);
     };
-
+    debugger
     return (
         <div className='reservation-page__container'>
-            {loading ? <PageLoader /> :
-                <div>
-                    {reserved ?
-                        <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
-                        <ChooseSeats
-                            rowsOfSeats={rowsOfSeats}
-                            seatHandleClick={seatHandleClick}
-                            reservationHandleClick={reservationHandleClick}
-                        />}
-                </div>
-            }
+            {shouldDisplayContent ? null : <PageLoader />}
+            <div>
+                {reserved ?
+                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
+                    <ChooseSeats
+                        rowsOfSeats={rowsOfSeats}
+                        seatHandleClick={seatHandleClick}
+                        reservationHandleClick={reservationHandleClick}
+                        sessionId={sessionId}
+                        shouldDisplayContent={shouldDisplayContent}
+                        changeSessionContentReady={changeSessionContentReady}
+                        changeSeatTypesContentReady={changeSeatTypesContentReady}
+                    />}
+            </div>
         </div>
     )
 }

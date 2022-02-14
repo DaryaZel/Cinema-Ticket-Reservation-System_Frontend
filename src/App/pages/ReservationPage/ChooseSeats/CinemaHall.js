@@ -1,8 +1,11 @@
 import { SeatLoader } from "../SeatLoader/SeatLoader";
 
-export function CinemaHall({ rowsOfSeats, seatHandleClick }) {
+export function CinemaHall({ rowsOfSeats, seatHandleClick, shouldDisplayContent }) {
     const getClassNamesFor = (seat) => {
-        let basicClass = 'row__seat seat'
+        let basicClass = 'row__seat seat';
+        if(seat.seat_details.type==='Love Seat'){
+            basicClass = 'row__seat seat-LoveSeat';
+        }
         if (seat.seat_details.isReserved) {
             basicClass = basicClass + ' seat_reserved';
             return basicClass
@@ -15,8 +18,8 @@ export function CinemaHall({ rowsOfSeats, seatHandleClick }) {
     }
     return (
         <div>
-            <div><span>Screen</span></div>
-            <div>
+            {shouldDisplayContent&&<h2 className='cinemahall__screen'>Screen</h2>}
+            <div className='cinemahall__rows-container'>
                 {rowsOfSeats &&
                     rowsOfSeats.map((row, index) => {
                         return (<div className='row'>
