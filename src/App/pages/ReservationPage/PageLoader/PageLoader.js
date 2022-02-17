@@ -2,8 +2,8 @@ import './PageLoader.css';
 
 export function PageLoader() {
     return (
-        <div className='modal'>
-        <div className="page-loader"></div>
+        <div className='reservation-page-modal'>
+        <div className="reservation-page-modal_loader"></div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-.modal {
+.reservation-page-modal {
   height: 100vh;
   width: 100vw;
   background-color: white;
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-.page-loader {
+.reservation-page-modal_loader {
   border: 16px solid #f3f3f3;
   border-top: 16px solid rgb(73, 160, 172);
   border-radius: 50%;

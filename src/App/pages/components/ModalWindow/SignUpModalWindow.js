@@ -64,17 +64,17 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
 
     return (
         <ModalWindow title={titleSignUpModalWindow} onCloseModalWindow={() => onCloseSignUpModal()}>
-            {showMessage ? <div className='modal__greeting'><h2>Welcome! Now you can log in!</h2></div> :
+            {showMessage ? <div className='auth-modal__greeting'><h2>Welcome! Now you can log in!</h2></div> :
                 <form onSubmit={handleSubmit}>
-                    <div className='modal__container'>
+                    <div className='auth-modal__container'>
                         {
                             signUpData.map((item) => (
-                                <div className='modal__row'>
-                                    <label for={item.name} className='modal__row-title'>
+                                <div className='auth-modal__row'>
+                                    <label for={item.name} className='auth-modal__row-title'>
                                         <span>{item.title}</span>
                                     </label>
-                                    <div className='modal__input-container'>
-                                        <div className='modal__input-icon'>
+                                    <div className='auth-modal__input-container'>
+                                        <div className='auth-modal__input-icon'>
                                             <img src={item.img} />
                                         </div>
                                         <input
@@ -83,7 +83,7 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
                                             name={item.name}
                                             value={item.inputText}
                                             placeholder={item.placeholder}
-                                            className='modal__input'
+                                            className='auth-modal__input'
                                             onChange={(event) => handleChange(event.target.value, item.setText)}>
                                         </input>
                                     </div>
@@ -92,7 +92,7 @@ export function SignUpModalWindow({ onCloseSignUpModal }) {
                         }
                     </div>
                     <div >
-                        <button type='submit' className='modal__button'>
+                        <button type='submit' className='auth-modal__button'>
                             <span>Sign Up</span>
                         </button>
                     </div>
