@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './Schedule.css';
 import { CinemaSchedule } from './CinemaSchedule';
 import { handleResponse } from '../../../../utilities/ResponseHandler';
-import { timezone } from '../../../../App';
+import { defaultCinemaValue, defaultDayValue, timezone } from '../../../../App';
 
 export function Schedule({ city, cinema, day }) {
     const [dateSchedule, setDateSchedule] = useState([]);
@@ -13,10 +13,10 @@ export function Schedule({ city, cinema, day }) {
         async function fetchData() {
             try {
                 let queryParams = `city=${city}&timeZone=${timezone}`
-                if (cinema !== "All cinemas") {
+                if (cinema !== defaultCinemaValue) {
                     queryParams = queryParams + `&cinema=${cinema}`
                 }
-                if (day !== "Whole calendar") {
+                if (day !== defaultDayValue) {
                     queryParams = queryParams + `&date=${day}`
                 }
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/schedule?${queryParams}`);

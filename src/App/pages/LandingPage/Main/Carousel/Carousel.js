@@ -5,14 +5,21 @@ import leftArrow from './images/left_arrow.png';
 import rightArrow from './images/right_arrow.png';
 import { Link } from 'react-router-dom';
 import { handleResponse } from '../../../../utilities/ResponseHandler';
+import { defaultCinemaValue, defaultDayValue, timezone } from '../../../../App';
 
-export function Carousel() {
+export function Carousel({ city, cinema, day }) {
     const [movieData, setMovieData] = useState([]);
-
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/movie`);
+                let queryParams = `city=${city}&timeZone=${timezone}`
+                if (cinema !== defaultCinemaValue) {
+                    queryParams = queryParams + `&cinema=${cinema}`
+                }
+                if (day !== defaultDayValue) {
+                    queryParams = queryParams + `&date=${day}`
+                }
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/movie?${queryParams}`);
                 handleResponse(response,
                     (error) => {
                         alert(error);
@@ -26,7 +33,7 @@ export function Carousel() {
             }
         }
         fetchData()
-    }, []);
+    }, [city, cinema, day]);
 
     const windowWidth = 25;
     const itemsInCarouselWindow = 4;
@@ -47,9 +54,9 @@ export function Carousel() {
 
     return (
         <div className='carousel'>
-            <div className='carousel__arrow' onClick={handleLeftArrow}>
+            {movieData.length>itemsInCarouselWindow&&<div className='carousel__arrow' onClick={handleLeftArrow}>
                 <img src={leftArrow} />
-            </div>
+            </div>}
             <div className='carousel__window'>
                 <div className='carousel__container'
                     style={{
@@ -78,9 +85,9 @@ export function Carousel() {
                     }
                 </div>
             </div>
-            <div className='carousel__arrow' onClick={handleRightArrow}>
+            {movieData.length>itemsInCarouselWindow&&<div className='carousel__arrow' onClick={handleRightArrow}>
                 <img src={rightArrow} />
-            </div>
+            </div>}
         </div>
     );
 }

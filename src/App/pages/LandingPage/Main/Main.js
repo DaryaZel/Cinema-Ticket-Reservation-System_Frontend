@@ -20,7 +20,11 @@ export function Main() {
                     />
                 </div>
                 <div className='main__carousel'>
-                    <Carousel />
+                    <Carousel
+                        city={city}
+                        cinema={cinema}
+                        day={day}
+                    />
                 </div>
                 <div className='main__schedule'>
                     <Schedule
