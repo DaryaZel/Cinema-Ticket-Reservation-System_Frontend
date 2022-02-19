@@ -22,7 +22,7 @@ export function MoviePage() {
 
     return (
         <div>
-            <Header />
+            <Header showSearchForm={true} />
             <FilterContext.Provider value={filtersValue}>
                 <MainMoviePage params={params} />
             </FilterContext.Provider>

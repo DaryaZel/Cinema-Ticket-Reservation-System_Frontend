@@ -8,10 +8,11 @@ import { Avatar } from '../Avatar/Avatar';
 import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
 
-export function Header() {
+export function Header({showSearchForm}) {
     const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
     const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
+    debugger
     return (
         <header className="header">
             <div className="header__container">
@@ -23,7 +24,7 @@ export function Header() {
                         <img src={film} alt="film_logo" />
                     </div>
                 </div>
-                <SearchForm />
+                {showSearchForm?<SearchForm />:null}
                 {
                     user ? (<Avatar
                         username={user.username}

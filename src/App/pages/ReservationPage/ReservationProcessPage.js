@@ -9,6 +9,7 @@ import { PageLoader } from './PageLoader/PageLoader';
 import { UserContext } from '../../App';
 
 export function ReservationPage() {
+    const selectedSeatsStorageKey = 'Selected_Seats';
     const params = useParams();
     const sessionId = params.id;
     const { user } = useContext(UserContext);
@@ -25,7 +26,7 @@ export function ReservationPage() {
     const ws = useRef(null);
 
     const mapSeats = (seatData) => {
-        let existing = localStorage.getItem('Selected Seats');
+        let existing = localStorage.getItem(selectedSeatsStorageKey);
         existing = existing ? existing.split(',') : [];
         let index = existing.indexOf(seatData._id);
         let transformedSeat = null;
@@ -159,7 +160,7 @@ export function ReservationPage() {
         let newRowsOfSeats = [...rowsOfSeats];
         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
-        addToLocalStorageArray('Selected Seats', seat.seat_details._id);
+        addToLocalStorageArray(selectedSeatsStorageKey, seat.seat_details._id);
         setRowsOfSeats(newRowsOfSeats);
     };
 
@@ -172,7 +173,7 @@ export function ReservationPage() {
         let newRowsOfSeats = [...rowsOfSeats];
         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
-        removeFromLocalStorageArray('Selected Seats', seat.seat_details._id);
+        removeFromLocalStorageArray(selectedSeatsStorageKey, seat.seat_details._id);
         setRowsOfSeats(newRowsOfSeats);
     };
 
@@ -215,7 +216,7 @@ export function ReservationPage() {
                             seat: transformedReservedSeats
                         };
                         ws.current.send(JSON.stringify(seatDetailsObject));
-                        localStorage.clear();
+                        localStorage.removeItem(selectedSeatsStorageKey);
                         setReserved(true);
                     }
                 );

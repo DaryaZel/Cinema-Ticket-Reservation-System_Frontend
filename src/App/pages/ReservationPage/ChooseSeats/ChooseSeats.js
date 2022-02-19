@@ -1,4 +1,5 @@
 import { SessionInformation } from "../SessionInformation/SessionInformation";
+import {Header} from "../../components/Header/Header";
 import { TotalPrice } from "../TotalPrice";
 import { CinemaHall } from "./CinemaHall";
 import './ChooseSeats.css';
@@ -8,6 +9,7 @@ import { tokenStorageKey } from "../../../App";
 export function ChooseSeats({ rowsOfSeats, seatHandleClick, reservationHandleClick, sessionId, shouldDisplayContent, changeSessionContentReady, changeSeatTypesContentReady }) {
     return (
         <div className='choose-seats__container'>
+            <Header showSearchForm={false} />
             <div className='choose-seats__header'>
                 <SessionInformation sessionId={sessionId} changeSessionContentReady={changeSessionContentReady}/>
             </div>

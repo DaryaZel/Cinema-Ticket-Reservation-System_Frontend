@@ -1,9 +1,11 @@
+import { Header } from '../../components/Header/Header';
 import { SessionInformation } from '../SessionInformation/SessionInformation';
 import { TotalPrice } from '../TotalPrice';
 
 export function ReservationResult({ rowsOfSeats, sessionId }) {
     return (
         <div>
+            <Header showSearchForm={false} />
             <h2>Thank You for Reservation!</h2>
             <SessionInformation sessionId={sessionId} />
             {rowsOfSeats.map((row) => {

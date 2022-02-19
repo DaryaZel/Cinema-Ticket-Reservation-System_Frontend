@@ -21,7 +21,7 @@ export function LandingPage() {
 
     return (
         <div>
-            <Header />
+            <Header showSearchForm={true} />
             <FilterContext.Provider value={filtersValue}>
                 <Main />
             </FilterContext.Provider>
