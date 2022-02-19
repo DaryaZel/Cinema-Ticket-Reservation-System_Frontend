@@ -21,7 +21,10 @@ export function SessionInformation({ sessionId, changeSessionContentReady }) {
                     },
                     (result) => {
                         setMovieSession(result);
-                        changeSessionContentReady(true);
+                        if (changeSessionContentReady) {
+                            changeSessionContentReady(true);
+                        }
+
                     }
                 );
             } catch (error) {

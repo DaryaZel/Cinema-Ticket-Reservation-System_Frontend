@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from "react-router-dom";
 import { handleResponse } from '../../utilities/ResponseHandler';
 import { ReservationResult } from './ReservationResult/ReservationResult';
@@ -19,6 +19,7 @@ export function ReservationPage() {
     const [rowsOfSeats, setRowsOfSeats] = useState(null);
     const [reserved, setReserved] = useState(false);
     let shouldDisplayContent = contentReady.availableseats && contentReady.seattypes && contentReady.session;
+    const ws = useRef(null);
 
     const mapSeats = (seatData) => {
         let existing = localStorage.getItem('Selected Seats');
@@ -29,14 +30,6 @@ export function ReservationPage() {
             transformedSeat = {
                 seat_details: seatData,
                 chosen: true,
-                loading: false
-            }
-        }
-        else if (index !== -1 && seatData.isSelected === false) {
-            removeFromLocalStorageArray('Selected Seats', seatData._id);
-            transformedSeat = {
-                seat_details: seatData,
-                chosen: false,
                 loading: false
             }
         }
@@ -63,11 +56,11 @@ export function ReservationPage() {
             const seats = JSON.parse(data);
 
             setRowsOfSeats(prevRowsOfSeats => {
-                let newRowsOfSeats = null
+                let newRowsOfSeats = null;
                 if (prevRowsOfSeats == null) {
-                    newRowsOfSeats = handleInitialSeatsLoad(seats)
+                    newRowsOfSeats = handleInitialSeatsLoad(seats);
                 } else {
-                    newRowsOfSeats = handleSeatsUpdate(prevRowsOfSeats, seats)
+                    newRowsOfSeats = handleSeatsUpdate(prevRowsOfSeats, seats);
                 }
                 return newRowsOfSeats;
             })
@@ -98,15 +91,7 @@ export function ReservationPage() {
             for (let index = 0; index < updatedSeats[row].length; index++) {
                 let seatDetailsToUpdate = seats.find(seat => seat._id == updatedSeats[row][index].seat_details._id)
                 if (seatDetailsToUpdate) {
-                    updatedSeats[row][index].seat_details = seatDetailsToUpdate
-                    let existing = localStorage.getItem('Selected Seats');
-                    existing = existing ? existing.split(',') : [];
-                    let indexOf = existing.indexOf(updatedSeats[row][index].seat_details._id);
-                    if (indexOf !== -1 && updatedSeats[row][index].seat_details.isSelected === false) {
-                        removeFromLocalStorageArray('Selected Seats', updatedSeats[row][index].seat_details._id);
-                        updatedSeats[row][index].chosen = false;
-                        alert(`Time is over for seat Number ${index + 1} Row ${row + 1}`)
-                    }
+                    updatedSeats[row][index].seat_details = seatDetailsToUpdate;
                 }
             }
         }
@@ -114,14 +99,14 @@ export function ReservationPage() {
     }
 
     useEffect(() => {
-        const ws = new WebSocket(`wss://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
-        ws.onmessage = e => {
-            handleSessionSeatsUpdate(e.data)
+        ws.current = new WebSocket(`ws://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
+        ws.current.onmessage = e => {
+            handleSessionSeatsUpdate(e.data);
         };
-        ws.onerror = e => {
-            alert('WebSocket error')
+        ws.current.onerror = e => {
+            alert('WebSocket error');
         }
-        return () => ws.close();
+        return () => ws.current.close();
     }, []);
 
     const changeAvailableSeatContentReady = (state) => {
@@ -163,96 +148,41 @@ export function ReservationPage() {
 
     };
     const addSeatCallback = (seat) => {
-        async function fetchData() {
-            try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/addSelect`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(seat.seat_details),
-                });
-                let newRowsOfSeats = [...rowsOfSeats];
-                newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = true;
-                setRowsOfSeats(newRowsOfSeats);
-                handleResponse(response,
-                    (error) => {
-                        alert(error);
-                    },
-                    () => {
-                        let newRowsOfSeats = [...rowsOfSeats];
-                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
-                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
-                        addToLocalStorageArray('Selected Seats', seat.seat_details._id);
-                        setRowsOfSeats(newRowsOfSeats);
-                    }
-                );
-            }
-            catch (error) {
-                alert(error);
-            }
-        }
-        fetchData()
+        const seatDetailsObject = {
+            event: 'makeSeatSelectedTrue',
+            seat: seat.seat_details
+        };
+        ws.current.send(JSON.stringify(seatDetailsObject));
+        let newRowsOfSeats = [...rowsOfSeats];
+        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
+        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
+        addToLocalStorageArray('Selected Seats', seat.seat_details._id);
+        setRowsOfSeats(newRowsOfSeats);
     };
 
     const removeSeatCallback = (seat) => {
-        async function fetchData() {
-            try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/removeSelect`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(seat.seat_details),
-                });
-                let newRowsOfSeats = [...rowsOfSeats];
-                newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = true;
-                setRowsOfSeats(newRowsOfSeats);
-                handleResponse(response,
-                    (error) => {
-                        alert(error);
-                    },
-                    () => {
-                        let newRowsOfSeats = [...rowsOfSeats];
-                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
-                        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
-                        removeFromLocalStorageArray('Selected Seats', seat.seat_details._id);
-                        setRowsOfSeats(newRowsOfSeats);
-                    }
-                );
-            }
-            catch (error) {
-                alert(error);
-            }
-        }
-        fetchData();
+        const seatDetailsObject = {
+            event: 'makeSeatSelectedFalse',
+            seat: seat.seat_details
+        };
+        ws.current.send(JSON.stringify(seatDetailsObject));
+        let newRowsOfSeats = [...rowsOfSeats];
+        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
+        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
+        removeFromLocalStorageArray('Selected Seats', seat.seat_details._id);
+        setRowsOfSeats(newRowsOfSeats);
     };
 
     const reservationHandleClick = () => {
         let reservedSeats = rowsOfSeats.flat().filter((seat) => seat.chosen === true)
         let transformedReservedSeats = reservedSeats.map(mapReservedSeats)
-        async function fetchData() {
-            try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/availableseat/reserve`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(transformedReservedSeats),
-                });
-                handleResponse(response,
-                    (error) => {
-                        alert(error);
-                    },
-                    () => {
-                        setReserved(true);
-                    })
-            }
-            catch (error) {
-                alert(error);
-            }
-        }
-        fetchData();
+        const seatDetailsObject = {
+            event: 'reserveSeat',
+            seat: transformedReservedSeats
+        };
+        ws.current.send(JSON.stringify(seatDetailsObject));
+        localStorage.clear();
+        setReserved(true);
     };
 
     const seatHandleClick = (seat) => {
