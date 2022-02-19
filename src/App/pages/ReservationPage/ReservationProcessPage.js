@@ -1,15 +1,18 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { handleResponse } from '../../utilities/ResponseHandler';
 import { ReservationResult } from './ReservationResult/ReservationResult';
 import { ChooseSeats } from './ChooseSeats/ChooseSeats';
 import './ReservationProcessPage.css';
 import { PageLoader } from './PageLoader/PageLoader';
+import { UserContext } from '../../App';
 
 export function ReservationPage() {
     const params = useParams();
     const sessionId = params.id;
+    const { user } = useContext(UserContext);
+    console.log(user)
     const [contentReady, setContentReady] = useState(
         {
             availableseats: false,
@@ -99,7 +102,7 @@ export function ReservationPage() {
     }
 
     useEffect(() => {
-        ws.current = new WebSocket(`ws://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
+        ws.current = new WebSocket(`wss://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
         ws.current.onmessage = e => {
             handleSessionSeatsUpdate(e.data);
         };
@@ -174,15 +177,53 @@ export function ReservationPage() {
     };
 
     const reservationHandleClick = () => {
-        let reservedSeats = rowsOfSeats.flat().filter((seat) => seat.chosen === true)
-        let transformedReservedSeats = reservedSeats.map(mapReservedSeats)
-        const seatDetailsObject = {
-            event: 'reserveSeat',
-            seat: transformedReservedSeats
-        };
-        ws.current.send(JSON.stringify(seatDetailsObject));
-        localStorage.clear();
-        setReserved(true);
+        debugger
+        const mapSeats = (seatData) => {
+            const transformedSeat = {
+                session_id: seatData.seat_details.session_id,
+                availableSeat_id: seatData.seat_details._id,
+                availableSeat_row: seatData.seat_details.rowNumber,
+                availableSeat_number: seatData.seat_details.number,
+                availableSeat_price: seatData.seat_details.price
+            }
+            return transformedSeat;
+        }
+        let transformedSeats = rowsOfSeats.flat().filter((seat) => seat.chosen === true).map(mapSeats);
+        let reservationInfo = {
+            userId: user._id,
+            sessionId: sessionId,
+            seatsArray: transformedSeats
+        }
+        async function fetchData() {
+            try {
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/reservation`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(reservationInfo),
+                });
+                handleResponse(response,
+                    (error) => {
+                        alert(error);
+                    },
+                    () => {
+                        let reservedSeats = rowsOfSeats.flat().filter((seat) => seat.chosen === true)
+                        let transformedReservedSeats = reservedSeats.map(mapReservedSeats)
+                        const seatDetailsObject = {
+                            event: 'reserveSeat',
+                            seat: transformedReservedSeats
+                        };
+                        ws.current.send(JSON.stringify(seatDetailsObject));
+                        localStorage.clear();
+                        setReserved(true);
+                    }
+                );
+            } catch (error) {
+                alert(error);
+            }
+        }
+        fetchData();
     };
 
     const seatHandleClick = (seat) => {
