@@ -1,5 +1,5 @@
 import { Header } from '../../components/Header/Header';
-import { SessionInformation } from '../SessionInformation/SessionInformation';
+import { SessionInformation } from '../../components/SessionInformation/SessionInformation';
 import { TotalPrice } from '../TotalPrice';
 
 export function ReservationResult({ rowsOfSeats, sessionId }) {

@@ -2,17 +2,18 @@ import { UserContext } from '../../../App.js';
 import { useContext, useState } from 'react';
 import film from './images/film.png';
 import './Header.css';
+import { Link } from 'react-router-dom';
 import { SearchForm } from './SearchForm/SearchForm';
 import { Authentication } from '../Authentication/Authentication';
 import { Avatar } from '../Avatar/Avatar';
 import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
 
-export function Header({showSearchForm}) {
+export function Header({ showSearchForm }) {
     const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
     const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
-    debugger
+    const userAccountLink = '/personalaccount';
     return (
         <header className="header">
             <div className="header__container">
@@ -24,16 +25,17 @@ export function Header({showSearchForm}) {
                         <img src={film} alt="film_logo" />
                     </div>
                 </div>
-                {showSearchForm?<SearchForm />:null}
+                {showSearchForm ? <SearchForm /> : null}
                 {
-                    user ? (<Avatar
+                    user ? (<Link to={userAccountLink} className="link">
+                        <Avatar
                         username={user.username}
                         onLogout={() => {
                             localStorage.clear();
                             sessionStorage.clear();
                             setUserState(null);
                         }}
-                    />) :
+                    /></Link>) :
                         (<Authentication
                             openSignUp={() => setSignUpModalVisibility(true)}
                             openLogIn={() => setLogInModalVisibility(true)}

@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './pages/LandingPage/LandingPage';
 import { MoviePage } from './pages/MoviePage/MoviePage';
 import { ReservationPage } from './pages/ReservationPage/ReservationProcessPage';
+import { PersonalAccountPage } from './pages/PersonalAccountPage/PersonalAccountPage';
 import './App.css';
 
 export const UserContext = React.createContext();
@@ -55,6 +56,7 @@ function App() {
           <Route path='/' element={<LandingPage />} exact />
           <Route path='/movie/:id' element={<MoviePage />} />
           <Route path='/reservation/:id' element={<ReservationPage />} />
+          <Route path='/personalaccount' element={<PersonalAccountPage />} />
         </Routes>
       </div>
     </UserContext.Provider>

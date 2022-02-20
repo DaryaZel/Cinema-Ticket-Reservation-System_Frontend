@@ -1,4 +1,4 @@
-import { SessionInformation } from "../SessionInformation/SessionInformation";
+import { SessionInformation } from "../../components/SessionInformation/SessionInformation";
 import {Header} from "../../components/Header/Header";
 import { TotalPrice } from "../TotalPrice";
 import { CinemaHall } from "./CinemaHall";

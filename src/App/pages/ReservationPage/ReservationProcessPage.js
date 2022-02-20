@@ -5,7 +5,7 @@ import { handleResponse } from '../../utilities/ResponseHandler';
 import { ReservationResult } from './ReservationResult/ReservationResult';
 import { ChooseSeats } from './ChooseSeats/ChooseSeats';
 import './ReservationProcessPage.css';
-import { PageLoader } from './PageLoader/PageLoader';
+import { PageLoader } from '../components/PageLoader/PageLoader';
 import { UserContext } from '../../App';
 
 export function ReservationPage() {
@@ -13,7 +13,6 @@ export function ReservationPage() {
     const params = useParams();
     const sessionId = params.id;
     const { user } = useContext(UserContext);
-    console.log(user)
     const [contentReady, setContentReady] = useState(
         {
             availableseats: false,
@@ -178,7 +177,6 @@ export function ReservationPage() {
     };
 
     const reservationHandleClick = () => {
-        debugger
         const mapSeats = (seatData) => {
             const transformedSeat = {
                 session_id: seatData.seat_details.session_id,
