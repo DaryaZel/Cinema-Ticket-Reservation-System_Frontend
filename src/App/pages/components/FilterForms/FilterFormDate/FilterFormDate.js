@@ -18,10 +18,8 @@ export function FilterFormDate({ changeSelectedDay }) {
                         alert(error);
                     },
                     (result) => {
-                        let formatResult = result.map((date) => new Date(date))
-
+                        let formatResult = result.map((date) => new Date(date));
                         setDaysArrays(formatResult);
-                        console.log(formatResult)
                     }
                 );
             } catch (error) {

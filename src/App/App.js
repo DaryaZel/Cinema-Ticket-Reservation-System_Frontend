@@ -35,6 +35,7 @@ function App() {
           });
           handleResponse(response,
             (error) => {
+              debugger
               alert(error);
             },
             (result) => {
@@ -43,6 +44,7 @@ function App() {
           )
         }
       } catch (error) {
+        debugger
         alert(error);
       }
     }
