@@ -69,7 +69,7 @@ export function Carousel({ city, cinema, day }) {
                 >
                     {
                         movieData.map((movie) => {
-                            const movieLink = '/movie/' + movie._id;
+                            const movieLink = '/movie/' + movie.movie_id;
                             return (
                                 <div key={movie._id} className='carousel__item'>
                                     <div className='carousel__img-container'>

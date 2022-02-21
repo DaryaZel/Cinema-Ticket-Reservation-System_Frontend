@@ -40,17 +40,20 @@
 }
 
 .movie-schedule__movie-container {
-    width: 40%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    text-align: left;
 }
 
 .movie-schedule__time-container {
-    width: 60%;
+    width: 50%;
     display: flex;
 }
 
 .movie-schedule__time-item {
     margin-right: 20px;
-    height: 150%;
+    height: 3vw;
     width: 80%;
     background-color: rgb(159, 212, 236);
     display: flex;
