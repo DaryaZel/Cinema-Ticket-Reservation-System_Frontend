@@ -14,11 +14,18 @@
 .carousel__container {
     height: 100%;
     display: flex;
-    justify-content: space-between;
     transition: translate;
     transition-property: transform;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
+}
+
+.carousel__container_space-between {
+    justify-content: space-between;
+}
+
+.carousel__container_space-around {
+    justify-content: space-around;
 }
 
 .carousel__item {

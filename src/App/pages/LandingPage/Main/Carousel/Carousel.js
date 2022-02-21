@@ -36,8 +36,12 @@ export function Carousel({ city, cinema, day }) {
     }, [city, cinema, day]);
 
     const windowWidth = 25;
-    const itemsInCarouselWindow = 4;
+    const itemsForCarousel= 4;
+    const itemsInCarouselWindow = movieData.length>itemsForCarousel?itemsForCarousel:movieData.length;
     const [offset, setOffset] = useState(0);
+    const getClassNamesFor=()=>{
+       return movieData.length>itemsForCarousel?'carousel__container carousel__container_space-between':'carousel__container carousel__container_space-around'
+    }
     const handleLeftArrow = () => {
         setOffset((currentOffset) => {
             const newOffset = currentOffset + windowWidth;
@@ -58,7 +62,7 @@ export function Carousel({ city, cinema, day }) {
                 <img src={leftArrow} />
             </div>}
             <div className='carousel__window'>
-                <div className='carousel__container'
+                <div className={getClassNamesFor()}
                     style={{
                         transform: `translateX(${offset}%)`
                     }}
