@@ -7,6 +7,6 @@ export function TotalPrice({ seats }) {
     }
 
     return (
-        <h3>Total price: {ticketsPriceSum}$</h3>
+        <h2>Total price: {ticketsPriceSum}$</h2>
     )
 }

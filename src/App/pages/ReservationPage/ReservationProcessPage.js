@@ -234,7 +234,7 @@ export function ReservationPage() {
             {shouldDisplayContent ? null : <PageLoader />}
             <div>
                 {reserved ?
-                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} /> :
+                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} hiddenReservationResultWindow={()=>setReserved(false)} /> :
                     <ChooseSeats
                         rowsOfSeats={rowsOfSeats}
                         seatHandleClick={seatHandleClick}

@@ -17,14 +17,14 @@ export function Header({ showSearchForm }) {
     return (
         <header className="header">
             <div className="header__container">
-                <div className="header__logo logo">
+            <Link to='/' className="link"> <div className="header__logo logo">
                     <div className="logo__text">
                         <h2>Spool</h2>
                     </div>
                     <div className="logo__icon">
                         <img src={film} alt="film_logo" />
                     </div>
-                </div>
+                </div></Link>
                 {showSearchForm ? <SearchForm /> : null}
                 {
                     user ? (<Link to={userAccountLink} className="link">

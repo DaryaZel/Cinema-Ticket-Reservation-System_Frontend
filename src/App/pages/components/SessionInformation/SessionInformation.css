@@ -1,0 +1,26 @@
+.session-information{
+    border-top: 2px solid  rgba(168, 168, 196, 0.356);
+    border-bottom: 2px solid  rgba(168, 168, 196, 0.356);
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.session-information__poster-img{
+    margin-right: 20px;
+    height: 100%;
+}
+.session-information__poster-img img{
+    height: 17vh;
+}
+.session-information__content-container{
+    text-align: left;
+}
+.session-information__place, .session-information__date{
+    display: flex;
+    margin-top: 5px;
+}
+.session-information__place img, .session-information__date img{
+    height: 2vw;
+    margin-right: 5px;
+}
