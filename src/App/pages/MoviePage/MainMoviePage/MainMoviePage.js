@@ -68,7 +68,7 @@ export function MainMoviePage({ params }) {
                         </tr>
                         <tr>
                             <td>Duration:</td>
-                            <td>{movie.movieInformation.duration_min}</td>
+                            <td>{movie.movieInformation.duration_min} min</td>
                         </tr>
                         <tr>
                             <td>Genre:</td>
