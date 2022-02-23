@@ -13,11 +13,10 @@ export function Header({ showSearchForm }) {
     const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
     const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
-    const userAccountLink = '/personalaccount';
     return (
         <header className="header">
             <div className="header__container">
-            <Link to='/' className="link"> <div className="header__logo logo">
+                <Link to='/' className="link"> <div className="header__logo logo">
                     <div className="logo__text">
                         <h2>Spool</h2>
                     </div>
@@ -27,15 +26,15 @@ export function Header({ showSearchForm }) {
                 </div></Link>
                 {showSearchForm ? <SearchForm /> : null}
                 {
-                    user ? (<Link to={userAccountLink} className="link">
+                    user ? (
                         <Avatar
-                        username={user.username}
-                        onLogout={() => {
-                            localStorage.clear();
-                            sessionStorage.clear();
-                            setUserState(null);
-                        }}
-                    /></Link>) :
+                            username={user.username}
+                            onLogout={() => {
+                                localStorage.clear();
+                                sessionStorage.clear();
+                                setUserState(null);
+                            }}
+                        />) :
                         (<Authentication
                             openSignUp={() => setSignUpModalVisibility(true)}
                             openLogIn={() => setLogInModalVisibility(true)}

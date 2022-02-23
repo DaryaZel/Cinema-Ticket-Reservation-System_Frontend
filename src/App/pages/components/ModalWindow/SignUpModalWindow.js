@@ -10,12 +10,19 @@ import { handleResponse } from '../../../utilities/ResponseHandler.js'
 
 export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
     const [showMessage, setShowMessage] = useState(false);
+    const [responseErrors, setResponseErrors] = useState(
+        {
+            'username': null,
+            'email': null,
+            'password': null
+        });
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextEmail, setInputTextEmail] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
     const [inputTextRepeatPassword, setInputTextRepeatPassword] = useState('');
+    debugger
     const signUpData = [
-        { title: 'Name', name: 'name', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
+        { title: 'Name', name: 'username', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
         { title: 'Email', name: 'email', type: 'email', img: email, placeholder: 'type your email', inputText: inputTextEmail, setText: setInputTextEmail },
         { title: 'Password', name: 'password', type: 'password', img: password, placeholder: 'type your password', inputText: inputTextPassword, setText: setInputTextPassword },
         { title: 'Repeat Password', name: 'repeatPassword', type: 'password', img: password, placeholder: 'repeat your password', inputText: inputTextRepeatPassword, setText: setInputTextRepeatPassword }
@@ -56,7 +63,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
             })
             handleResponse(response,
                 (error) => {
-                    alert(error);
+                    setResponseErrors(error);
                 },
                 (result) => {
                     sessionStorage.setItem(tokenStorageKey, result);
@@ -71,7 +78,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        let name = event.target.name.value;
+        let name = event.target.username.value;
         let email = event.target.email.value;
         let password = event.target.password.value;
         let repeatPassword = event.target.repeatPassword.value;
@@ -80,7 +87,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
             handleSignUpRequest(newUser);
         }
         else {
-            alert('Password mismatch');
+            setResponseErrors({ 'password': 'Password mismatch' });
         }
     }
 
@@ -92,23 +99,33 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
                         {
                             signUpData.map((item) => (
                                 <div className='auth-modal__row'>
-                                    <label for={item.name} className='auth-modal__row-title'>
-                                        <span>{item.title}</span>
-                                    </label>
-                                    <div className='auth-modal__input-container'>
-                                        <div className='auth-modal__input-icon'>
-                                            <img src={item.img} />
+                                    <div className='auth-modal__field-container'>
+                                        <div className='auth-modal__input-container'>
+                                            <div className='auth-modal__label'>
+                                                <label for={item.name} className='auth-modal__row-title'>
+                                                    <span>{item.title}</span>
+                                                </label>
+                                            </div>
+                                            <div className='auth-modal__input-icon'>
+                                                <img src={item.img} />
+                                            </div>
+                                            <input
+                                                id={item.name}
+                                                type={item.type}
+                                                name={item.name}
+                                                value={item.inputText}
+                                                placeholder={item.placeholder}
+                                                className='auth-modal__input'
+                                                onChange={(event) => handleChange(event.target.value, item.setText)}>
+                                            </input>
                                         </div>
-                                        <input
-                                            id={item.name}
-                                            type={item.type}
-                                            name={item.name}
-                                            value={item.inputText}
-                                            placeholder={item.placeholder}
-                                            className='auth-modal__input'
-                                            onChange={(event) => handleChange(event.target.value, item.setText)}>
-                                        </input>
+                                        <div className='auth-modal__error-container'>
+                                            {responseErrors[item.name] ?
+                                                <h6 className='auth-modal__error'>{responseErrors[item.name]}</h6> :
+                                                <h6 className='auth-modal__error'></h6>}
+                                        </div>
                                     </div>
+
                                 </div>
                             ))
                         }

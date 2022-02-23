@@ -29,7 +29,7 @@
     padding: 20px;
     border-radius: 12px;
     background-color: white;
-    height: 20vw;
+    height: 25vw;
     width: 30vw;
     animation-duration: 0.3s;
     animation-name: slowModalContent;
@@ -57,14 +57,21 @@
 }
 
 .auth-modal__row {
-    margin-bottom: 10px;
     display: flex;
     justify-content: right;
     align-items: center;
 }
 
+.auth-modal__label {
+    width: 8vw;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
 .auth-modal__title {
     border-bottom: 2px solid black;
+    text-align: center;
 }
 
 .auth-modal__title h2 {
@@ -78,7 +85,7 @@
 }
 
 .auth-modal__input-container input {
-    width: 80%;
+    width: 10vw;
     border: 1px solid black;
     border-left: none;
     border-radius: 0px 6px 6px 0px;
@@ -99,8 +106,18 @@
     max-width: 100%;
 }
 
+.auth-modal__error-container {
+    display: flex;
+    justify-content: right;
+}
+
+.auth-modal__error {
+    width: 10vw;
+    height: 2vw;
+    color: rgb(119, 9, 9);
+}
+
 .auth-modal__button {
-    margin-top: 1vh;
     outline: none;
     padding: 5px;
     border-radius: 10px;

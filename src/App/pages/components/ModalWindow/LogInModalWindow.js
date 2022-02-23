@@ -10,10 +10,15 @@ import './ModalWindow.css';
 export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
     const [inputTextName, setInputTextName] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
+    const [responseErrors, setResponseErrors] = useState(
+        {
+            'username': null,
+            'password': null
+        });
     const [checked, setChecked] = useState(false);
 
     const logInData = [
-        { title: 'Name', name: 'name', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
+        { title: 'Name', name: 'username', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
         { title: 'Password', name: 'password', type: 'password', img: password, placeholder: 'type your password', inputText: inputTextPassword, setText: setInputTextPassword }
     ];
     const titleLoginModalWindow = 'Log In';
@@ -45,8 +50,9 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        let name = event.target.name.value;
+        let name = event.target.username.value;
         let password = event.target.password.value;
+        debugger
         let newUser = new LogInUser(name, password);
         try {
             const response = await fetch('https://cinematicketbooking.herokuapp.com/auth/login', {
@@ -58,7 +64,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
             });
             handleResponse(response,
                 (error) => {
-                    alert(error);
+                    setResponseErrors(error);
                 },
                 (result) => {
                     if (checked) {
@@ -82,14 +88,23 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                     {
                         logInData.map((item) => (
                             <div className='auth-modal__row'>
-                                <label for={item.name} className='auth-modal__row-title'>
-                                    <span>{item.title}</span>
-                                </label>
-                                <div className='auth-modal__input-container'>
-                                    <div className='auth-modal__input-icon'>
-                                        <img src={item.img} />
+                                <div className='auth-modal__field-container'>
+                                    <div className='auth-modal__input-container'>
+                                        <div className='auth-modal__label'>
+                                            <label for={item.name} className='auth-modal__row-title'>
+                                                <span>{item.title}</span>
+                                            </label>
+                                        </div>
+                                        <div className='auth-modal__input-icon'>
+                                            <img src={item.img} />
+                                        </div>
+                                        <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='auth-modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
                                     </div>
-                                    <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='auth-modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
+                                    <div className='auth-modal__error-container'>
+                                        {responseErrors[item.name] ?
+                                            <h6 className='auth-modal__error'>{responseErrors[item.name]}</h6> :
+                                            <h6 className='auth-modal__error'></h6>}
+                                    </div>
                                 </div>
                             </div>
                         ))
