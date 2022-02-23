@@ -34,7 +34,7 @@ export function SeatTypes({ sessionId, changeSeatTypesContentReady, shouldDispla
     }
     return (
         <div className="legend">
-            {shouldDisplayContent&&<h2 className="legend__title">Seat Types</h2>}
+            {shouldDisplayContent && <h2 className="legend__title">Seat Types</h2>}
             <div className="legend__seatTypes-container">
                 {seatTypes.map((seat) => {
                     return (
@@ -54,6 +54,23 @@ export function SeatTypes({ sessionId, changeSeatTypesContentReady, shouldDispla
                         </div>
                     )
                 })}
+                <div className="legend__seat-navigation">
+                    <div className="legend__seat-navigation-example">
+                        <div className='seat seat_selected'>
+                        </div>
+                        <span>seat is selected</span>
+                    </div>
+                    <div className="legend__seat-navigation-example">
+                        <div className='seat seat_already-selected'>
+                        </div>
+                        <span>this seat is already selected by another user(try again in 5 min)</span>
+                    </div>
+                    <div className="legend__seat-navigation-example">
+                        <div className='seat seat_reserved'>
+                        </div>
+                        <span>seat is reserved</span>
+                    </div>
+                </div>
             </div>
         </div>
     )

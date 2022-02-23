@@ -3,7 +3,7 @@ import { SeatLoader } from "../SeatLoader/SeatLoader";
 export function CinemaHall({ rowsOfSeats, seatHandleClick, shouldDisplayContent }) {
     const getClassNamesFor = (seat) => {
         let basicClass = 'row__seat seat';
-        if(seat.seat_details.type==='Love Seat'){
+        if(seat.seat_details.seatType==='Love Seat'){
             basicClass = 'row__seat seat-LoveSeat';
         }
         if (seat.seat_details.isReserved) {

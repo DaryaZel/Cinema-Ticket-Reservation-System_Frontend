@@ -9,7 +9,6 @@ import { PageLoader } from '../components/PageLoader/PageLoader';
 import { UserContext } from '../../App';
 
 export function ReservationPage() {
-    const selectedSeatsStorageKey = 'Selected_Seats';
     const params = useParams();
     const sessionId = params.id;
     const { user } = useContext(UserContext);
@@ -23,25 +22,17 @@ export function ReservationPage() {
     const [reserved, setReserved] = useState(false);
     let shouldDisplayContent = contentReady.availableseats && contentReady.seattypes && contentReady.session;
     const ws = useRef(null);
+    const rowsOfSeatsRef = useRef();
+
+    useEffect(() => {
+        rowsOfSeatsRef.current = rowsOfSeats;
+    }, [rowsOfSeats]);
 
     const mapSeats = (seatData) => {
-        let existing = localStorage.getItem(selectedSeatsStorageKey);
-        existing = existing ? existing.split(',') : [];
-        let index = existing.indexOf(seatData._id);
-        let transformedSeat = null;
-        if (index !== -1 && seatData.isSelected === true) {
-            transformedSeat = {
-                seat_details: seatData,
-                chosen: true,
-                loading: false
-            }
-        }
-        else {
-            transformedSeat = {
-                seat_details: seatData,
-                chosen: false,
-                loading: false
-            }
+        const transformedSeat = {
+            seat_details: seatData,
+            chosen: false,
+            loading: false
         }
         return transformedSeat;
     };
@@ -94,7 +85,12 @@ export function ReservationPage() {
             for (let index = 0; index < updatedSeats[row].length; index++) {
                 let seatDetailsToUpdate = seats.find(seat => seat._id == updatedSeats[row][index].seat_details._id)
                 if (seatDetailsToUpdate) {
+                    if (!seatDetailsToUpdate.isSelected && updatedSeats[row][index].chosen && seats[seats.length - 1] === 'makeAllSelectedSeatsFalse') {
+                        debugger
+                        updatedSeats[row][index].chosen = false;
+                    }
                     updatedSeats[row][index].seat_details = seatDetailsToUpdate;
+
                 }
             }
         }
@@ -102,6 +98,10 @@ export function ReservationPage() {
     }
 
     useEffect(() => {
+        window.addEventListener("unload", function () {
+            makeAllSelectedSeatsFalse();
+            return ws.current.close();
+        })
         ws.current = new WebSocket(`wss://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
         ws.current.onmessage = e => {
             handleSessionSeatsUpdate(e.data);
@@ -109,7 +109,11 @@ export function ReservationPage() {
         ws.current.onerror = e => {
             alert('WebSocket error');
         }
-        return () => ws.current.close();
+        return () => {
+            debugger
+            makeAllSelectedSeatsFalse();
+            return ws.current.close();
+        }
     }, []);
 
     const changeAvailableSeatContentReady = (state) => {
@@ -129,27 +133,8 @@ export function ReservationPage() {
             ...prevContentReady,
             seattypes: state
         }));
-    }
-
-    let addToLocalStorageArray = function (name, value) {
-
-        let existing = localStorage.getItem(name);
-        existing = existing ? existing.split(',') : [];
-        existing.push(value);
-        localStorage.setItem(name, existing.toString());
-
     };
-    let removeFromLocalStorageArray = function (name, value) {
 
-        let existing = localStorage.getItem(name);
-        existing = existing ? existing.split(',') : [];
-        let index = existing.indexOf(value);
-        if (index !== -1) {
-            existing.splice(index, 1);
-        }
-        localStorage.setItem(name, existing.toString());
-
-    };
     const addSeatCallback = (seat) => {
         const seatDetailsObject = {
             event: 'makeSeatSelectedTrue',
@@ -158,22 +143,19 @@ export function ReservationPage() {
         ws.current.send(JSON.stringify(seatDetailsObject));
         let newRowsOfSeats = [...rowsOfSeats];
         newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = true;
-        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
-        addToLocalStorageArray(selectedSeatsStorageKey, seat.seat_details._id);
         setRowsOfSeats(newRowsOfSeats);
     };
 
     const removeSeatCallback = (seat) => {
+        let newRowsOfSeats = [...rowsOfSeats];
+        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
+        setRowsOfSeats(newRowsOfSeats);
         const seatDetailsObject = {
             event: 'makeSeatSelectedFalse',
             seat: seat.seat_details
         };
         ws.current.send(JSON.stringify(seatDetailsObject));
-        let newRowsOfSeats = [...rowsOfSeats];
-        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].chosen = false;
-        newRowsOfSeats[seat.seat_details.rowNumber - 1][seat.seat_details.number - 1].loading = false;
-        removeFromLocalStorageArray(selectedSeatsStorageKey, seat.seat_details._id);
-        setRowsOfSeats(newRowsOfSeats);
+
     };
 
     const reservationHandleClick = () => {
@@ -214,7 +196,6 @@ export function ReservationPage() {
                             seat: transformedReservedSeats
                         };
                         ws.current.send(JSON.stringify(seatDetailsObject));
-                        localStorage.removeItem(selectedSeatsStorageKey);
                         setReserved(true);
                     }
                 );
@@ -225,6 +206,22 @@ export function ReservationPage() {
         fetchData();
     };
 
+    const makeAllSelectedSeatsFalse = () => {
+        const mapSeats = (seatData) => {
+            const transformedSeat = {
+                session_id: seatData.seat_details.session_id,
+                seat_id: seatData.seat_details.seat_id
+            }
+            return transformedSeat;
+        }
+        let transformedSeats = rowsOfSeatsRef.current.flat().filter((seat) => seat.chosen === true).map(mapSeats);
+        const seatDetailsObject = {
+            event: 'makeAllSelectedSeatsFalse',
+            seat: transformedSeats
+        };
+        ws.current.send(JSON.stringify(seatDetailsObject));
+
+    }
     const seatHandleClick = (seat) => {
         seat.chosen === true ? removeSeatCallback(seat) : addSeatCallback(seat);
     };
@@ -234,7 +231,7 @@ export function ReservationPage() {
             {shouldDisplayContent ? null : <PageLoader />}
             <div>
                 {reserved ?
-                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} hiddenReservationResultWindow={()=>setReserved(false)} /> :
+                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} hiddenReservationResultWindow={() => setReserved(false)} /> :
                     <ChooseSeats
                         rowsOfSeats={rowsOfSeats}
                         seatHandleClick={seatHandleClick}
@@ -243,6 +240,7 @@ export function ReservationPage() {
                         shouldDisplayContent={shouldDisplayContent}
                         changeSessionContentReady={changeSessionContentReady}
                         changeSeatTypesContentReady={changeSeatTypesContentReady}
+                        makeAllSelectedSeatsFalse={makeAllSelectedSeatsFalse}
                     />}
             </div>
         </div>

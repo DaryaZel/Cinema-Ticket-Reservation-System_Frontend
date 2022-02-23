@@ -108,6 +108,16 @@
     width: 70%
 }
 
+.legend__seatType .seat {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.legend__seatType .seat-LoveSeat {
+    width: 3.5vw;
+    height: 2.5vw;
+}
+
 .seatType__title {
     display: flex;
     justify-content: space-between;
@@ -117,4 +127,24 @@
 .seatType__description {
     margin-top: 10px;
     text-align: left;
+}
+
+.legend__seat-navigation {
+    padding: 20px 5vw;
+    display: flex;
+    justify-content: space-around;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.legend__seat-navigation .seat {
+    width: 2vw;
+    height: 2vw;
+}
+
+.legend__seat-navigation-example {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    align-items: center;
 }

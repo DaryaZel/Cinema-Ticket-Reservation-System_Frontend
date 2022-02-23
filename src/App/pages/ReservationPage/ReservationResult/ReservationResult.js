@@ -5,6 +5,7 @@ import arrow_back from './images/back-button.png'
 import './ReservationResult.css'
 
 export function ReservationResult({ rowsOfSeats, sessionId, hiddenReservationResultWindow }) {
+    debugger
     return (
         <div>
             <Header showSearchForm={false} />
