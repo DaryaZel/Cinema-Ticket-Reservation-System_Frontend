@@ -33,18 +33,17 @@
     align-items: center;
     justify-content: center;
     user-select: none;
-    height: 45vh;
+    height: 30vw;
     min-width: 25%;
-    max-width: 25%;
 }
 
 .carousel__img-container {
     position: relative;
 }
 
-.carousel__item img {
-    max-width: 75%;
-    max-height: 75%;
+.carousel__img {
+    width: 75%;
+    height: 75%;
 }
 
 .carousel__item img:hover {

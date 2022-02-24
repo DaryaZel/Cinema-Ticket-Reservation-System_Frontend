@@ -52,7 +52,6 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
         event.preventDefault();
         let name = event.target.username.value;
         let password = event.target.password.value;
-        debugger
         let newUser = new LogInUser(name, password);
         try {
             const response = await fetch('https://cinematicketbooking.herokuapp.com/auth/login', {

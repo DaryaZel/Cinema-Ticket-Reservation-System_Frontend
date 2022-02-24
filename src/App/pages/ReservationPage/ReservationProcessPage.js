@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { handleResponse } from '../../utilities/ResponseHandler';
 import { ReservationResult } from './ReservationResult/ReservationResult';
 import { ChooseSeats } from './ChooseSeats/ChooseSeats';
-import './ReservationProcessPage.css';
 import { PageLoader } from '../components/PageLoader/PageLoader';
 import { UserContext } from '../../App';
+import './ReservationProcessPage.css';
 
 export function ReservationPage() {
     const params = useParams();
@@ -86,7 +86,6 @@ export function ReservationPage() {
                 let seatDetailsToUpdate = seats.find(seat => seat._id == updatedSeats[row][index].seat_details._id)
                 if (seatDetailsToUpdate) {
                     if (!seatDetailsToUpdate.isSelected && updatedSeats[row][index].chosen && seats[seats.length - 1] === 'makeAllSelectedSeatsFalse') {
-                        debugger
                         updatedSeats[row][index].chosen = false;
                     }
                     updatedSeats[row][index].seat_details = seatDetailsToUpdate;
@@ -110,7 +109,6 @@ export function ReservationPage() {
             alert('WebSocket error');
         }
         return () => {
-            debugger
             makeAllSelectedSeatsFalse();
             return ws.current.close();
         }

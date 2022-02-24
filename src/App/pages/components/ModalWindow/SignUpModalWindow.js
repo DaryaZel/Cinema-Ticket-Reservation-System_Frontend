@@ -20,7 +20,6 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
     const [inputTextEmail, setInputTextEmail] = useState('');
     const [inputTextPassword, setInputTextPassword] = useState('');
     const [inputTextRepeatPassword, setInputTextRepeatPassword] = useState('');
-    debugger
     const signUpData = [
         { title: 'Name', name: 'username', type: 'text', img: name, placeholder: 'type your username', inputText: inputTextName, setText: setInputTextName },
         { title: 'Email', name: 'email', type: 'email', img: email, placeholder: 'type your email', inputText: inputTextEmail, setText: setInputTextEmail },

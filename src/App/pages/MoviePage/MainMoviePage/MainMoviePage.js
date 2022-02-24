@@ -15,7 +15,6 @@ export function MainMoviePage({ params }) {
     const formattingOptions = {
         day: 'numeric', month: 'long'
     };
-    debugger
     useEffect(() => {
         async function fetchData() {
             try {

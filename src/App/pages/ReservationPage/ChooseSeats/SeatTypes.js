@@ -8,7 +8,7 @@ export function SeatTypes({ sessionId, changeSeatTypesContentReady, shouldDispla
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`https://cinematicketbooking.herokuapp.com/seatTypes/?movieSessionId=${sessionId}`);
+                const response = await fetch(`https://cinematicketbooking.herokuapp.com/sessionsprices/?movieSessionId=${sessionId}`);
                 handleResponse(response,
                     (error) => {
                         alert(error);
