@@ -3,6 +3,8 @@ import { timezone, tokenStorageKey, UserContext } from "../../App";
 import { handleResponse } from "../../utilities/ResponseHandler";
 import { Header } from "../components/Header/Header";
 import { PageLoader } from "../components/PageLoader/PageLoader";
+import location from './images/location.png';
+import timetable from './images/timetable.png';
 import './PersonalAccountPage.css';
 
 export function PersonalAccountPage() {
@@ -61,16 +63,20 @@ export function PersonalAccountPage() {
                 <div> <h2>Reservations List</h2>
                     {reservations.map((reservation) => {
                         return (
-                            <div>
-                                <h2>Reservation {new Date(reservation.createdAt).toLocaleDateString(locale, formattingOptionsForReservation)}</h2>
-                                <div>
-                                    <h3>{reservation.movieName}</h3>
+                            <div className='reservations__content-container'>
+                                <h2 className='reservations__movie-name'>{reservation.movieName}</h2>
+                                <div className='reservations__place'>
+                                    <img src={location} />
                                     <h3>{reservation.cinemaName}</h3>
+                                </div>
+                                <div className='reservations__date'>
+                                    <img src={timetable} />
                                     <h3>{(new Date(reservation.date)).toLocaleDateString(locale, formattingOptionsForSession)}</h3>
                                 </div>
                                 {reservation.tickets.map((ticket) => {
                                     return <h4>Seat: {ticket.availableSeat_number} Row: {ticket.availableSeat_row} .....  {ticket.availableSeat_price}$</h4>
                                 })}
+                                <h3 className='reservations__information'>Reservation {new Date(reservation.createdAt).toLocaleDateString(locale, formattingOptionsForReservation)}</h3>
                             </div>
                         )
                     })
