@@ -180,7 +180,7 @@ export function ReservationPage() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(reservationInfo),
+                    body: JSON.stringify(reservationInfo)
                 });
                 handleResponse(response,
                     (error) => {

@@ -13,6 +13,7 @@ export function Header({ showSearchForm }) {
     const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
     const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
+    
     return (
         <header className="header">
             <div className="header__container">
