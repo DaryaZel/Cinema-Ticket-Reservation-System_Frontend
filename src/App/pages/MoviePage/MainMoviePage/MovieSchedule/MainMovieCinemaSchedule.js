@@ -12,7 +12,7 @@ export function MainMovieCinemaSchedule({ cinema }) {
                 {cinema.sessions.map((session) => {
                     const sessionLink = '/reservation/' + session.id;
                     return (
-                        <Link to={sessionLink} className="link"><MainMovieSessionTime session={session} /></Link>
+                        <Link to={sessionLink} key={session.id} className="link"><MainMovieSessionTime session={session} /></Link>
                     )
                 }
                 )}

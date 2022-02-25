@@ -97,7 +97,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
                     <div className='auth-modal__container'>
                         {
                             signUpData.map((item) => (
-                                <div className='auth-modal__row'>
+                                <div key={item._id} className='auth-modal__row'>
                                     <div className='auth-modal__field-container'>
                                         <div className='auth-modal__input-container'>
                                             <div className='auth-modal__label'>

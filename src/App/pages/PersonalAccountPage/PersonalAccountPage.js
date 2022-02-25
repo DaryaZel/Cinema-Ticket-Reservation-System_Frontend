@@ -63,7 +63,7 @@ export function PersonalAccountPage() {
                 <div> <h2>Reservations List</h2>
                     {reservations.map((reservation) => {
                         return (
-                            <div className='reservations__content-container'>
+                            <div key={reservation._id} className='reservations__content-container'>
                                 <h2 className='reservations__movie-name'>{reservation.movieName}</h2>
                                 <div className='reservations__place'>
                                     <img src={location} />
@@ -74,7 +74,7 @@ export function PersonalAccountPage() {
                                     <h3>{(new Date(reservation.date)).toLocaleDateString(locale, formattingOptionsForSession)}</h3>
                                 </div>
                                 {reservation.tickets.map((ticket) => {
-                                    return <h4>Seat: {ticket.availableSeat_number} Row: {ticket.availableSeat_row} .....  {ticket.availableSeat_price}$</h4>
+                                    return <h4 key={ticket._id}>Seat: {ticket.availableSeat_number} Row: {ticket.availableSeat_row} .....  {ticket.availableSeat_price}$</h4>
                                 })}
                                 <h3 className='reservations__information'>Reservation {new Date(reservation.createdAt).toLocaleDateString(locale, formattingOptionsForReservation)}</h3>
                             </div>

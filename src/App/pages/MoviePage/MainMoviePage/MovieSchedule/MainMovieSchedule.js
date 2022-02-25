@@ -37,16 +37,16 @@ export function MainMovieSchedule({ city, cinema, day, movieId }) {
 
     return (
         <div className='schedule'>
-            {dateSchedule.map((elem) => {
+            {dateSchedule.map((elem, index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <div className='schedule__date-container'>
                             <h2>{new Date(elem.day).toLocaleDateString(locale, formattingOptions)}</h2>
                         </div>
                         {elem.schedules.length === 0 ?
                             <h3 className='schedule__no-sessions'>No sessions found</h3> :
-                            elem.schedules.map((cinema) => (
-                                <MainMovieCinemaSchedule cinema={cinema} />
+                            elem.schedules.map((cinema, index) => (
+                                <MainMovieCinemaSchedule key={index} cinema={cinema} />
                             ))
                         }</div>
                 )

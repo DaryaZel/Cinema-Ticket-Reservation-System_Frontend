@@ -84,18 +84,18 @@ export function SearchForm() {
     return (
         <form className="search-form">
             <div className="search-form__container">
-                <div class="search-form-dropdown">
-                    <div class="search-form__dropdown-content">
+                <div className="search-form-dropdown">
+                    <div className="search-form__dropdown-content">
                         <input id='searchText' type='text'
                             name='searchText' className="search-form__input"
                             value={inputText} placeholder="Search movie..."
-                            maxLength="20" autocomplete="off"
+                            maxLength="20" autoComplete="off"
                             onKeyPress={(e) => handleEnterEvent(e)}
                             onChange={handleChange} >
                         </input>
                         {movieData && movieData.map((movie) => {
                             const movieLink = '/movie/' + movie._id;
-                            return (<div>
+                            return (<div key={movie._id}>
                                 <Link to={movieLink} className="link">
                                     <span>{movie.movieName}</span>
                                 </Link>

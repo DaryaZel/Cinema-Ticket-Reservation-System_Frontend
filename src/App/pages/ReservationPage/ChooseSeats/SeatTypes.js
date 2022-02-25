@@ -38,7 +38,7 @@ export function SeatTypes({ sessionId, changeSeatTypesContentReady, shouldDispla
             <div className="legend__seatTypes-container">
                 {seatTypes.map((seat) => {
                     return (
-                        <div className="legend__seatType seatType">
+                        <div key={seat._id} className="legend__seatType seatType">
                             <div className="seatType__example">
                                 <div className={getClassNamesFor(seat)}>
                                 </div>
