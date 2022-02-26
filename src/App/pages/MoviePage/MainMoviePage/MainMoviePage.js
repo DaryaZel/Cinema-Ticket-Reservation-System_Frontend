@@ -28,7 +28,7 @@ export function MainMoviePage({ params }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();

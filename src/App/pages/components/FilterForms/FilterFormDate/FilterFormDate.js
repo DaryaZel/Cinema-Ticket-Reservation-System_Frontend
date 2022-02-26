@@ -23,7 +23,7 @@ export function FilterFormDate({ changeSelectedDay }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();

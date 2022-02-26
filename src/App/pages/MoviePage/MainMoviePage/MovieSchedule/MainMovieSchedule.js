@@ -29,7 +29,7 @@ export function MainMovieSchedule({ city, cinema, day, movieId }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData()

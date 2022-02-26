@@ -8,16 +8,17 @@ import { Authentication } from '../Authentication/Authentication';
 import { Avatar } from '../Avatar/Avatar';
 import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
+import { LandingPageContext } from '../../LandingPage/LandingPage.js';
 
 export function Header({ showSearchForm }) {
     const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
     const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
-    
+    const { setMoviesList } = useContext(LandingPageContext) || { 'setMoviesList': null };
     return (
         <header className="header">
             <div className="header__container">
-                <Link to='/' className="link"> <div className="header__logo logo">
+                <Link to='/' className="link"> <div className="header__logo logo" onClick={() => setMoviesList ? setMoviesList(null) : null}>
                     <div className="logo__text">
                         <h2>Spool</h2>
                     </div>
@@ -25,7 +26,7 @@ export function Header({ showSearchForm }) {
                         <img src={film} alt="film_logo" />
                     </div>
                 </div></Link>
-                {showSearchForm ? <SearchForm /> : null}
+                {showSearchForm ? <SearchForm setMoviesList={setMoviesList} /> : null}
                 {
                     user ? (
                         <Avatar

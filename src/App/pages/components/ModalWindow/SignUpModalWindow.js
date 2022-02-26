@@ -71,7 +71,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
                 }
             )
         } catch (error) {
-            alert(error.message);
+            alert("Oops, something went wrong");
         }
     };
 

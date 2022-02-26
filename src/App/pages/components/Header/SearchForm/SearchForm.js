@@ -5,9 +5,8 @@ import { LandingPageContext } from '../../../LandingPage/LandingPage';
 import glass from './images/magnifying_glass.png';
 import './SearchForm.css';
 
-export function SearchForm() {
+export function SearchForm({setMoviesList}) {
     const [inputText, setInputText] = useState('');
-    const { moviesList, setMoviesList } = useContext(LandingPageContext);
     const [movieData, setMovieData] = useState([]);
 
     const searchMovieList = () => {
@@ -34,7 +33,7 @@ export function SearchForm() {
                 )
             } catch (error) {
                 debugger
-                alert('hhhh');
+                alert("Oops, something went wrong");
             }
         }
         fetchData()
@@ -74,7 +73,7 @@ export function SearchForm() {
                     }
                 )
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData()
@@ -84,28 +83,28 @@ export function SearchForm() {
     return (
         <form className="search-form">
             <div className="search-form__container">
-                <div className="search-form-dropdown">
-                    <div className="search-form__dropdown-content">
-                        <input id='searchText' type='text'
-                            name='searchText' className="search-form__input"
-                            value={inputText} placeholder="Search movie..."
-                            maxLength="20" autoComplete="off"
-                            onKeyPress={(e) => handleEnterEvent(e)}
-                            onChange={handleChange} >
-                        </input>
-                        {movieData && movieData.map((movie) => {
-                            const movieLink = '/movie/' + movie._id;
-                            return (<div key={movie._id}>
-                                <Link to={movieLink} className="link">
-                                    <span>{movie.movieName}</span>
-                                </Link>
-                            </div>)
-                        })}
-                    </div>
+                <div className="search-form__content">
+                        <div className="search-form__dropdown-content">
+                            <input id='searchText' type='text'
+                                name='searchText' className="search-form__input"
+                                value={inputText} placeholder="Search movie..."
+                                maxLength="20" autoComplete="off"
+                                onKeyPress={(e) => handleEnterEvent(e)}
+                                onChange={handleChange} >
+                            </input>
+                            {movieData && movieData.map((movie) => {
+                                const movieLink = '/movie/' + movie._id;
+                                return (<div key={movie._id}>
+                                    <Link to={movieLink} className="link">
+                                        <span>{movie.movieName}</span>
+                                    </Link>
+                                </div>)
+                            })}
+                        </div>
                 </div>
-                <button id='searchButton' name='searchButton' className="search-form__button" onClick={handleClick}>
+                <div> <button id='searchButton' name='searchButton' className="search-form__button" onClick={handleClick}>
                     <img src={glass} />
-                </button>
+                </button></div>
             </div>
         </form>
     );

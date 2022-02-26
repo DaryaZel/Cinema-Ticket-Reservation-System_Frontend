@@ -18,7 +18,7 @@ export function FilterFormCity({ changeSelectedCity }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();

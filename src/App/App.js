@@ -43,7 +43,7 @@ function App() {
           )
         }
       } catch (error) {
-        alert(error);
+        alert("Oops, something went wrong");
       }
     }
     fetchData()

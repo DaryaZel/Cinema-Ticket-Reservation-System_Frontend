@@ -20,7 +20,7 @@ export function SeatTypes({ sessionId, changeSeatTypesContentReady, shouldDispla
                 );
             }
             catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData()

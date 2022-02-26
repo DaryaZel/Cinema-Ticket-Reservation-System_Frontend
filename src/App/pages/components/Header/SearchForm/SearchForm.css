@@ -4,11 +4,17 @@
 
 .search-form__container {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: left;
+}
+.search-form__content{
+    min-width: 100px;
+    width: 80%;
+    margin-right: 10px;
 }
 
 .search-form__input {
-    width: 90%;
+    width: 85%;
     border: 1px solid black;
     padding: 10px 10px 10px 15px;
     border-radius: 40px;
@@ -37,10 +43,10 @@
 
 .search-form__dropdown {
     position: relative;
-    width: 100%;
 }
 
 .search-form__dropdown-content {
+    max-width: 100%;
     position: absolute;
     overflow: auto;
     z-index: 1;
@@ -56,6 +62,6 @@
     background-color: rgb(255, 254, 254);
 }
 
-.search-form__dropdown span:hover {
-    background-color: #ddd;
+.search-form__dropdown-content span:hover {
+    background-color: rgb(226, 226, 243);
 }

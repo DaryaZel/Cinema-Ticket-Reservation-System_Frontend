@@ -48,7 +48,7 @@ export function PersonalAccountPage() {
                     setReservations([]);
                 }
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData()

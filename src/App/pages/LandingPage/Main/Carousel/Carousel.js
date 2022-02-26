@@ -29,7 +29,7 @@ export function Carousel({ city, cinema, day }) {
                     }
                 )
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData()

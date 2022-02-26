@@ -30,7 +30,7 @@ export function SessionInformation({ sessionId, changeSessionContentReady }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();

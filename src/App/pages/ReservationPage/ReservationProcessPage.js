@@ -60,7 +60,7 @@ export function ReservationPage() {
             })
         }
         catch (error) {
-            alert(error)
+            alert("Oops, something went wrong")
         }
     }
 
@@ -198,7 +198,7 @@ export function ReservationPage() {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();

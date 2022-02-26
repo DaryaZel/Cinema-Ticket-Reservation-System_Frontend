@@ -40,7 +40,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
             );
         }
         catch (error) {
-            alert(error);
+            alert("Oops, something went wrong");
         }
     }
 
@@ -76,7 +76,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                 }
             );
         } catch (error) {
-            alert(error);
+            alert("Oops, something went wrong");
         }
     }
 
