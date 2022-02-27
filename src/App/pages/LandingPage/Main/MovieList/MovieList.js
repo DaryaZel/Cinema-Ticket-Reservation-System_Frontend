@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LandingPageContext } from '../../LandingPage';
 import './MovieList.css'
-export function MoviesList({ }) {
+export function MoviesList() {
     const { moviesList } = useContext(LandingPageContext);
 
     return (
@@ -13,7 +13,7 @@ export function MoviesList({ }) {
                     <div className='main-movie-list__movie-poster'>
                         <Link to={movieLink} className="link">
                             <div className='main-movie-list__movie-poster-img'>
-                                <img src={movie.posterImg_link} />
+                                <img src={movie.posterImg_link} alt='poster' />
                                 <div className='main-movie-list__movie-poster-age-restriction'>
                                     <span>{movie.age_restriction}</span>
                                 </div>

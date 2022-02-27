@@ -36,11 +36,11 @@ export function Carousel({ city, cinema, day }) {
     }, [city, cinema, day]);
 
     const windowWidth = 25;
-    const itemsForCarousel= 4;
-    const itemsInCarouselWindow = movieData.length>itemsForCarousel?itemsForCarousel:movieData.length;
+    const itemsForCarousel = 4;
+    const itemsInCarouselWindow = movieData.length > itemsForCarousel ? itemsForCarousel : movieData.length;
     const [offset, setOffset] = useState(0);
-    const getClassNamesFor=()=>{
-       return movieData.length>itemsForCarousel?'carousel__container carousel__container_space-between':'carousel__container carousel__container_space-around'
+    const getClassNamesFor = () => {
+        return movieData.length > itemsForCarousel ? 'carousel__container carousel__container_space-between' : 'carousel__container carousel__container_space-around'
     }
     const handleLeftArrow = () => {
         setOffset((currentOffset) => {
@@ -58,8 +58,8 @@ export function Carousel({ city, cinema, day }) {
 
     return (
         <div className='carousel'>
-            {movieData.length>itemsInCarouselWindow&&<div className='carousel__arrow' onClick={handleLeftArrow}>
-                <img src={leftArrow} />
+            {movieData.length > itemsInCarouselWindow && <div className='carousel__arrow' onClick={handleLeftArrow}>
+                <img src={leftArrow} alt='leftArrow' />
             </div>}
             <div className='carousel__window'>
                 <div className={getClassNamesFor()}
@@ -74,7 +74,7 @@ export function Carousel({ city, cinema, day }) {
                                 <div key={movie._id} className='carousel__item'>
                                     <div className='carousel__img-container'>
                                         <Link to={movieLink}>
-                                            <img className='carousel__img' src={movie.posterImg_link} />
+                                            <img className='carousel__img' src={movie.posterImg_link} alt='poster' />
                                         </Link>
                                         <div className='carousel__ticket'>
                                             <Link to={movieLink}>
@@ -89,8 +89,8 @@ export function Carousel({ city, cinema, day }) {
                     }
                 </div>
             </div>
-            {movieData.length>itemsInCarouselWindow&&<div className='carousel__arrow' onClick={handleRightArrow}>
-                <img src={rightArrow} />
+            {movieData.length > itemsInCarouselWindow && <div className='carousel__arrow' onClick={handleRightArrow}>
+                <img src={rightArrow} alt='rightArrow' />
             </div>}
         </div>
     );

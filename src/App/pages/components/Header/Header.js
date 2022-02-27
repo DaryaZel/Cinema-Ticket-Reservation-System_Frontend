@@ -10,7 +10,7 @@ import { SignUpModalWindow } from '../ModalWindow/SignUpModalWindow';
 import { LogInModalWindow } from '../ModalWindow/LogInModalWindow';
 import { LandingPageContext } from '../../LandingPage/LandingPage.js';
 
-export function Header({ showSearchForm }) {
+export function Header({ showSearchForm, movieData, setMovieData }) {
     const [signUpModalVisibility, setSignUpModalVisibility] = useState(false);
     const [logInModalVisibility, setLogInModalVisibility] = useState(false);
     const { user, setUserState } = useContext(UserContext);
@@ -26,7 +26,7 @@ export function Header({ showSearchForm }) {
                         <img src={film} alt="film_logo" />
                     </div>
                 </div></Link>
-                {showSearchForm ? <SearchForm setMoviesList={setMoviesList} /> : null}
+                {showSearchForm ? <SearchForm movieData={movieData} setMovieData={setMovieData}/> : null}
                 {
                     user ? (
                         <Avatar

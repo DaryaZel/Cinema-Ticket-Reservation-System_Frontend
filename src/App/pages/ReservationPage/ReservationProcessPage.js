@@ -69,7 +69,7 @@ export function ReservationPage() {
         let { rowNumber } = seats.reduce((acc, curr) => acc.rowNumber > curr.rowNumber ? acc : curr);
         let rowsArray = [];
         for (let i = 0; i < rowNumber; i++) {
-            rowsArray.push(new Array());
+            rowsArray.push([]);
         }
         for (let i = 0; i < transformedSeats.length; i++) {
             rowsArray[transformedSeats[i].seat_details.rowNumber - 1].push(transformedSeats[i]);
@@ -83,9 +83,10 @@ export function ReservationPage() {
         let updatedSeats = [...prevRowsOfSeats]
         for (let row = 0; row < updatedSeats.length; row++) {
             for (let index = 0; index < updatedSeats[row].length; index++) {
-                let seatDetailsToUpdate = seats.find(seat => seat._id == updatedSeats[row][index].seat_details._id)
+                let seatDetailsToUpdate = seats.find(seat => seat._id === updatedSeats[row][index].seat_details._id)
                 if (seatDetailsToUpdate) {
                     if (!seatDetailsToUpdate.isSelected && updatedSeats[row][index].chosen && seats[seats.length - 1] === 'makeAllSelectedSeatsFalse') {
+                        debugger
                         updatedSeats[row][index].chosen = false;
                     }
                     updatedSeats[row][index].seat_details = seatDetailsToUpdate;
@@ -99,7 +100,6 @@ export function ReservationPage() {
     useEffect(() => {
         window.addEventListener("unload", function () {
             makeAllSelectedSeatsFalse();
-            return ws.current.close();
         })
         ws.current = new WebSocket(`wss://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
         ws.current.onmessage = e => {

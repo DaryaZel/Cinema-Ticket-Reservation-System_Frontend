@@ -39,7 +39,7 @@ export function MainMoviePage({ params }) {
             {movie && <div className='main-movie__container'>
                 <div className='main-movie__movie-poster'>
                     <div className='main-movie__movie-poster-img'>
-                        <img src={movie.movieInformation.posterImg_link} />
+                        <img src={movie.movieInformation.posterImg_link} alt='poster' />
                         <div className='main-movie__movie-poster-age-restriction'>
                             <span>{movie.movieInformation.age_restriction}</span>
                         </div>

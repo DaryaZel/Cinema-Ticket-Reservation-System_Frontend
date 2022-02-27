@@ -50,7 +50,7 @@ export function FilterFormDate({ changeSelectedDay }) {
                     fp.current.flatpickr.clear();
                 }}
             >
-                 <img src={close} />
+                <img src={close} alt='close' />
             </button>
         </div>)
     );

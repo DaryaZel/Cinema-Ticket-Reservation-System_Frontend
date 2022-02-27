@@ -41,18 +41,18 @@ export function SessionInformation({ sessionId, changeSessionContentReady }) {
             {movieSession &&
                 <div className='session-information'>
                     <div className='session-information__poster-img'>
-                        <img src={movieSession[0].posterImg_link} />
+                        <img src={movieSession[0].posterImg_link} alt='poster'/>
                     </div>
                     <div className='session-information__content-container'>
                         <h2 className='session-information__thanks'>{movieSession[0].movieName}</h2>
                         <div className='session-information__place'>
-                            <img src={location}/>
+                            <img src={location} alt='location' />
                             <h3>{movieSession[0].cinemaName}</h3>
-                            </div>
+                        </div>
                         <div className='session-information__date'>
-                        <img src={timetable}/>
+                            <img src={timetable} alt='timetable' />
                             <h3>{(new Date(movieSession[0].date)).toLocaleDateString(locale, formattingOptions)}</h3>
-                            </div>
+                        </div>
                     </div>
                 </div>
             }

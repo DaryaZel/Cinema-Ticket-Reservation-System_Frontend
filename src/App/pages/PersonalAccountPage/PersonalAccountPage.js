@@ -66,11 +66,11 @@ export function PersonalAccountPage() {
                             <div key={reservation._id} className='reservations__content-container'>
                                 <h2 className='reservations__movie-name'>{reservation.movieName}</h2>
                                 <div className='reservations__place'>
-                                    <img src={location} />
+                                    <img src={location} alt='location' />
                                     <h3>{reservation.cinemaName}</h3>
                                 </div>
                                 <div className='reservations__date'>
-                                    <img src={timetable} />
+                                    <img src={timetable} alt='timetable' />
                                     <h3>{(new Date(reservation.date)).toLocaleDateString(locale, formattingOptionsForSession)}</h3>
                                 </div>
                                 {reservation.tickets.map((ticket) => {

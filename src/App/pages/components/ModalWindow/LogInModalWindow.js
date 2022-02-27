@@ -95,14 +95,18 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                                             </label>
                                         </div>
                                         <div className='auth-modal__input-icon'>
-                                            <img src={item.img} />
+                                            <img src={item.img} alt={name} />
                                         </div>
-                                        <input id={item.name} type={item.type} name={item.name} value={item.inputText} placeholder={item.placeholder} className='auth-modal__input' onChange={(event) => handleChange(event.target.value, item.setText)}></input>
+                                        <input id={item.name} type={item.type}
+                                            name={item.name} value={item.inputText}
+                                            placeholder={item.placeholder} className='auth-modal__input'
+                                            autoComplete="off"
+                                            onChange={(event) => handleChange(event.target.value, item.setText)}></input>
                                     </div>
                                     <div className='auth-modal__error-container'>
                                         {responseErrors[item.name] ?
-                                            <h6 className='auth-modal__error'>{responseErrors[item.name]}</h6> :
-                                            <h6 className='auth-modal__error'></h6>}
+                                            <h5 className='auth-modal__error'>{responseErrors[item.name]}</h5> :
+                                            <h5 className='auth-modal__error'></h5>}
                                     </div>
                                 </div>
                             </div>

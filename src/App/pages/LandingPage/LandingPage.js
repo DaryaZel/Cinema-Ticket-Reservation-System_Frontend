@@ -12,6 +12,7 @@ export function LandingPage() {
     const [cinema, setCinema] = useState(defaultCinemaValue);
     const [day, setDay] = useState(defaultDayValue);
     const [moviesList, setMoviesList] = useState(null);
+    const [movieData, setMovieData] = useState([]);
     const filtersValue = {
         city: city,
         setCity: setCity,
@@ -25,10 +26,13 @@ export function LandingPage() {
         setMoviesList: setMoviesList
     }
 
+    const handleClick = () => {
+        setMovieData(null)
+    }
     return (
-        <div>
+        <div onClick={handleClick}>
             <LandingPageContext.Provider value={valueLandingPageContext}>
-                <Header showSearchForm={true} />
+                <Header showSearchForm={true} movieData={movieData} setMovieData={setMovieData} />
                 <FilterContext.Provider value={filtersValue}>
                     <Main />
                 </FilterContext.Provider>

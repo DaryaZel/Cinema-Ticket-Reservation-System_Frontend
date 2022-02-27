@@ -5,15 +5,16 @@ import { LandingPageContext } from '../../../LandingPage/LandingPage';
 import glass from './images/magnifying_glass.png';
 import './SearchForm.css';
 
-export function SearchForm({setMoviesList}) {
+export function SearchForm({ movieData, setMovieData }) {
     const [inputText, setInputText] = useState('');
-    const [movieData, setMovieData] = useState([]);
+    const [makeRequest, setMakeRequest] = useState(false)
+    // const [movieData, setMovieData] = useState([]);
+    const { setMoviesList } = useContext(LandingPageContext)
 
     const searchMovieList = () => {
         async function fetchData() {
             let searchTextObj = { 'payload': inputText }
             try {
-                debugger
                 const response = await fetch(`https://cinematicketbooking.herokuapp.com/movie/search`,
                     {
                         method: 'POST',
@@ -32,7 +33,6 @@ export function SearchForm({setMoviesList}) {
                     }
                 )
             } catch (error) {
-                debugger
                 alert("Oops, something went wrong");
             }
         }
@@ -51,6 +51,9 @@ export function SearchForm({setMoviesList}) {
         e.preventDefault()
         searchMovieList()
     };
+    const changeMovieData = () => {
+        setMakeRequest((prevMakeRequest)=>!prevMakeRequest);
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -78,32 +81,36 @@ export function SearchForm({setMoviesList}) {
         }
         fetchData()
 
-    }, [inputText]);
+    }, [inputText, makeRequest]);
 
     return (
         <form className="search-form">
             <div className="search-form__container">
                 <div className="search-form__content">
-                        <div className="search-form__dropdown-content">
-                            <input id='searchText' type='text'
-                                name='searchText' className="search-form__input"
-                                value={inputText} placeholder="Search movie..."
-                                maxLength="20" autoComplete="off"
-                                onKeyPress={(e) => handleEnterEvent(e)}
-                                onChange={handleChange} >
-                            </input>
-                            {movieData && movieData.map((movie) => {
-                                const movieLink = '/movie/' + movie._id;
-                                return (<div key={movie._id}>
-                                    <Link to={movieLink} className="link">
-                                        <span>{movie.movieName}</span>
-                                    </Link>
-                                </div>)
-                            })}
-                        </div>
+                    <div className="search-form__dropdown-content">
+                        <input id='searchText' type='text'
+                            name='searchText' className="search-form__input"
+                            value={inputText} placeholder="Search movie..."
+                            maxLength="20" autoComplete="off"
+                            onKeyPress={(e) => handleEnterEvent(e)}
+                            onChange={handleChange}
+                            onClick={(e) => {
+                                changeMovieData(e)
+                                e.stopPropagation()
+                            }} >
+                        </input>
+                        {movieData && movieData.map((movie) => {
+                            const movieLink = '/movie/' + movie._id;
+                            return (<div key={movie._id}>
+                                <Link to={movieLink} className="link">
+                                    <span>{movie.movieName}</span>
+                                </Link>
+                            </div>)
+                        })}
+                    </div>
                 </div>
                 <div> <button id='searchButton' name='searchButton' className="search-form__button" onClick={handleClick}>
-                    <img src={glass} />
+                    <img src={glass} alt='search' />
                 </button></div>
             </div>
         </form>

@@ -11,7 +11,7 @@ export function ReservationResult({ rowsOfSeats, sessionId, hiddenReservationRes
             <h2 className='reservation-result__thanks'>Thank You for your Reservation!</h2>
             <div onClick={hiddenReservationResultWindow} className='reservation-result__back-button'>
                 <div className='reservation-result__back-button-img'>
-                    <img src={arrow_back} />
+                    <img src={arrow_back} alt='arrow_back' />
                 </div>
                 <h3>Back to cinema hall</h3></div>
             <div className='reservation-result_reservation-ticket reservation-ticket'>

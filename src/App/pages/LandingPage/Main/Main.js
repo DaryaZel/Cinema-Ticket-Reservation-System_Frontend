@@ -8,7 +8,7 @@ import { MoviesList } from './MovieList/MovieList';
 
 export function Main() {
     const { city, setCity, cinema, setCinema, day, setDay } = useContext(FilterContext);
-    const {moviesList, setMoviesList } = useContext(LandingPageContext);
+    const { moviesList } = useContext(LandingPageContext);
 
     return (
         <main className='main'>
