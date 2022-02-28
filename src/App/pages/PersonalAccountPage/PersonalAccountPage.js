@@ -62,6 +62,10 @@ export function PersonalAccountPage() {
             {reservations.length !== 0 ?
                 <div> <h2>Reservations List</h2>
                     {reservations.map((reservation) => {
+                        let ticketsPriceSum = 0;
+                        reservation.tickets.forEach((ticket) => {
+                            ticketsPriceSum += ticket.availableSeat_price;
+                        })
                         return (
                             <div key={reservation._id} className='reservations__content-container'>
                                 <h2 className='reservations__movie-name'>{reservation.movieName}</h2>
@@ -76,6 +80,7 @@ export function PersonalAccountPage() {
                                 {reservation.tickets.map((ticket) => {
                                     return <h4 key={ticket._id}>Seat: {ticket.availableSeat_number} Row: {ticket.availableSeat_row} .....  {ticket.availableSeat_price}$</h4>
                                 })}
+                                <h3>Total Price: {ticketsPriceSum}$</h3>
                                 <h3 className='reservations__information'>Reservation {new Date(reservation.createdAt).toLocaleDateString(locale, formattingOptionsForReservation)}</h3>
                             </div>
                         )

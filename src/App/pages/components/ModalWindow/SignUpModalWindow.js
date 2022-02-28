@@ -97,7 +97,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
                     <div className='auth-modal__container'>
                         {
                             signUpData.map((item) => (
-                                <div key={item._id} className='auth-modal__row'>
+                                <div key={item.name} className='auth-modal__row'>
                                     <div className='auth-modal__field-container'>
                                         <div className='auth-modal__input-container'>
                                             <div className='auth-modal__label'>
@@ -109,6 +109,7 @@ export function SignUpModalWindow({ onCloseSignUpModal, setUserState }) {
                                                 <img src={item.img} alt={name} />
                                             </div>
                                             <input
+                                                key={item.name}
                                                 id={item.name}
                                                 type={item.type}
                                                 name={item.name}

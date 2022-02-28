@@ -39,15 +39,25 @@
 
 .carousel__img-container {
     position: relative;
+    width: 80%;
+    height: 80%;
+}
+.carousel__img-content{
+    padding-top: 155%;
+    position: relative;
 }
 
 .carousel__img {
-    width: 75%;
-    height: 75%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
     filter: drop-shadow(5px 5px 5px rgb(131, 125, 125));
 }
 
-.carousel__item img:hover {
+.carousel__img:hover {
     filter: drop-shadow(5px 5px 5px rgb(255, 255, 255));
 }
 
@@ -64,9 +74,9 @@
 
 .carousel__ticket {
     position: absolute;
-    width: 55%;
-    height: 25%;
-    left: 10%;
+    width: 60%;
+    height: 30%;
+    left: 5%;
     bottom: 4%;
     border-radius: 5px;
 }

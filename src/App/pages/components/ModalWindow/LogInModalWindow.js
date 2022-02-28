@@ -86,7 +86,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                 <div className='auth-modal__container'>
                     {
                         logInData.map((item) => (
-                            <div key={item._id} className='auth-modal__row'>
+                            <div key={item.name} className='auth-modal__row'>
                                 <div className='auth-modal__field-container'>
                                     <div className='auth-modal__input-container'>
                                         <div className='auth-modal__label'>
@@ -97,7 +97,7 @@ export function LogInModalWindow({ onCloseLogInModal, setUserState }) {
                                         <div className='auth-modal__input-icon'>
                                             <img src={item.img} alt={name} />
                                         </div>
-                                        <input id={item.name} type={item.type}
+                                        <input key={item.name} id={item.name} type={item.type}
                                             name={item.name} value={item.inputText}
                                             placeholder={item.placeholder} className='auth-modal__input'
                                             autoComplete="off"

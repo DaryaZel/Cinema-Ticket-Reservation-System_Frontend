@@ -73,6 +73,7 @@ export function Carousel({ city, cinema, day }) {
                             return (
                                 <div key={movie._id} className='carousel__item'>
                                     <div className='carousel__img-container'>
+                                    <div className='carousel__img-content'>
                                         <Link to={movieLink}>
                                             <img className='carousel__img' src={movie.posterImg_link} alt='poster' />
                                         </Link>
@@ -82,6 +83,7 @@ export function Carousel({ city, cinema, day }) {
                                             </Link>
                                         </div>
                                         <h3>{movie.movieName}</h3>
+                                        </div>
                                     </div>
                                 </div>
                             )

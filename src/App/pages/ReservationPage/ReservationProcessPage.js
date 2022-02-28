@@ -86,7 +86,6 @@ export function ReservationPage() {
                 let seatDetailsToUpdate = seats.find(seat => seat._id === updatedSeats[row][index].seat_details._id)
                 if (seatDetailsToUpdate) {
                     if (!seatDetailsToUpdate.isSelected && updatedSeats[row][index].chosen && seats[seats.length - 1] === 'makeAllSelectedSeatsFalse') {
-                        debugger
                         updatedSeats[row][index].chosen = false;
                     }
                     updatedSeats[row][index].seat_details = seatDetailsToUpdate;
@@ -103,7 +102,16 @@ export function ReservationPage() {
         })
         ws.current = new WebSocket(`wss://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
         ws.current.onmessage = e => {
-            handleSessionSeatsUpdate(e.data);
+            const msgData = JSON.parse(e.data);
+            if (msgData.event === "ping") {
+                const pongData = {
+                    event: "pong",
+                    beat: 1
+                }
+                ws.current.send(JSON.stringify(pongData));
+            } else {
+                handleSessionSeatsUpdate(e.data);
+            }
         };
         ws.current.onerror = e => {
             alert('WebSocket error');
@@ -229,7 +237,11 @@ export function ReservationPage() {
             {shouldDisplayContent ? null : <PageLoader />}
             <div>
                 {reserved ?
-                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId} hiddenReservationResultWindow={() => setReserved(false)} /> :
+                    <ReservationResult rowsOfSeats={rowsOfSeats} sessionId={sessionId}
+                        hiddenReservationResultWindow={() => {
+                            makeAllSelectedSeatsFalse()
+                            setReserved(false)
+                        }} /> :
                     <ChooseSeats
                         rowsOfSeats={rowsOfSeats}
                         seatHandleClick={seatHandleClick}
