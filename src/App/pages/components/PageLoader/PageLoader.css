@@ -1,0 +1,30 @@
+.reservation-page-modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reservation-page-modal_loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid rgb(73, 160, 172);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,4 +1,5 @@
 .filters {
+    margin-top: 50px;
     border-top: 1px solid rgba(168, 168, 196, 0.356);
     border-bottom: 1px solid rgba(168, 168, 196, 0.356);
     width: 100%;
@@ -9,6 +10,8 @@
 
 .filter-form {
     margin-right: 5vw;
+    display: flex;
+    align-items: center;
 }
 
 .filter-form__selector {
@@ -19,7 +22,22 @@
     background-color: rgba(168, 168, 196, 0.356);
 }
 
-.filter-form__selector:hover {
+.filter-form__button {
+    margin-left: 5px;
+    padding: 0;
+    border: none;
+    border-radius: 40px;
+    background-color: rgba(168, 168, 196, 0.356);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-form__button img {
+    height: 4vh;
+}
+
+.filter-form__selector:hover, .filter-form__button:hover {
     background-color: rgba(168, 168, 196, 0.562);
     cursor: pointer;
 }

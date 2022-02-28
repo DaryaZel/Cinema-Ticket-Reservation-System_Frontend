@@ -9,6 +9,11 @@
     text-transform: uppercase;
 }
 
+.schedule__no-sessions {
+    margin: 3vw 0;
+    color: rgb(131, 125, 125);
+}
+
 .cinema-schedule {
     display: flex;
     justify-content: space-between;
@@ -30,19 +35,26 @@
     margin-bottom: 20px;
 }
 
+.movie-schedule h3:hover {
+    font-weight: bold;
+}
+
 .movie-schedule__movie-container {
-    width: 40%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    text-align: left;
 }
 
 .movie-schedule__time-container {
-    width: 60%;
+    width: 50%;
     display: flex;
 }
 
 .movie-schedule__time-item {
     margin-right: 20px;
-    height: 150%;
-    width: 15%;
+    height: 3vw;
+    width: 80%;
     background-color: rgb(159, 212, 236);
     display: flex;
     align-items: center;
@@ -52,12 +64,4 @@
 
 .movie-schedule__time-item:hover {
     background-color: rgb(125, 205, 241);
-}
-
-.movie-schedule__time-item a {
-    text-decoration: none;
-}
-
-.movie-schedule__time-item span {
-    color: black;
 }

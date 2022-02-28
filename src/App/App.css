@@ -39,6 +39,9 @@ h4 {
 h5 {
 	font-size: 1vw;
 }
+h6 {
+	font-size: 0.8vw;
+}
 
 span {
 	font-size: 1vw;
@@ -75,4 +78,9 @@ table {
 
 .App {
 	text-align: center;
+}
+
+.link {
+	text-decoration: none;
+	color: black;
 }

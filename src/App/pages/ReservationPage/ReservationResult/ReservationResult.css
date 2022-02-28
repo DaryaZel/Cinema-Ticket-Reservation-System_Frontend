@@ -1,0 +1,48 @@
+.reservation-result__thanks {
+    margin: 10px 0 20px;
+}
+
+.reservation-result__back-button {
+    box-sizing: border-box;
+    margin: 0 auto 20px auto;
+    width: 25%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.reservation-result__back-button:hover{
+    cursor: pointer;
+    border: 1px solid rgba(168, 168, 196, 0.356);
+}
+.reservation-result__back-button-img {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.reservation-result__back-button-img img {
+    height: 3vw;
+}
+
+.reservation-result_reservation-ticket {
+    margin: 0 auto;
+}
+
+.reservation-ticket {
+    width: 50%;
+    padding: 10% 0;
+    background-image: url('./images/invoice.png');
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reservation-result__session-information {
+    margin-bottom: 10px;
+}
+
+.reservation-result__total-price {
+    margin-top: 10px;
+}

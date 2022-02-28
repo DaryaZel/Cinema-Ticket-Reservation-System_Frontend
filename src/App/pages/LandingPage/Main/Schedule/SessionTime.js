@@ -7,7 +7,7 @@ export function SessionTime({ session }) {
 
     return (
         <div className='movie-schedule__time-item'>
-            <a href='#'><span>{new Intl.DateTimeFormat(locale, formattingOptions).format(new Date(session.date))}</span></a>
+            <span>{new Intl.DateTimeFormat(locale, formattingOptions).format(new Date(session.date))}</span>
         </div>
     )
 

@@ -18,7 +18,7 @@ export function FilterFormCity({ changeSelectedCity }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();
@@ -35,8 +35,8 @@ export function FilterFormCity({ changeSelectedCity }) {
 
     return (
         <div className='filter-form'>
-            <select className='filter-form__selector' name="select" onChange={(e) => changeSelectedCity(e.target.value)} >
-                <option value={defaultCityValue} selected>Minsk</option>
+            <select className='filter-form__selector' defaultValue={defaultCityValue} name="select" onChange={(e) => changeSelectedCity(e.target.value)} >
+                <option value={defaultCityValue} >Minsk</option>
                 {
                     cityArray.map((city, index) => (
                         <option key={city + index} value={city}>{city}</option>

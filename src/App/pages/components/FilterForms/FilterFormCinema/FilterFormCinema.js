@@ -19,7 +19,7 @@ export function FilterFormCinema({ city, changeSelectedCinema }) {
                     }
                 );
             } catch (error) {
-                alert(error);
+                alert("Oops, something went wrong");
             }
         }
         fetchData();

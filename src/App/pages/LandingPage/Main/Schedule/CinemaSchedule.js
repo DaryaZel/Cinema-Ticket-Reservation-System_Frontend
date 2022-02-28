@@ -8,8 +8,8 @@ export function CinemaSchedule({ cinema }) {
                 <h5>{cinema.cinemaAddress}</h5>
             </div>
             <div className='cinema-schedule__movie-schedule-container'>
-                {cinema.movies.map((movie) => (
-                    <MovieSchedule movie={movie} />
+                {cinema.movies.map((movie, index) => (
+                    <MovieSchedule key={index} movie={movie} />
                 ))}
             </div>
         </div>

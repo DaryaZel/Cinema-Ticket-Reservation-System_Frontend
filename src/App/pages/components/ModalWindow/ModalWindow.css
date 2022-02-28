@@ -1,4 +1,4 @@
-.modal {
+.auth-modal {
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.37);
@@ -25,14 +25,17 @@
     }
 }
 
-.modal__content {
+.auth-modal__content {
     padding: 20px;
     border-radius: 12px;
     background-color: white;
-    height: 20vw;
+    height: 30vw;
     width: 30vw;
     animation-duration: 0.3s;
     animation-name: slowModalContent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 @keyframes slowModalContent {
@@ -45,46 +48,53 @@
     }
 }
 
-.modal__container {
-    padding-top: 1.5vh;
+.auth-modal__container {
+    padding-top: 2vh;
     width: 80%;
     margin: auto 0;
 }
 
-.modal__greeting h2 {
+.auth-modal__greeting h2 {
     margin-top: 9vh;
     font-size: 3vw;
 }
 
-.modal__row {
-    margin-bottom: 10px;
+.auth-modal__row {
     display: flex;
     justify-content: right;
     align-items: center;
 }
 
-.modal__title {
-    border-bottom: 2px solid black;
+.auth-modal__label {
+    width: 8vw;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
-.modal__title h2 {
+.auth-modal__title {
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.auth-modal__title h2 {
     padding-bottom: 20px;
 }
 
-.modal__input-container {
+.auth-modal__input-container {
     margin-left: 2vw;
     display: flex;
     justify-content: center;
 }
 
-.modal__input-container input {
-    width: 80%;
+.auth-modal__input-container input {
+    width: 10vw;
     border: 1px solid black;
     border-left: none;
     border-radius: 0px 6px 6px 0px;
 }
 
-.modal__input-icon {
+.auth-modal__input-icon {
     padding: 3px;
     width: 2vw;
     display: flex;
@@ -95,12 +105,23 @@
     background: rgba(168, 168, 196, 0.356);
 }
 
-.modal__input-icon img {
+.auth-modal__input-icon img {
     max-width: 100%;
 }
 
-.modal__button {
-    margin-top: 1vh;
+.auth-modal__error-container {
+    display: flex;
+    justify-content: right;
+}
+
+.auth-modal__error {
+    width: 10vw;
+    height: 2vw;
+    color: rgb(119, 9, 9);
+}
+
+.auth-modal__button {
+    margin-top: 10px;
     outline: none;
     padding: 5px;
     border-radius: 10px;
@@ -108,23 +129,23 @@
     background-color: #fff;
 }
 
-.modal__button:hover {
+.auth-modal__button:hover {
     box-shadow: inset 0 6px 10px 0 rgba(0, 0, 0, 0.2), inset 0 4px 14px 0 rgba(0, 0, 0, 0.19);
 }
 
-.modal__checkbox input {
+.auth-modal__checkbox input {
     position: absolute;
     z-index: -1;
     opacity: 0;
 }
 
-.modal__checkbox input+label {
+.auth-modal__checkbox input+label {
     display: inline-flex;
     align-items: center;
     user-select: none;
 }
 
-.modal__checkbox input+label::before {
+.auth-modal__checkbox input+label::before {
     content: '';
     display: inline-block;
     width: 1em;
@@ -139,7 +160,7 @@
     background-size: 50% 50%;
 }
 
-.modal__checkbox input:checked+label::before {
+.auth-modal__checkbox input:checked+label::before {
     border-color: rgba(168, 168, 196, 0.356);
     background-color: rgba(168, 168, 196, 0.356);
     background-image: url("./images/check-mark.png");

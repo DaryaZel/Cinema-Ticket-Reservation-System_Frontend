@@ -14,11 +14,18 @@
 .carousel__container {
     height: 100%;
     display: flex;
-    justify-content: space-between;
     transition: translate;
     transition-property: transform;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
+}
+
+.carousel__container_space-between {
+    justify-content: space-between;
+}
+
+.carousel__container_space-around {
+    justify-content: space-around;
 }
 
 .carousel__item {
@@ -26,18 +33,32 @@
     align-items: center;
     justify-content: center;
     user-select: none;
-    height: 45vh;
+    height: 30vw;
     min-width: 25%;
-    max-width: 25%;
 }
 
 .carousel__img-container {
     position: relative;
+    width: 80%;
+    height: 80%;
+}
+.carousel__img-content{
+    padding-top: 155%;
+    position: relative;
 }
 
-.carousel__item img {
-    max-width: 80%;
-    max-height: 80%;
+.carousel__img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: drop-shadow(5px 5px 5px rgb(131, 125, 125));
+}
+
+.carousel__img:hover {
+    filter: drop-shadow(5px 5px 5px rgb(255, 255, 255));
 }
 
 .carousel__item h3 {
@@ -53,15 +74,19 @@
 
 .carousel__ticket {
     position: absolute;
-    width: 55%;
-    height: 25%;
-    left: 10%;
+    width: 60%;
+    height: 30%;
+    left: 5%;
     bottom: 4%;
     border-radius: 5px;
 }
 
 .carousel__arrow img {
-    cursor: pointer;
     width: 50px;
     height: 50px;
+}
+
+.carousel__arrow img:hover {
+    cursor: pointer;
+    filter: drop-shadow(5px 5px 5px rgb(131, 125, 125));
 }

@@ -2,14 +2,19 @@
     display: flex;
     align-items: center;
 }
+.avatar__user {
+    display: flex;
+    align-items: center;
+}
 
-.avatar div {
+.avatar__img, .avatar__title, .avatar__logOut {
     width: 4.5vw;
 }
 
 .avatar__img {
     display: flex;
     align-items: center;
+    margin-right: 20px;
 }
 
 .avatar__img img {
