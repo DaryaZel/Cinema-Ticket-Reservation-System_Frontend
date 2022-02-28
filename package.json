@@ -15,7 +15,10 @@
     "react-tooltip": "^4.2.21",
     "web-vitals": "^1.1.2"
   },
+  "homepage": "https://daryazel.github.io/Cinema-Ticket-Reservation-System__Frontend/",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -38,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
