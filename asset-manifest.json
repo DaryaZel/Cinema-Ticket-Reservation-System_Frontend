@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/css/main.e920a87a.chunk.css",
+    "main.js": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/main.e5c1f8bf.chunk.js",
+    "main.js.map": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/main.e5c1f8bf.chunk.js.map",
+    "runtime-main.js": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/runtime-main.dfa932e6.js",
+    "runtime-main.js.map": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/runtime-main.dfa932e6.js.map",
+    "static/css/2.e83bbe55.chunk.css": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/css/2.e83bbe55.chunk.css",
+    "static/js/2.b0f8be10.chunk.js": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/2.b0f8be10.chunk.js",
+    "static/js/2.b0f8be10.chunk.js.map": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/2.b0f8be10.chunk.js.map",
+    "static/js/3.991d5255.chunk.js": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/3.991d5255.chunk.js",
+    "static/js/3.991d5255.chunk.js.map": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/3.991d5255.chunk.js.map",
+    "index.html": "/github.io/Cinema-Ticket-Reservation-System__Frontend/index.html",
+    "static/css/2.e83bbe55.chunk.css.map": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/css/2.e83bbe55.chunk.css.map",
+    "static/css/main.e920a87a.chunk.css.map": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/css/main.e920a87a.chunk.css.map",
+    "static/js/2.b0f8be10.chunk.js.LICENSE.txt": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/js/2.b0f8be10.chunk.js.LICENSE.txt",
+    "static/media/arroba.05c52f50.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/arroba.05c52f50.png",
+    "static/media/close.2ddbcf1b.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/close.2ddbcf1b.png",
+    "static/media/film.e1dab363.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/film.e1dab363.png",
+    "static/media/ReservationResult.css": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/invoice.1de0cf3a.png",
+    "static/media/location.c937a8cc.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/location.c937a8cc.png",
+    "static/media/ticket.8db39acb.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/ticket.8db39acb.png",
+    "static/media/timetable.c91df6ab.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/timetable.c91df6ab.png",
+    "static/media/user.33e7df09.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/user.33e7df09.png",
+    "static/media/user.61637315.png": "/github.io/Cinema-Ticket-Reservation-System__Frontend/static/media/user.61637315.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dfa932e6.js",
+    "static/css/2.e83bbe55.chunk.css",
+    "static/js/2.b0f8be10.chunk.js",
+    "static/css/main.e920a87a.chunk.css",
+    "static/js/main.e5c1f8bf.chunk.js"
+  ]
+}
