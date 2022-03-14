@@ -1,5 +1,5 @@
 {
-  "name": "cinema-ticket-reservation-system",
+  "name": "cinema_ticket_reservation_system",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,7 +15,7 @@
     "react-tooltip": "^4.2.21",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "https://daryazel.github.io/Cinema-Ticket-Reservation-System__Frontend/",
+  "homepage": "https://daryazel.github.io/Cinema_Ticket_Reservation_System__Frontend/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
