@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/Cinema-Ticket-Reservation-System__Frontend">
+    <BrowserRouter  basename={window.location.pathname || ''}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
