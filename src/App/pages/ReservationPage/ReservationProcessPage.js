@@ -45,10 +45,8 @@ export function ReservationPage() {
         return transformedReservedSeats;
     }
 
-    function handleSessionSeatsUpdate(data) {
+    function handleSessionSeatsUpdate(seats) {
         try {
-            const seats = JSON.parse(data);
-
             setRowsOfSeats(prevRowsOfSeats => {
                 let newRowsOfSeats = null;
                 if (prevRowsOfSeats == null) {
@@ -103,14 +101,19 @@ export function ReservationPage() {
         ws.current = new WebSocket(`wss://cinematicketbooking.herokuapp.com/?movieSessionId=${sessionId}`);
         ws.current.onmessage = e => {
             const msgData = JSON.parse(e.data);
-            if (msgData.event === "ping") {
-                const pongData = {
-                    event: "pong",
-                    beat: 1
+            if (msgData.length !== 0) {
+                if (msgData.event === "ping") {
+                    const pongData = {
+                        event: "pong",
+                        beat: 1
+                    }
+                    ws.current.send(JSON.stringify(pongData));
+                } else {
+                    handleSessionSeatsUpdate(msgData);
                 }
-                ws.current.send(JSON.stringify(pongData));
-            } else {
-                handleSessionSeatsUpdate(e.data);
+            }
+            else {
+                alert("Sorry, all seats are already fully booked")
             }
         };
         ws.current.onerror = e => {
@@ -213,20 +216,24 @@ export function ReservationPage() {
     };
 
     const makeAllSelectedSeatsFalse = () => {
-        const mapSeats = (seatData) => {
-            const transformedSeat = {
-                session_id: seatData.seat_details.session_id,
-                seat_id: seatData.seat_details.seat_id
+        if (rowsOfSeatsRef.current) {
+            const mapSeats = (seatData) => {
+                const transformedSeat = {
+                    session_id: seatData.seat_details.session_id,
+                    seat_id: seatData.seat_details.seat_id
+                }
+                return transformedSeat;
             }
-            return transformedSeat;
+            let transformedSeats = rowsOfSeatsRef.current.flat().filter((seat) => seat.chosen === true).map(mapSeats);
+            const seatDetailsObject = {
+                event: 'makeAllSelectedSeatsFalse',
+                seat: transformedSeats
+            };
+            ws.current.send(JSON.stringify(seatDetailsObject));
         }
-        let transformedSeats = rowsOfSeatsRef.current.flat().filter((seat) => seat.chosen === true).map(mapSeats);
-        const seatDetailsObject = {
-            event: 'makeAllSelectedSeatsFalse',
-            seat: transformedSeats
-        };
-        ws.current.send(JSON.stringify(seatDetailsObject));
-
+        else {
+            return null
+        }
     }
     const seatHandleClick = (seat) => {
         seat.chosen === true ? removeSeatCallback(seat) : addSeatCallback(seat);
